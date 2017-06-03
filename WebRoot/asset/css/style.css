@@ -309,7 +309,7 @@ p.quote{
     .form-signin .panel{background: #2196f3;color: #fff;padding: 10px;border:none !important;box-shadow: 0 7px 16px #0a86e9, 0 4px 5px #0a86e9;}
     .form-signin .panel-body{padding-bottom: 50px;padding-top: 30px;}
     .form-signin .atomic-number{font-size: 20px;}
-    .form-signin .atomic-symbol{font-size: 10em !important;font-weight: 500;padding-bottom: 20spx;}
+    .form-signin .atomic-symbol{font-size: 10em !important;font-weight: 500;padding-bottom: 20px;}
     .form-signin .element-name,.form-signin .atomic-mass{font-size: 18px;margin-top: -10px;font-weight: 600;line-height: 1.2;}
     .form-signin label{color:#fff !important;}
     .form-signin .bar:before,.form-signin .bar:after{background-color:#fff !important;}
@@ -384,7 +384,7 @@ p.quote{
    
     .search-v1 #search-v1-images .post { height: 100px; background: cyan; margin-bottom: 20px; }
     .search-v1 #search-v1-images .tall { height: 200px; }
-}
+
 /*end: search v1*/
 
 
@@ -593,7 +593,7 @@ p.quote{
 
 .form-control.android[type='text'],
 .form-control.android[type='password'] {
-  width: 100%%;
+  width: 100%;
   font-family: "Roboto", "Droid Sans", sans-serif;
   font-size: 16px;
   margin: 0;
@@ -2608,11 +2608,11 @@ ul li a:focus {
   border: 5px solid white;
   border-right-color: transparent;
   border-top-color: transparent;
-  -webkit-box-shadow: 1px 1px 2px rgba(black, 0.2);
-  -moz-box-shadow: 1px 1px 2px rgba(black, 0.2);
-  -ms-box-shadow: 1px 1px 2px rgba(black, 0.2);
-  -o-box-shadow: 1px 1px 2px rgba(black, 0.2);
-  box-shadow: 1px 1px 2px rgba(black, 0.2);
+  -webkit-box-shadow: 1px 1px 2px rgba(0,0,0, 0.2);
+  -moz-box-shadow: 1px 1px 2px rgba(0,0,0, 0.2);
+  -ms-box-shadow: 1px 1px 2px rgba(0,0,0, 0.2);
+  -o-box-shadow: 1px 1px 2px rgba(0,0,0, 0.2);
+  box-shadow: 1px 1px 2px rgba(0,0,0, 0.2);
 }
 
 .msg_sent > time {
@@ -6387,7 +6387,7 @@ ul li a:focus {
   .responsive-table td:before { content: attr(data-title); }
 
   .search-nav{
-    display: none !Im;
+    display: none;
   }
 
   #quote-carousel .carousel-indicators {
