@@ -21,6 +21,7 @@
       <link rel="stylesheet" type="text/css" href="asset/css/plugins/animate.min.css"/>
     <link rel="stylesheet" type="text/css" href="asset/css/plugins/select2.min.css"/>
       <link rel="stylesheet" type="text/css" href="asset/css/plugins/fullcalendar.min.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/datatables.bootstrap.min.css"/>
     <link href="asset/css/style.css" rel="stylesheet">
     <style type="text/css">
         .up-img-cover {width: 250px;height: 250px;}
@@ -388,12 +389,150 @@
                         </div>
                       </div>
                       <div role="tabpanel" class="tab-pane fade" id="storage-stream" aria-labelledby="tabs2">
+                        <div class="col-md-12 panel-info">
+                            <div class="panel-heading">
+                                <h4 class="panel-title text-white">
+                                    库存信息
+                                </h4>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="responsive-table" style="padding: 15px;">
+                                    <table class="table table-striped table-bordered" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th><span class="fa fa-map-marker"></span> 仓库位置</th>
+                                            <th><span class="fa fa-cubes"></span> 库存数量</th>
+                                            <th><span class="fa fa-exchange"></span> 流水</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>北京海淀仓库</td>
+                                            <td>594</td>
+                                            <td><a href="#">查看流水</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>北京海淀仓库</td>
+                                            <td>594</td>
+                                            <td><a href="#">查看流水</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>北京海淀仓库</td>
+                                            <td>594</td>
+                                            <td><a href="#">查看流水</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>北京海淀仓库</td>
+                                            <td>594</td>
+                                            <td><a href="#">查看流水</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>北京海淀仓库</td>
+                                            <td>594</td>
+                                            <td><a href="#">查看流水</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>北京海淀仓库</td>
+                                            <td>594</td>
+                                            <td><a href="#">查看流水</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>北京海淀仓库</td>
+                                            <td>594</td>
+                                            <td><a href="#">查看流水</a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div style="padding: 0 15px 15px 15px">所有库存总数：<span class="text-success">2048</span> </div>
+                            </div>
+                        </div>
+                          <div class="col-md-12 panel-info">
+                              <div class="panel-heading">
+                                  <h4 class="panel-title text-white">
+                                      <span class="text-danger">北京海淀仓库</span> 库存流水详情
+                                  </h4>
+                              </div>
+                              <div class="panel panel-default">
+                                  <div class="responsive-table" style="padding: 15px;">
+                                      <table id="stream-table" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                                          <thead>
+                                          <tr>
+                                              <th>序号</th>
+                                              <th>时间</th>
+                                              <th>出入库类型</th>
+                                              <th>单价</th>
+                                              <th>出入库数量</th>
+                                              <th>库存余量</th>
+                                          </tr>
+                                          </thead>
+                                          <tbody>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>2017-06-01</td>
+                                              <td>采购入库</td>
+                                              <td>9.30</td>
+                                              <td class="text-success">+500</td>
+                                              <td>594</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>2017-06-01</td>
+                                              <td>采购入库</td>
+                                              <td>9.30</td>
+                                              <td class="text-success">+500</td>
+                                              <td>594</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>2017-06-01</td>
+                                              <td>采购入库</td>
+                                              <td>9.30</td>
+                                              <td class="text-success">+500</td>
+                                              <td>594</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>2017-06-01</td>
+                                              <td>采购入库</td>
+                                              <td>9.30</td>
+                                              <td class="text-success">+500</td>
+                                              <td>594</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>2017-06-01</td>
+                                              <td>采购入库</td>
+                                              <td>9.30</td>
+                                              <td class="text-success">+500</td>
+                                              <td>594</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>2017-06-01</td>
+                                              <td>采购入库</td>
+                                              <td>9.30</td>
+                                              <td class="text-success">+500</td>
+                                              <td>594</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>2017-06-01</td>
+                                              <td>采购入库</td>
+                                              <td>9.30</td>
+                                              <td class="text-success">+500</td>
+                                              <td>594</td>
+                                          </tr>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div role="tabpanel" class="tab-pane fade" id="store-in" aria-labelledby="tabs3">
 
                       </div>
-                      <div role="tabpanel" class="tab-pane fade" id="store-in" aria-labelledby="tabs2">
-
-                      </div>
-                      <div role="tabpanel" class="tab-pane fade" id="store-out" aria-labelledby="tabs2">
+                      <div role="tabpanel" class="tab-pane fade" id="store-out" aria-labelledby="tabs4">
 
                       </div>
                   </div>
@@ -417,6 +556,8 @@
       <script src="asset/js/plugins/amazeui.min.js" charset="utf-8"></script>
       <script src="asset/js/plugins/cropper.min.js" charset="utf-8"></script>
       <script src="asset/js/plugins/custom_up_img.js" charset="utf-8"></script>
+      <script src="asset/js/plugins/jquery.datatables.min.js"></script>
+      <script src="asset/js/plugins/datatables.bootstrap.min.js"></script>
 
       <!-- custom -->
       <script src="asset/js/main.js"></script>
@@ -432,7 +573,7 @@
                   e.preventDefault();
                   $(this).tab('show');
               });
-
+              $('#stream-table').DataTable();
           });
       </script>
 
