@@ -1,0 +1,23 @@
+.up-modal-frame .up-frame-radius{padding-bottom: 20px;border-radius: 5px;}
+.up-modal-frame .am-modal-dialog{width: 600px;}
+.up-frame-parent .up-frame-header{height: 50px;padding: 0px;line-height: 50px;border-bottom:solid 1px #e5e5e5;}
+.up-frame-parent .up-frame-header label{font-size: 16px;float: left;margin-left: 14px;color: #808080;}
+
+.up-frame-parent .up-frame-body{padding:20px;}
+
+.up-frame-parent .up-pre-before {width:327px;height: 327px;padding:0px;float: left;background: #fcfcfc;border: 1px solid #e3e3e3;}
+.up-frame-parent .up-pre-before img{width: 100%;}
+
+.up-frame-parent .up-frame-body .up-pre-after{background: #fcfcfc;overflow: hidden;width: 186px;min-width: 186px;min-height: 186px;height: 186px;border: 1px solid #e3e3e3;float: left;margin-left: 25px;}
+
+.up-frame-parent .up-control-btns{width: 150px;height:30px;margin-left: auto;margin-right: auto;background: #dddddd;text-align: center;line-height: 30px; margin-top: 30px;}
+.up-frame-parent .up-control-btns span{width: 30%;} 
+
+@media screen and (max-width: 1024px){
+	.up-frame-parent .up-pre-before {width: 100%;}
+	.up-frame-parent .up-frame-body .up-pre-after{margin-left: 0px;margin-top: 10px;}
+}
+
+@media screen and (max-width: 600px){
+	.up-modal-frame .am-modal-dialog{width: 90%;}
+}
