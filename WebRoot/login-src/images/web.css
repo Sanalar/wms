@@ -9,14 +9,14 @@
     text-align: center;
 }
 body {
-     background-image: url(bg.jpg?v20150217);}
+     background-image: url(bg.png);}
 #form1 {
      z-index:100;
      position:relative;
 }
 #body {
     text-align: left;
-    background-image: url(bg.png?v20150217);
+    background-image: url(bg.png);
     background-repeat: no-repeat;
     width:900px; height:350px;
     margin:auto auto;

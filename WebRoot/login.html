@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head id="Head1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>登录 - 仓库管理系统</title>
+	<meta name="Keywords" content="仓库管理系统" />
+	<meta name="Description" content="仓库管理系统" />
+	<link href="login-src/images/web.css" rel="stylesheet" />
+	<link rel="stylesheet" href="login-src/css/stylebt.css">
+	<script src="login-src/js/jquery-1.7.2.min.js"></script>
+</head>
+
+<body>
+<div>为了充分展现本站效果，请使用支持 HTML5 的浏览器(Chrome, Edge, IE11, Firefox)来访问本站。<br>如果依然看到这行提示文字，请尝试着多刷新几次本页面。</div>
+<form method="post" action="" id="form1">
+	<div id="body" >
+		<div id="jp_container" role="application" aria-label="media player">
+			<div class="jp-type-playlist">
+				<div id="jplayer" class="jp-jplayer"></div>
+				<div class="jp-time"> <span class="jp-current-time" role="timer" aria-label="time"></span><span class="jp-duration" role="timer" aria-label="duration"></span> </div>
+			</div>
+		</div>
+	</div>
+	<div class="link play-link">
+	<a class="button" data-title="登录" href="index.html">
+			<span class="line line-top"></span>
+			<span class="line line-right"></span>
+			<span class="line line-bottom"></span>
+			<span class="line line-left"></span>
+			登 录
+		</a>
+	</div>
+	<div style="color:gray; font-family:微软雅黑; font-size:14px; position:relative; top:50px" > &copy; 2017 wms.sanalar.pub 詹娜娜、巨颖、苏桂清 邮箱：sanalar@163.com
+	</div>
+</form>
+</body>
+</html>
+<script type="text/javascript" src="login-src/images/jquery.js"></script>
+<script type="text/javascript" src="login-src/images/ThreeWebGL.js"></script>
+<script type="text/javascript" src="login-src/images/ThreeExtras.js"></script>
+<script type="text/javascript" src="login-src/images/Detector.js"></script>
+<script type="text/javascript" src="login-src/images/RequestAnimationFrame.js"></script>
+<script id="vs" type="x-shader/x-vertex">
+			varying vec2 vUv;
+			void main() {
+				vUv = uv;
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+			}
+</script>
+<script id="fs" type="x-shader/x-fragment">
+			uniform sampler2D map;
+			uniform vec3 fogColor;
+			uniform float fogNear;
+			uniform float fogFar;
+			varying vec2 vUv;
+			void main() {
+				float depth = gl_FragCoord.z / gl_FragCoord.w;
+				float fogFactor = smoothstep( fogNear, fogFar, depth );
+				gl_FragColor = texture2D( map, vUv );
+				gl_FragColor.w *= pow( gl_FragCoord.z, 20.0 );
+				gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );
+			}
+</script>
+<script type="text/javascript" src="login-src/images/cloud.js"></script>
+<script type="text/javascript" src="login-src/js/scriptbt.js"></script>
+

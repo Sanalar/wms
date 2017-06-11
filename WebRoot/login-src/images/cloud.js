@@ -8,7 +8,7 @@ function init()
     camera.position.z = 10;
     scene = new THREE.Scene();
     geometry = new THREE.Geometry();
-    var texture = THREE.ImageUtils.loadTexture('images/cloud.png');
+    var texture = THREE.ImageUtils.loadTexture('login-src/images/cloud.png');
     texture.magFilter = THREE.LinearMipMapLinearFilter;
     texture.minFilter = THREE.LinearMipMapLinearFilter;
 
