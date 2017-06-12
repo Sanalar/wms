@@ -1,0 +1,151 @@
+body {
+	text-align      : center;
+	font-family     : "Roboto",Arial;
+	background      : #EBEBEB;
+}
+.knoxlogo {
+    height          : 100px;
+}
+.btn {
+    background        : #0090FF;
+    border-radius     : 5px; 
+    border            : 0;
+    color             : #FFF;
+    cursor            : pointer;
+    display           : inline-block;  
+    font-size         : 12px;
+    height            : 40px;
+    line-height       : 40px;
+    min-width         : 110px; 
+    padding           : 0 10px 0 75px;
+    text-align        : left;
+    text-decoration   : none;
+    text-transform    : uppercase; 
+    border            : 2px solid #0090FF;
+    -ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=1,Color=#ff123852,Positive=true)";zoom:1;
+filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=1,Color=#ff123852,Positive=true);
+
+  -moz-box-shadow:0px 2px 2px rgba(0,0,0,0.2);
+  -webkit-box-shadow:0px 2px 2px rgba(0,0,0,0.2);
+  box-shadow:0px 2px 2px rgba(0,0,0,0.2);
+  -ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=2,Color=#33000000,Positive=true)";
+filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=2,Color=#33000000,Positive=true);
+}
+.btn span {
+        
+    background        : #fff url('crowne_icon.png') 8px no-repeat;
+   position: absolute;
+   left: 0;
+   width: 60px;
+    -webkit-border-top-left-radius: 3px;
+-webkit-border-bottom-left-radius: 3px;
+-moz-border-radius-topleft: 3px;
+-moz-border-radius-bottomleft: 3px;
+border-top-left-radius: 3px;
+border-bottom-left-radius: 3px;
+}
+.btn:active
+{
+	top: 2px;
+	border-bottom: 2px solid #0090FF;
+    -moz-box-shadow:0px 1px 0px rgba(255,255,255,0.5);
+-webkit-box-shadow:0px 1px 0px rgba(255,255,255,0.5);
+box-shadow:0px 1px 0px rgba(255,255,255,0.5);
+-ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=1,Color=#ccffffff,Positive=true)";
+filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=1,Color=#ccffffff,Positive=true);
+}
+
+/**************************
+ ***** HINT STYLING *******
+ **************************/
+
+.hint { position: relative; display: inline-block; }
+
+.hint:before, .hint:after {
+			position: absolute;
+			opacity: 0;
+			z-index: 1000000;
+			-webkit-transition: 0.3s ease;
+			-moz-transition: 0.3s ease;
+  pointer-events: none;
+}		
+.hint:hover:before, .hint:hover:after {
+	opacity: 1;
+}
+.hint:before {
+	content: '';
+	position: absolute;
+	background: transparent;
+	border: 6px solid transparent;
+	position: absolute;
+}	
+.hint:after {
+	content: attr(data-hint);
+	background: rgba(0, 0, 0, 0.8);
+			color: white;
+			padding: 8px 10px;
+			font-size: 12px;
+	white-space: nowrap;
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+/* top */
+
+.hint-top:before {
+	bottom: 100%;
+	left: 50%;
+	margin: 0 0 -18px 0;
+	border-top-color: rgba(0, 0, 0, 0.8);
+}		
+.hint-top:after {
+	bottom: 100%;
+	left: 50%;
+	margin: 0 0 -6px -10px;
+}
+.hint-top:hover:before {
+	margin-bottom: -10px;
+}
+.hint-top:hover:after {
+	margin-bottom: 2px;
+}
+
+/* default: bottom */
+
+.hint-bottom:before {
+	top: 100%;
+	left: 50%;
+	margin: -14px 0 0 0;
+	border-bottom-color: rgba(0, 0, 0, 0.8);
+}	
+.hint-bottom:after {
+	top: 100%;
+	left: 50%;
+	margin: -2px 0 0 -10px;
+}
+.hint-bottom:hover:before {
+	margin-top: -6px;
+}
+.hint-bottom:hover:after {
+	margin-top: 6px;
+}
+
+/* right */
+
+.hint-right:before {
+	left: 100%;
+	bottom: 50%;
+	margin: 0 0 -4px -8px;
+	border-right-color: rgba(0,0,0,0.8);
+}		
+.hint-right:after {
+	left: 100%;
+	bottom: 50%;
+	margin: 0 0 -13px 4px;
+}
+.hint-right:hover:before {
+	margin: 0 0 -4px -0;
+}
+.hint-right:hover:after {
+	margin: 0 0 -13px 12px;
+}

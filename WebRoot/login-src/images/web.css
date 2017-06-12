@@ -1,0 +1,36 @@
+﻿html, body {
+    font-size: 13px;
+    font-family: "宋体", Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #FFF;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    text-align: center;
+}
+body {
+     background-image: url(bg.png);}
+#form1 {
+     z-index:100;
+     position:relative;
+}
+#body {
+    text-align: left;
+    background-image: url(bg.png);
+    background-repeat: no-repeat;
+    width:900px; height:350px;
+    margin:auto auto;
+}
+#copy {
+    margin:auto auto;
+    text-align:center;
+    color:#122651;
+}
+#jp_container { position:relative;}
+#jp_container .jp-playlist{ position:absolute; top:350px;width: 500px; left:230px;}
+#jp_container .jp-playlist li { text-align:left;width: 150px; line-height:20px;float: left;}
+#jp_container .jp-playlist li a { text-align:left; text-decoration:none;}
+.jp-playlist-item { color:#808080;}
+.jp-playlist-current { color:#1d82e4;}
+.jp-artist { display:none;}
+.jp-time { top:330px; left:560px;  width:120px; position:relative; color:#ccc;}
