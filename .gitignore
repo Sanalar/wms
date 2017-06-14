@@ -6,3 +6,4 @@
 /WebRoot/.idea/WebRoot.iml
 /WebRoot/.idea/workspace.xml
 /WebRoot/.idea
+/WebRoot/WEB-INF/classes/pub/sanalar/wms/db/*.class
