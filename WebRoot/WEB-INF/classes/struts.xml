@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.action.extension" value="action,html" />
+	<package name="wms" extends="struts-default" namespace="/">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="pub.sanalar.wms.interceptors.LoginInterceptor"></interceptor>
+		</interceptors>
+		
+		<action name="login" class="pub.sanalar.wms.actions.HtmlLoginAction">
+			<result name="success">index.html</result>
+			<result name="login">login.html</result>
+		</action>
+	</package>
 </struts>    
