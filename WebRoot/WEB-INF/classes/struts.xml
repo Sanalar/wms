@@ -8,9 +8,16 @@
 			<interceptor name="loginInterceptor" class="pub.sanalar.wms.interceptors.LoginInterceptor"></interceptor>
 		</interceptors>
 		
+		<global-results>
+			<result name="login" type="redirect">login.html</result>
+		</global-results>
 		<action name="login" class="pub.sanalar.wms.actions.HtmlLoginAction">
 			<result name="success">index.html</result>
 			<result name="login">login.html</result>
+		</action>
+		<action name="index">
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<result>index.html</result>
 		</action>
 	</package>
 </struts>    
