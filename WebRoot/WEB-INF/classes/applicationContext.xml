@@ -26,6 +26,12 @@
 				</prop>
 			</props>
 		</property>
+		<property name="mappingResources">
+			<list>
+				<value>pub/sanalar/wms/models/WmsUser.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsUserType.hbm.xml</value>
+			</list>
+		</property>
 	</bean>
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
@@ -34,5 +40,14 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<bean
 		id="htmlLoginActionBean" class="pub.sanalar.wms.actions.HtmlLoginAction" scope="prototype">
+	</bean>
+	<bean id="checkLoginDaoBean"
+		class="pub.sanalar.wms.daos.CheckLoginDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="checkLoginActionBean" 
+	class="pub.sanalar.wms.actions.CheckLoginAction" 
+	scope="prototype">
+		<property name="checkLoginDao" ref="checkLoginDaoBean"></property>
 	</bean>
 </beans>

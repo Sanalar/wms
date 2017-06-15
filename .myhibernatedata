@@ -1,17 +1,20 @@
 #MyEclipse Hibernate Properties
-#Wed Jun 14 23:25:41 CST 2017
-genVersionTag=false
-sessionFactoryName=pub.sanalar.wms.db.HibernateSessionFactory
-genAnnotations=false
-configFile=/wms/src/hibernate.cfg.xml
-reStrategyClass=
-sessionFactoryId=
-profile=
-detectM2M=false
+#Thu Jun 15 23:45:53 CST 2017
 genBasicCompId=false
-keyGenerator=
-createConfigFile=true
-basePersistenceClass=
+sessionFactoryName=pub.sanalar.wms.db.HibernateSessionFactory
+profile=
+daoSFId=
+jndiPath=
+detectM2M=false
+reStrategyClass=
 detectO2O=false
+springDaoFile=
 useJavaTypes=true
+keyGenerator=
+genVersionTag=false
+sessionFactoryId=
+basePersistenceClass=
+genAnnotations=false
 reSettingsFile=
+configFile=/wms/src/hibernate.cfg.xml
+createConfigFile=true
