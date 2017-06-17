@@ -70,6 +70,6 @@
 		<property name="category1" value="0"></property>
 		<property name="category2" value="0"></property>
 		<property name="search" value=""></property>
-		<property name="page" value="0"></property>
+		<property name="page" value="1"></property>
 	</bean>
 </beans>

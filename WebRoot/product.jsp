@@ -251,14 +251,24 @@
                   <div class="row">
                       <div class="col-sm-12 text-center">
                           <div class="btn-group" role="group" aria-label="..." style="margin-bottom:20px">
-                              <button type="button" class="btn">
+                              <a class="btn" href='product.html?category1=<s:property value="category1"/>&category2=<s:property value="category2"/>&page=<s:property value="page-1"/>&search=<s:property value="search"/>'>
                                   <span class="fa fa-angle-left"></span>
-                              </button>
-                              <button type="button" class="btn active">1</button>
-                              <button type="button" class="btn">2</button>
-                              <button type="button" class="btn">
+                              </a>
+                              <s:bean name="org.apache.struts2.util.Counter" id="c">
+                              	<s:param name="first" value="1" />
+   								<s:param name="last" value="pageCount" />
+   								<s:iterator>
+									<s:if test="current-1==page">
+										<a class="btn active"><s:property/></a>
+									</s:if>
+									<s:else>
+										<a class="btn" href='product.html?category1=<s:property value="category1"/>&category2=<s:property value="category2"/>&page=<s:property/>&search=<s:property value="search"/>'><s:property/></a>
+									</s:else>
+   								</s:iterator>
+                              </s:bean>
+                              <a class="btn" href='product.html?category1=<s:property value="category1"/>&category2=<s:property value="category2"/>&page=<s:property value="page+1"/>&search=<s:property value="search"/>'>
                                   <span class="fa fa-angle-right"></span>
-                              </button>
+                              </a>
                           </div>
                       </div>
                   </div>

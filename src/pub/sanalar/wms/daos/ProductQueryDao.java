@@ -48,7 +48,8 @@ public class ProductQueryDao extends HibernateDaoSupport {
 		String hql = "select count(*) from WmsProduct product"
 				+ getQueryConditionHql(category1, category2, search);
 		
-		return (Long) getSessionFactory().getCurrentSession().createQuery(hql).list().get(0);
+		Object result = getSessionFactory().getCurrentSession().createQuery(hql).uniqueResult();
+		return (Long)result;
 	}
 	
 	@SuppressWarnings("unchecked")
