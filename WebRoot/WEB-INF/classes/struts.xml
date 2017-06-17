@@ -19,6 +19,10 @@
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result>index.html</result>
 		</action>
+		<action name="product" class="htmlProductActionBean">
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<result>product.html</result>
+		</action>
 		<action name="checkLogin" class="checkLoginActionBean">
 			<result name="error-login">error-login.html</result>
 			<result name="success" type="redirect">index.html</result>
