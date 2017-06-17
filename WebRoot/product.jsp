@@ -251,9 +251,16 @@
                   <div class="row">
                       <div class="col-sm-12 text-center">
                           <div class="btn-group" role="group" aria-label="..." style="margin-bottom:20px">
+                          	  <s:if test="page>1">
                               <a class="btn" href='product.html?category1=<s:property value="category1"/>&category2=<s:property value="category2"/>&page=<s:property value="page-1"/>&search=<s:property value="search"/>'>
                                   <span class="fa fa-angle-left"></span>
                               </a>
+                              </s:if>
+                              <s:else>
+                              <a class="btn">
+                                  <span class="fa fa-angle-left"></span>
+                              </a>
+                              </s:else>
                               <s:bean name="org.apache.struts2.util.Counter" id="c">
                               	<s:param name="first" value="1" />
    								<s:param name="last" value="pageCount" />
@@ -266,9 +273,16 @@
 									</s:else>
    								</s:iterator>
                               </s:bean>
+                              <s:if test="page<pageCount">
                               <a class="btn" href='product.html?category1=<s:property value="category1"/>&category2=<s:property value="category2"/>&page=<s:property value="page+1"/>&search=<s:property value="search"/>'>
                                   <span class="fa fa-angle-right"></span>
                               </a>
+                              </s:if>
+                              <s:else>
+                              <a class="btn">
+                                  <span class="fa fa-angle-right"></span>
+                              </a>
+                              </s:else>
                           </div>
                       </div>
                   </div>
