@@ -1,5 +1,6 @@
 package pub.sanalar.wms.actions;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -16,13 +17,23 @@ public class HtmlProductAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer page;
+	private Long pageCount;
 	private Integer category1;
 	private Integer category2;
 	private String search;
 	private ProductQueryDao productQueryDao;
 	private CategoryQueryDao categoryQueryDao;
 	private List<WmsProduct> products;
+	private DecimalFormat df = new DecimalFormat("0.00");
 	public final static Integer pageSize = 20;
+	
+	public DecimalFormat getDf() {
+		return df;
+	}
+	
+	public Long getPageCount() {
+		return pageCount;
+	}
 	
 	public Integer getPage() {
 		return page;
@@ -70,6 +81,8 @@ public class HtmlProductAction extends ActionSupport {
 	
 	@Override
 	public String execute() throws Exception {
+		pageCount = productQueryDao.getProductCount(category1, category2, search);
+		pageCount = (pageCount + pageSize - 1) / pageSize;
 		products = productQueryDao.getProductList(category1, category2, search, pageSize, page);
 		return SUCCESS;
 	}
