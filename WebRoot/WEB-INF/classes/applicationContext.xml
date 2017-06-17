@@ -30,6 +30,10 @@
 			<list>
 				<value>pub/sanalar/wms/models/WmsUser.hbm.xml</value>
 				<value>pub/sanalar/wms/models/WmsUserType.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsCategory.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsCondition.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsProduct.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsProductCondition.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
