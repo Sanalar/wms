@@ -2,6 +2,7 @@ package pub.sanalar.wms.actions;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Map;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -24,8 +25,23 @@ public class HtmlProductAction extends ActionSupport {
 	private ProductQueryDao productQueryDao;
 	private CategoryQueryDao categoryQueryDao;
 	private List<WmsProduct> products;
+	private Map<Integer, String> category1List;
+	private Map<Integer, String> category1IconList;
+	private Map<Integer, String> category2List;
 	private DecimalFormat df = new DecimalFormat("0.00");
 	public final static Integer pageSize = 20;
+	
+	public Map<Integer, String> getCategory1List() {
+		return category1List;
+	}
+	
+	public Map<Integer, String> getCategory1IconList() {
+		return category1IconList;
+	}
+	
+	public Map<Integer, String> getCategory2List() {
+		return category2List;
+	}
 	
 	public DecimalFormat getDf() {
 		return df;
@@ -41,7 +57,7 @@ public class HtmlProductAction extends ActionSupport {
 	public void setPage(Integer page) {
 		this.page = page;
 	}
-	public Integer getCategrory1() {
+	public Integer getCategory1() {
 		return category1;
 	}
 	public void setCategory1(Integer category1) {
@@ -83,6 +99,9 @@ public class HtmlProductAction extends ActionSupport {
 	public String execute() throws Exception {
 		pageCount = productQueryDao.getProductCount(category1, category2, search);
 		pageCount = (pageCount + pageSize - 1) / pageSize;
+		category1List = categoryQueryDao.getTopCategories();
+		category1IconList = categoryQueryDao.getTopCategoryIcons();
+		category2List = categoryQueryDao.getSubCategories(category1);
 		products = productQueryDao.getProductList(category1, category2, search, pageSize, page);
 		return SUCCESS;
 	}

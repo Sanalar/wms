@@ -188,16 +188,24 @@
                             </button>
                             <div class="btn-group" role="group" style="margin-left:20px">
                                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="fa fa-cubes"></span> 所有分类
+                                    <s:if test="category1==0">
+                                    <span class="fa fa-cubes"></span>
+                                                                        所有分类
+                                    </s:if>
+                                    <s:else>
+                                    <span class='<s:property value="category1IconList.get(category1)"/>'></span>
+                                    <s:property value="category1List.get(category1)"/>
+                                    </s:else>
                                     <span class="fa fa-angle-down"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#"><span class="fa fa-cubes"></span> 所有分类</a></li>
-                                    <li><a href="#"><span class="fa fa-flask"></span> 危化品</a></li>
-                                    <li><a href="#"><span class="fa fa-cutlery"></span> 食品</a></li>
-                                    <li><a href="#"><span class="fa fa-futbol-o"></span> 日用品</a></li>
-                                    <li><a href="#"><span class="fa fa-tv"></span> 电子设备</a></li>
-                                    <li><a href="#"><span class="fa fa-medkit"></span> 医药品</a></li>
+                                	<li><a href='product.html?category1=0&category2=0&page=1&search=<s:property value="search"/>'><span class="fa fa-cubes"></span> 所有分类</a></li>
+                                	<s:iterator value="category1List.entrySet()" id="entry">
+                                	<li><a href='product.html?category1=<s:property value="#entry.key"/>&category2=0&page=1&search=<s:property value="search"/>'>
+                                		<span class='<s:property value="category1IconList.get(#entry.key)"/>'></span>
+                                		<s:property value="#entry.value"/>
+                                	</a></li>
+                                	</s:iterator>
                                 </ul>
                             </div>
                             <div class="btn-group" role="group">
