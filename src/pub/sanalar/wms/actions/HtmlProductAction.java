@@ -1,9 +1,12 @@
 package pub.sanalar.wms.actions;
 
+import java.util.List;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 import pub.sanalar.wms.daos.CategoryQueryDao;
 import pub.sanalar.wms.daos.ProductQueryDao;
+import pub.sanalar.wms.models.WmsProduct;
 
 public class HtmlProductAction extends ActionSupport {
 
@@ -18,6 +21,8 @@ public class HtmlProductAction extends ActionSupport {
 	private String search;
 	private ProductQueryDao productQueryDao;
 	private CategoryQueryDao categoryQueryDao;
+	private List<WmsProduct> products;
+	public final static Integer pageSize = 20;
 	
 	public Integer getPage() {
 		return page;
@@ -56,10 +61,17 @@ public class HtmlProductAction extends ActionSupport {
 		this.categoryQueryDao = categoryQueryDao;
 	}
 	
+	public List<WmsProduct> getProducts() {
+		return products;
+	}
+	public void setProducts(List<WmsProduct> products) {
+		this.products = products;
+	}
+	
 	@Override
 	public String execute() throws Exception {
-		// TODO Auto-generated method stub
-		return super.execute();
+		products = productQueryDao.getProductList(category1, category2, search, pageSize, page);
+		return SUCCESS;
 	}
 
 }

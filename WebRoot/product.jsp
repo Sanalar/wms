@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -220,6 +222,29 @@
               </div>
               <div class="col-md-12">
                   <div class="row">
+                  	<s:iterator value="products" id="p">
+                  	<div class="col-sm-6 col-md-3 product-grid">
+                  		<div class="thumbnail">
+                              <div class="product-location">
+                                  <span class="fa-map-marker fa"></span> 北京海淀仓库
+                              </div>
+                              <div class="product-price product-price-bottom">
+                                  <h4 class="text-danger">￥<s:property value="#p.productInPrice"/></h4>
+                              </div>
+                              <img src='products/<s:property value="#p.productImage"/>' alt="..." style="width:250px;height:250px">
+                              <div class="caption">
+                                  <small><s:property value="#p.wmsCategory.wmsCategory.categoryName"/> <span class="fa-angle-right fa"></span> 
+                                  		<s:property value="#p.wmsCategory.categoryName"/></small>
+                                  <small class="pull-right">
+                                      <span><s:property value="#p.productCode"/></span>
+                                  </small>
+                                  <h4 class="text-primary"><s:property value="#p.productName"/></h4>
+                                  <p style="height: 60px; overflow: hidden"><s:property value="#p.productDescription"/></p>
+                                  <p><a href='product-detail.html?id=<s:property value="#p.productId"/>' class="btn btn-primary btn-block" role="button">查看详情</a></p>
+                              </div>
+                          </div>
+                  	</div>
+                  	</s:iterator>
                       <div class="col-sm-6 col-md-3 product-grid">
                           <div class="thumbnail">
                               <div class="product-location">
