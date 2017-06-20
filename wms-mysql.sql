@@ -1,4 +1,4 @@
-/*
+﻿/*
 Navicat MySQL Data Transfer
 
 Source Server         : MySQL
@@ -13,6 +13,7 @@ File Encoding         : 65001
 Date: 2017-06-20 23:35:48
 */
 
+USE wms;
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
