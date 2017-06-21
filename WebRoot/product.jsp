@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -186,31 +188,50 @@
                             </button>
                             <div class="btn-group" role="group" style="margin-left:20px">
                                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="fa fa-cubes"></span> 所有分类
+                                    <s:if test="category1==0">
+                                    <span class="fa fa-cubes"></span>
+                                                                        所有分类
+                                    </s:if>
+                                    <s:else>
+                                    <span class='<s:property value="category1IconList.get(category1)"/>'></span>
+                                    <s:property value="category1List.get(category1)"/>
+                                    </s:else>
                                     <span class="fa fa-angle-down"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#"><span class="fa fa-cubes"></span> 所有分类</a></li>
-                                    <li><a href="#"><span class="fa fa-flask"></span> 危化品</a></li>
-                                    <li><a href="#"><span class="fa fa-cutlery"></span> 食品</a></li>
-                                    <li><a href="#"><span class="fa fa-futbol-o"></span> 日用品</a></li>
-                                    <li><a href="#"><span class="fa fa-tv"></span> 电子设备</a></li>
-                                    <li><a href="#"><span class="fa fa-medkit"></span> 医药品</a></li>
+                                	<li><a href='product.html?category1=0&category2=0&page=1&search=<s:property value="search"/>'><span class="fa fa-cubes"></span> 所有分类</a></li>
+                                	<s:iterator value="category1List.entrySet()" id="entry">
+                                	<li><a href='product.html?category1=<s:property value="#entry.key"/>&category2=0&page=1&search=<s:property value="search"/>'>
+                                		<span class='<s:property value="category1IconList.get(#entry.key)"/>'></span>
+                                		<s:property value="#entry.value"/>
+                                	</a></li>
+                                	</s:iterator>
                                 </ul>
                             </div>
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <s:if test="category2 == 0">
                                     <span class="fa fa-cubes"></span> 所有分类
                                     <span class="fa fa-angle-down"></span>
+                                    </s:if>
+                                    <s:else>
+                                    <s:property value="category2List.get(category2)"/>
+                                    <span class="fa fa-angle-down"></span>
+                                    </s:else>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#"><span class="fa fa-cubes"></span> 所有分类</a></li>
+                                    <li><a a href='product.html?category1=<s:property value="category1"/>&category2=0&page=1&search=<s:property value="search"/>'><span class="fa fa-cubes"></span> 所有分类</a></li>
+                                	<s:iterator value="category2List.entrySet()" id="entry">
+                                	<li><a href='product.html?category1=<s:property value="category1"/>&category2=<s:property value="#entry.key"/>&page=1&search=<s:property value="search"/>'>
+                                		<s:property value="#entry.value"/>
+                                	</a></li>
+                                	</s:iterator>
                                 </ul>
                             </div>
                             <div class="search pull-right">
                                 <span class="fa fa-search icon-search" style="font-size:23px;"></span>
                                 <div class="form-group form-animate-text" style="margin-bottom: 0;">
-                                    <input name="goodsname" id="goodsname" type="text" class="form-text" placeholder="搜索货品" required style="padding-bottom: 5px; padding-top: 0">
+                                    <input name="goodsname2" id="goodsname2" type="text"  value='<s:property value="search"/>' class="form-text" placeholder="搜索货品" style="padding-bottom: 5px; padding-top: 0"/>
                                     <span class="bar"></span>
                                 </div>
                             </div>
@@ -220,161 +241,67 @@
               </div>
               <div class="col-md-12">
                   <div class="row">
-                      <div class="col-sm-6 col-md-3 product-grid">
-                          <div class="thumbnail">
+                  	<s:iterator value="products" id="p">
+                  	<div class="col-sm-6 col-md-3 product-grid">
+                  		<div class="thumbnail">
                               <div class="product-location">
                                   <span class="fa-map-marker fa"></span> 北京海淀仓库
                               </div>
                               <div class="product-price product-price-bottom">
-                                  <h4 class="text-danger">￥12.50</h4>
+                                  <h4 class="text-danger">￥<s:property value="df.format(#p.productOutPrice)"/></h4>
                               </div>
-                              <img src="holder.js/250x250" alt="...">
+                              <img src='products/<s:property value="#p.productImage"/>' alt="..." style="width:250px;height:250px">
                               <div class="caption">
-                                  <small>食品 <span class="fa-angle-right fa"></span> 糖果巧克力</small>
+                                  <small><s:property value="#p.wmsCategory.wmsCategory.categoryName"/> <span class="fa-angle-right fa"></span> 
+                                  		<s:property value="#p.wmsCategory.categoryName"/></small>
                                   <small class="pull-right">
-                                      <span>dfqkl-1011</span>
+                                      <span><s:property value="#p.productCode"/></span>
                                   </small>
-                                  <h4 class="text-primary">德芙巧克力</h4>
-                                  <p style="height: 60px; overflow: hidden">德芙是世界最大宠物食品和休闲食品制造商美国跨国食品公司玛氏（Mars）公司在中国推出的系列产品。</p>
-                                  <p><a href="product-detail.html" class="btn btn-primary btn-block" role="button">查看详情</a></p>
+                                  <h4 class="text-primary"><s:property value="#p.productName"/></h4>
+                                  <p style="height: 60px; overflow: hidden"><s:property value="#p.productDescription"/></p>
+                                  <p><a href='product-detail.html?id=<s:property value="#p.productId"/>' class="btn btn-primary btn-block" role="button">查看详情</a></p>
                               </div>
                           </div>
-                      </div>
-                      <div class="col-sm-6 col-md-3 product-grid">
-                          <div class="thumbnail">
-                              <div class="product-location">
-                                  <span class="fa-map-marker fa"></span> 北京海淀仓库
-                              </div>
-                              <div class="product-price product-price-bottom">
-                                  <h4 class="text-danger">￥12.50</h4>
-                              </div>
-                              <img src="holder.js/250x250" alt="...">
-                              <div class="caption">
-                                  <small>食品 <span class="fa-angle-right fa"></span> 糖果巧克力</small>
-                                  <small class="pull-right">
-                                      <span>dfqkl-1011</span>
-                                  </small>
-                                  <h4 class="text-primary">德芙巧克力</h4>
-                                  <p style="height: 60px; overflow: hidden">德芙是世界最大宠物食品和休闲食品制造商美国跨国食品公司玛氏（Mars）公司在中国推出的系列产品。</p>
-                                  <p><a href="product-detail.html" class="btn btn-primary btn-block" role="button">查看详情</a></p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6 col-md-3 product-grid">
-                          <div class="thumbnail">
-                              <div class="product-location">
-                                  <span class="fa-map-marker fa"></span> 北京海淀仓库
-                              </div>
-                              <div class="product-price product-price-bottom">
-                                  <h4 class="text-danger">￥12.50</h4>
-                              </div>
-                              <img src="holder.js/250x250" alt="...">
-                              <div class="caption">
-                                  <small>食品 <span class="fa-angle-right fa"></span> 糖果巧克力</small>
-                                  <small class="pull-right">
-                                      <span>dfqkl-1011</span>
-                                  </small>
-                                  <h4 class="text-primary">德芙巧克力</h4>
-                                  <p style="height: 60px; overflow: hidden">德芙是世界最大宠物食品和休闲食品制造商美国跨国食品公司玛氏（Mars）公司在中国推出的系列产品。</p>
-                                  <p><a href="#" class="btn btn-primary btn-block" role="button">查看详情</a></p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6 col-md-3 product-grid">
-                          <div class="thumbnail">
-                              <div class="product-location">
-                                  <span class="fa-map-marker fa"></span> 北京海淀仓库
-                              </div>
-                              <div class="product-price product-price-bottom">
-                                  <h4 class="text-danger">￥12.50</h4>
-                              </div>
-                              <img src="holder.js/250x250" alt="...">
-                              <div class="caption">
-                                  <small>食品 <span class="fa-angle-right fa"></span> 糖果巧克力</small>
-                                  <small class="pull-right">
-                                      <span>dfqkl-1011</span>
-                                  </small>
-                                  <h4 class="text-primary">德芙巧克力</h4>
-                                  <p style="height: 60px; overflow: hidden">德芙是世界最大宠物食品和休闲食品制造商美国跨国食品公司玛氏（Mars）公司在中国推出的系列产品。</p>
-                                  <p><a href="#" class="btn btn-primary btn-block" role="button">查看详情</a></p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6 col-md-3 product-grid">
-                          <div class="thumbnail">
-                              <div class="product-location">
-                                  <span class="fa-map-marker fa"></span> 北京海淀仓库
-                              </div>
-                              <div class="product-price product-price-bottom">
-                                  <h4 class="text-danger">￥12.50</h4>
-                              </div>
-                              <img src="holder.js/250x250" alt="...">
-                              <div class="caption">
-                                  <small>食品 <span class="fa-angle-right fa"></span> 糖果巧克力</small>
-                                  <small class="pull-right">
-                                      <span>dfqkl-1011</span>
-                                  </small>
-                                  <h4 class="text-primary">德芙巧克力</h4>
-                                  <p style="height: 60px; overflow: hidden">德芙是世界最大宠物食品和休闲食品制造商美国跨国食品公司玛氏（Mars）公司在中国推出的系列产品。</p>
-                                  <p><a href="#" class="btn btn-primary btn-block" role="button">查看详情</a></p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6 col-md-3 product-grid">
-                          <div class="thumbnail">
-                              <div class="product-location">
-                                  <span class="fa-map-marker fa"></span> 北京海淀仓库
-                              </div>
-                              <div class="product-price product-price-bottom">
-                                  <h4 class="text-danger">￥12.50</h4>
-                              </div>
-                              <img src="holder.js/250x250" alt="...">
-                              <div class="caption">
-                                  <small>食品 <span class="fa-angle-right fa"></span> 糖果巧克力</small>
-                                  <small class="pull-right">
-                                      <span>dfqkl-1011</span>
-                                  </small>
-                                  <h4 class="text-primary">德芙巧克力</h4>
-                                  <p style="height: 60px; overflow: hidden">德芙是世界最大宠物食品和休闲食品制造商美国跨国食品公司玛氏（Mars）公司在中国推出的系列产品。</p>
-                                  <p><a href="#" class="btn btn-primary btn-block" role="button">查看详情</a></p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6 col-md-3 product-grid">
-                          <div class="thumbnail">
-                              <div class="product-location">
-                                  <span class="fa-map-marker fa"></span> 北京海淀仓库
-                              </div>
-                              <div class="product-price product-price-bottom">
-                                  <h4 class="text-danger">￥12.50</h4>
-                              </div>
-                              <img src="holder.js/250x250" alt="...">
-                              <div class="caption">
-                                  <small>食品 <span class="fa-angle-right fa"></span> 糖果巧克力</small>
-                                  <small class="pull-right">
-                                      <span>dfqkl-1011</span>
-                                  </small>
-                                  <h4 class="text-primary">德芙巧克力</h4>
-                                  <p style="height: 60px; overflow: hidden">德芙是世界最大宠物食品和休闲食品制造商美国跨国食品公司玛氏（Mars）公司在中国推出的系列产品。</p>
-                                  <p><a href="#" class="btn btn-primary btn-block" role="button">查看详情</a></p>
-                              </div>
-                          </div>
-                      </div>
-
+                  	</div>
+                  	</s:iterator>
                   </div>
               </div>
               <div class="col-md-12">
                   <div class="row">
                       <div class="col-sm-12 text-center">
                           <div class="btn-group" role="group" aria-label="..." style="margin-bottom:20px">
-                              <button type="button" class="btn">
+                          	  <s:if test="page>1">
+                              <a class="btn" href='product.html?category1=<s:property value="category1"/>&category2=<s:property value="category2"/>&page=<s:property value="page-1"/>&search=<s:property value="search"/>'>
                                   <span class="fa fa-angle-left"></span>
-                              </button>
-                              <button type="button" class="btn active">1</button>
-                              <button type="button" class="btn">2</button>
-                              <button type="button" class="btn">
+                              </a>
+                              </s:if>
+                              <s:else>
+                              <a class="btn">
+                                  <span class="fa fa-angle-left"></span>
+                              </a>
+                              </s:else>
+                              <s:bean name="org.apache.struts2.util.Counter" id="c">
+                              	<s:param name="first" value="1" />
+   								<s:param name="last" value="pageCount" />
+   								<s:iterator>
+									<s:if test="current-1==page">
+										<a class="btn active"><s:property/></a>
+									</s:if>
+									<s:else>
+										<a class="btn" href='product.html?category1=<s:property value="category1"/>&category2=<s:property value="category2"/>&page=<s:property/>&search=<s:property value="search"/>'><s:property/></a>
+									</s:else>
+   								</s:iterator>
+                              </s:bean>
+                              <s:if test="page<pageCount">
+                              <a class="btn" href='product.html?category1=<s:property value="category1"/>&category2=<s:property value="category2"/>&page=<s:property value="page+1"/>&search=<s:property value="search"/>'>
                                   <span class="fa fa-angle-right"></span>
-                              </button>
+                              </a>
+                              </s:if>
+                              <s:else>
+                              <a class="btn">
+                                  <span class="fa fa-angle-right"></span>
+                              </a>
+                              </s:else>
                           </div>
                       </div>
                   </div>
@@ -399,8 +326,13 @@
       <script src="asset/js/main.js"></script>
       <script type="text/javascript">
           $(document).ready(function(){
-
+	          $("#goodsname2").keydown(function(event){ 
+	          	if(event.keyCode==13){ 
+					window.location.href = 'product.html?category1=<s:property value="category1"/>&category2=<s:property value="category2"/>&page=1&search=' + encodeURI(encodeURI($("#goodsname2").val()));
+				}}); 
           });
+          
+
       </script>
   <!-- end: Javascript -->
   </body>

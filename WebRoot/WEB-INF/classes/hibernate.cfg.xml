@@ -22,6 +22,11 @@
 		</property>
 		<mapping resource="pub/sanalar/wms/models/WmsUserType.hbm.xml" />
 		<mapping resource="pub/sanalar/wms/models/WmsUser.hbm.xml" />
+		<mapping
+			resource="pub/sanalar/wms/models/WmsProductCondition.hbm.xml" />
+		<mapping resource="pub/sanalar/wms/models/WmsCondition.hbm.xml" />
+		<mapping resource="pub/sanalar/wms/models/WmsCategory.hbm.xml" />
+		<mapping resource="pub/sanalar/wms/models/WmsProduct.hbm.xml" />
 
 	</session-factory>
 

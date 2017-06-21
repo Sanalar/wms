@@ -16,8 +16,14 @@
 			<result name="login">login.html</result>
 		</action>
 		<action name="index">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result>index.html</result>
+		</action>
+		<action name="product" class="htmlProductActionBean">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<result>product.jsp</result>
 		</action>
 		<action name="checkLogin" class="checkLoginActionBean">
 			<result name="error-login">error-login.html</result>

@@ -30,6 +30,10 @@
 			<list>
 				<value>pub/sanalar/wms/models/WmsUser.hbm.xml</value>
 				<value>pub/sanalar/wms/models/WmsUserType.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsCategory.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsCondition.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsProduct.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsProductCondition.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -45,9 +49,27 @@
 		class="pub.sanalar.wms.daos.CheckLoginDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="productQueryDaoBean"
+		class="pub.sanalar.wms.daos.ProductQueryDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="categoryQueryDaoBean"
+		class="pub.sanalar.wms.daos.CategoryQueryDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<bean id="checkLoginActionBean" 
 	class="pub.sanalar.wms.actions.CheckLoginAction" 
 	scope="prototype">
 		<property name="checkLoginDao" ref="checkLoginDaoBean"></property>
+	</bean>
+	<bean id="htmlProductActionBean" 
+	class="pub.sanalar.wms.actions.HtmlProductAction" 
+	scope="prototype">
+		<property name="productQueryDao" ref="productQueryDaoBean"></property>
+		<property name="categoryQueryDao" ref="categoryQueryDaoBean"></property>
+		<property name="category1" value="0"></property>
+		<property name="category2" value="0"></property>
+		<property name="search" value=""></property>
+		<property name="page" value="1"></property>
 	</bean>
 </beans>
