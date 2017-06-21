@@ -231,7 +231,7 @@
                             <div class="search pull-right">
                                 <span class="fa fa-search icon-search" style="font-size:23px;"></span>
                                 <div class="form-group form-animate-text" style="margin-bottom: 0;">
-                                    <input name="goodsname" id="goodsname" type="text" class="form-text" placeholder="搜索货品" required style="padding-bottom: 5px; padding-top: 0">
+                                    <input name="goodsname2" id="goodsname2" type="text"  value='<s:property value="search"/>' class="form-text" placeholder="搜索货品" style="padding-bottom: 5px; padding-top: 0"/>
                                     <span class="bar"></span>
                                 </div>
                             </div>
@@ -326,8 +326,13 @@
       <script src="asset/js/main.js"></script>
       <script type="text/javascript">
           $(document).ready(function(){
-
+	          $("#goodsname2").keydown(function(event){ 
+	          	if(event.keyCode==13){ 
+					window.location.href = 'product.html?category1=<s:property value="category1"/>&category2=<s:property value="category2"/>&page=1&search=' + encodeURI(encodeURI($("#goodsname2").val()));
+				}}); 
           });
+          
+
       </script>
   <!-- end: Javascript -->
   </body>

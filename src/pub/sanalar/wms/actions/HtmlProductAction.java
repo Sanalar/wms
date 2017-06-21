@@ -97,6 +97,7 @@ public class HtmlProductAction extends ActionSupport {
 	
 	@Override
 	public String execute() throws Exception {
+		search = java.net.URLDecoder.decode(search, "UTF-8");
 		pageCount = productQueryDao.getProductCount(category1, category2, search);
 		pageCount = (pageCount + pageSize - 1) / pageSize;
 		category1List = categoryQueryDao.getTopCategories();
