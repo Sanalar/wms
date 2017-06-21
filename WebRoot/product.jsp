@@ -210,11 +210,22 @@
                             </div>
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <s:if test="category2 == 0">
                                     <span class="fa fa-cubes"></span> 所有分类
                                     <span class="fa fa-angle-down"></span>
+                                    </s:if>
+                                    <s:else>
+                                    <s:property value="category2List.get(category2)"/>
+                                    <span class="fa fa-angle-down"></span>
+                                    </s:else>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#"><span class="fa fa-cubes"></span> 所有分类</a></li>
+                                    <li><a a href='product.html?category1=<s:property value="category1"/>&category2=0&page=1&search=<s:property value="search"/>'><span class="fa fa-cubes"></span> 所有分类</a></li>
+                                	<s:iterator value="category2List.entrySet()" id="entry">
+                                	<li><a href='product.html?category1=<s:property value="category1"/>&category2=<s:property value="#entry.key"/>&page=1&search=<s:property value="search"/>'>
+                                		<s:property value="#entry.value"/>
+                                	</a></li>
+                                	</s:iterator>
                                 </ul>
                             </div>
                             <div class="search pull-right">
