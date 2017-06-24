@@ -295,10 +295,9 @@
                                                 <div class="form-group form-text" style="margin-top:10px; margin-bottom: 10px">
                                                     <label>特殊存放条件</label>
                                                     <select class="select2-A btn-block" multiple="multiple">
-                                                        <option value="SC">干燥</option>
-                                                        <option value="VT">避光</option>
-                                                        <option value="VA">不可挤压</option>
-                                                        <option value="WV">通风</option>
+                                                        <s:iterator value="conditionList.entrySet()" id="e">
+                                                        <option value='<s:property value="#e.key"/>'><s:property value="#e.value"/></option>
+                                                        </s:iterator>
                                                     </select>
                                                 </div>
                                             </div>

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.opensymphony.xwork2.ActionSupport;
 
 import pub.sanalar.wms.daos.CategoryQueryDao;
+import pub.sanalar.wms.daos.ConditionQueryDao;
 import pub.sanalar.wms.daos.ProductQueryDao;
 import pub.sanalar.wms.models.WmsProduct;
 
@@ -18,9 +19,11 @@ public class HtmlProductDetailsAction extends ActionSupport {
 	
 	private CategoryQueryDao categoryQueryDao;
 	private ProductQueryDao productQueryDao;
+	private ConditionQueryDao conditionQueryDao;
 	private String topCategoryListString;
 	private String allSubCategoryListString;
 	private WmsProduct product;
+	private Map<Integer, String> conditionList;
 	private Integer id;
 	private DecimalFormat df = new DecimalFormat("0.00");
 
@@ -38,6 +41,8 @@ public class HtmlProductDetailsAction extends ActionSupport {
 		Map<Integer, String> topCategories = categoryQueryDao.getTopCategories();
 		topCategoryListString = categoryQueryDao.getTopCategoryListString(topCategories);
 		allSubCategoryListString = categoryQueryDao.getAllSubCategoryListString(topCategories);
+		
+		conditionList = conditionQueryDao.getAllConditions();
 		
 		return SUCCESS;
 	}
@@ -92,6 +97,18 @@ public class HtmlProductDetailsAction extends ActionSupport {
 
 	public DecimalFormat getDf() {
 		return df;
+	}
+
+	public ConditionQueryDao getConditionQueryDao() {
+		return conditionQueryDao;
+	}
+
+	public void setConditionQueryDao(ConditionQueryDao conditionQueryDao) {
+		this.conditionQueryDao = conditionQueryDao;
+	}
+
+	public Map<Integer, String> getConditionList() {
+		return conditionList;
 	}
 
 }
