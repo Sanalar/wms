@@ -32,7 +32,8 @@
 		<action name="product-details" class="htmlProductDetailsActionBean">
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<result>product-details.jsp</result>
+			<result name="success">product-details.jsp</result>
+			<result name="error">404.jsp</result>
 		</action>
 	</package>
 </struts>    

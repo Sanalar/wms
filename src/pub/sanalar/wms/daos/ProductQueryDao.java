@@ -67,4 +67,8 @@ public class ProductQueryDao extends HibernateDaoSupport {
 					.list();
 		}
 	}
+	
+	public WmsProduct getProductById(Integer id){
+		return getHibernateTemplate().get(WmsProduct.class, id);
+	}
 }

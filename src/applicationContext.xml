@@ -76,5 +76,6 @@
 	class="pub.sanalar.wms.actions.HtmlProductDetailsAction" 
 	scope="prototype">
 		<property name="categoryQueryDao" ref="categoryQueryDaoBean"></property>
+		<property name="productQueryDao" ref="productQueryDaoBean"></property>
 	</bean>
 </beans>

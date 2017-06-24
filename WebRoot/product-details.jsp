@@ -179,7 +179,7 @@
                   <div class="panel box-shadow-none text-left content-header">
                       <div class="panel-body" style="padding-bottom:0px;">
                           <div class="col-md-12">
-                              <h3 class="animated fadeInLeft"><b class="text-primary">德芙巧克力</b> 产品详情</h3>
+                              <h3 class="animated fadeInLeft"><b class="text-primary"><s:property value="product.productName"/></b> 产品详情</h3>
                               <p class="animated fadeInDown">
                                   仓库管理系统 <span class="fa-angle-right fa"></span> 产品库存 <span class="fa-angle-right fa"></span> 产品管理
                                   <span class="fa-angle-right fa"></span> 产品详情
@@ -206,21 +206,22 @@
                                         <form>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required value="德芙巧克力">
+                                                    <input type="text" class="form-text" required value='<s:property value="product.productName"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品名称 <span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required value="dfqkl-1011">
+                                                    <input type="text" class="form-text" required value='<s:property value="product.productCode"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品编号 <span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" id="selected-category" data-am-modal="{target: '#category-dialog'}" required>
+                                                    <input type="text" class="form-text" id="selected-category" data-am-modal="{target: '#category-dialog'}" required
+                                                    value='<s:property value="product.wmsCategory.wmsCategory.categoryName"/> > <s:property value="product.wmsCategory.categoryName"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品分类</label>
                                                 </div>
@@ -250,42 +251,42 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required>
+                                                    <input type="text" class="form-text" value='<s:property value="product.productSupplier"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品厂商</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required>
+                                                    <input type="text" class="form-text" value='<s:property value="product.productStandard"/>'>
                                                     <span class="bar"></span>
                                                     <label>规格</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required>
+                                                    <input type="text" class="form-text" value='<s:property value="product.productUint"/>'>
                                                     <span class="bar"></span>
                                                     <label>单位</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text mask-money" required>
+                                                    <input type="text" class="form-text mask-money" value='<s:property value="df.format(product.productInPrice)"/>'>
                                                     <span class="bar"></span>
                                                     <label>进价</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text mask-money" required>
+                                                    <input type="text" class="form-text mask-money" value='<s:property value="df.format(product.productOutPrice)"/>'>
                                                     <span class="bar"></span>
                                                     <label>售价</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required>
+                                                    <input type="text" class="form-text" value='<s:property value="product.productDescription"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品描述</label>
                                                 </div>
@@ -313,7 +314,8 @@
                                     <!-- 产品图片 -->
                                     <div class="col-md-4">
                                         <div class="up-img-cover"  id="up-img-touch" >
-                                            <img class="am-thumbnail" alt="点击图片上传" src="asset/img/avatar.png" data-am-popover="{content: '点击上传产品图片', trigger: 'hover focus'}" >
+                                            <img class="am-thumbnail" alt="点击图片上传" src='products/<s:property value="product.productImage"/>' data-am-popover="{content: '点击上传产品图片', trigger: 'hover focus'}" 
+                                            style="width:250px;height:250px">
                                         </div>
                                         <!--图片上传框-->
                                         <div class="am-modal am-modal-no-btn up-modal-frame" tabindex="-1" id="up-modal-frame">
