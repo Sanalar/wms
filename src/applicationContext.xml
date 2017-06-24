@@ -72,4 +72,9 @@
 		<property name="search" value=""></property>
 		<property name="page" value="1"></property>
 	</bean>
+	<bean id="htmlProductDetailsActionBean" 
+	class="pub.sanalar.wms.actions.HtmlProductDetailsAction" 
+	scope="prototype">
+		<property name="categoryQueryDao" ref="categoryQueryDaoBean"></property>
+	</bean>
 </beans>
