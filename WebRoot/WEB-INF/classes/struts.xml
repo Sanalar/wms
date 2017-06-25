@@ -4,13 +4,17 @@
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.action.extension" value="action,html" />
 	<package name="wms" extends="struts-default" namespace="/">
+		<result-types>
+    		<result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+		</result-types>
 		<interceptors>
 			<interceptor name="loginInterceptor" class="pub.sanalar.wms.interceptors.LoginInterceptor"></interceptor>
+			<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>
 		</interceptors>
-		
 		<global-results>
 			<result name="login" type="redirect">login.html</result>
 		</global-results>
+		
 		<action name="login" class="htmlLoginActionBean">
 			<result name="success" type="redirect">index.html</result>
 			<result name="login">login.html</result>
@@ -28,6 +32,25 @@
 		<action name="checkLogin" class="checkLoginActionBean">
 			<result name="error-login">error-login.html</result>
 			<result name="success" type="redirect">index.html</result>
+		</action>
+		<action name="product-details" class="htmlProductDetailsActionBean">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<result name="success">product-details.jsp</result>
+			<result name="error">404.jsp</result>
+		</action>
+		<action name="uploadProductImage" class="uploadProductImageActionBean">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<result name="login" type="httpheader">
+				<param name="status">403</param>
+			</result>
+			<result name="error" type="httpheader">
+				<param name="status">403</param>
+			</result>
+			<result name="success" type="json">
+				<param name="root">success</param>
+			</result>
 		</action>
 	</package>
 </struts>    

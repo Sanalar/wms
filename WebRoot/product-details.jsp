@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -177,7 +179,7 @@
                   <div class="panel box-shadow-none text-left content-header">
                       <div class="panel-body" style="padding-bottom:0px;">
                           <div class="col-md-12">
-                              <h3 class="animated fadeInLeft"><b class="text-primary">德芙巧克力</b> 产品详情</h3>
+                              <h3 class="animated fadeInLeft"><b class="text-primary"><s:property value="product.productName"/></b> 产品详情</h3>
                               <p class="animated fadeInDown">
                                   仓库管理系统 <span class="fa-angle-right fa"></span> 产品库存 <span class="fa-angle-right fa"></span> 产品管理
                                   <span class="fa-angle-right fa"></span> 产品详情
@@ -204,31 +206,33 @@
                                         <form>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required value="德芙巧克力">
+                                                    <input type="text" class="form-text" required value='<s:property value="product.productName"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品名称 <span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required value="dfqkl-1011">
+                                                    <input type="text" class="form-text" required value='<s:property value="product.productCode"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品编号 <span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" id="selected-category" data-toggle="modal" data-target="#category-dialog" required>
+                                                    <input type="text" class="form-text" id="selected-category" data-am-modal="{target: '#category-dialog'}" required
+                                                    value='<s:property value="product.wmsCategory.wmsCategory.categoryName"/> > <s:property value="product.wmsCategory.categoryName"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品分类</label>
                                                 </div>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="category-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                                    <div class="modal-dialog" role="document">
+                                                <div class="am-modal am-modal-no-btn" id="category-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                    <div class="am-modal-dialog" role="document" style="text-align:left; width:600px">
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                <h4 class="modal-title" id="myModalLabel">选择货品分类</h4>
+                                                            <div class="am-modal-hd">
+                                                            	<span class="modal-title" id="myModalLabel">选择货品分类</span>
+                                                                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                                                                
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="wareSort clearfix">
@@ -238,7 +242,7 @@
                                                                 <div class="selectedSort"><b>当前选择的商品类别：</b><i id="selectedSort"></i></div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default btn-round btn-gradient" data-dismiss="modal">取 消</button>
+                                                                <button type="button" class="btn btn-default btn-round btn-gradient" data-am-modal-close>取 消</button>
                                                                 <button type="button" id="releaseBtn" class="btn btn-primary btn-round btn-gradient" disabled="disabled">确 定</button>
                                                             </div>
                                                         </div>
@@ -247,42 +251,42 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required>
+                                                    <input type="text" class="form-text" value='<s:property value="product.productSupplier"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品厂商</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required>
+                                                    <input type="text" class="form-text" value='<s:property value="product.productStandard"/>'>
                                                     <span class="bar"></span>
                                                     <label>规格</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required>
+                                                    <input type="text" class="form-text" value='<s:property value="product.productUint"/>'>
                                                     <span class="bar"></span>
                                                     <label>单位</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text mask-money" required>
+                                                    <input type="text" class="form-text mask-money" value='<s:property value="df.format(product.productInPrice)"/>'>
                                                     <span class="bar"></span>
                                                     <label>进价</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text mask-money" required>
+                                                    <input type="text" class="form-text mask-money" value='<s:property value="df.format(product.productOutPrice)"/>'>
                                                     <span class="bar"></span>
                                                     <label>售价</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required>
+                                                    <input type="text" class="form-text" value='<s:property value="product.productDescription"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品描述</label>
                                                 </div>
@@ -291,10 +295,9 @@
                                                 <div class="form-group form-text" style="margin-top:10px; margin-bottom: 10px">
                                                     <label>特殊存放条件</label>
                                                     <select class="select2-A btn-block" multiple="multiple">
-                                                        <option value="SC">干燥</option>
-                                                        <option value="VT">避光</option>
-                                                        <option value="VA">不可挤压</option>
-                                                        <option value="WV">通风</option>
+                                                        <s:iterator value="conditionList.entrySet()" id="e">
+                                                        <option value='<s:property value="#e.key"/>'><s:property value="#e.value"/></option>
+                                                        </s:iterator>
                                                     </select>
                                                 </div>
                                             </div>
@@ -310,7 +313,8 @@
                                     <!-- 产品图片 -->
                                     <div class="col-md-4">
                                         <div class="up-img-cover"  id="up-img-touch" >
-                                            <img class="am-thumbnail" alt="点击图片上传" src="asset/img/avatar.png" data-am-popover="{content: '点击上传产品图片', trigger: 'hover focus'}" >
+                                            <img class="am-thumbnail" alt="点击图片上传" src='products/<s:property value="product.productImage"/>' data-am-popover="{content: '点击上传产品图片', trigger: 'hover focus'}" 
+                                            style="width:250px;height:250px">
                                         </div>
                                         <!--图片上传框-->
                                         <div class="am-modal am-modal-no-btn up-modal-frame" tabindex="-1" id="up-modal-frame">
@@ -341,7 +345,7 @@
                                                         <div class="up-control-btns">
                                                             <span class="am-icon-rotate-left"   id="up-btn-left"></span>
                                                             <span class="am-icon-rotate-right"  id="up-btn-right"></span>
-    				<span class="am-icon-check up-btn-ok" url="/admin/user/upload.action"
+    				<span class="am-icon-check up-btn-ok" url="uploadProductImage.action" targetid='<s:property value="id"/>'
                           parameter="{width:'250',height:'250'}">
     				</span>
                                                         </div>
@@ -527,7 +531,6 @@
           <!-- end: content -->
 
       </div>
-
     <!-- start: Javascript -->
     <script src="asset/js/jquery.min.js"></script>
     <script src="asset/js/jquery.ui.min.js"></script>
@@ -566,15 +569,9 @@
       <script>
           /*定义三级分类数据*/
           //一级分类
-          var province = ["危化品", "食品", "日用品", "电子设备", "医药品"];
+          var province = <s:property value="topCategoryListString" escape="false"/>;
           //二级分类
-          var city = [
-              ["爆炸品", "压缩气体和液化气体", "易燃液体", "易燃固体、自燃物品和遇湿易燃物品", "氧化剂和有机过氧化物", "毒害品和感染性物品", "放射性物品", "腐蚀品"],
-              ["糖果/巧克力", "饮料/水", "肉类/豆制品零食", "饼干糕点", "冲调保健", "酒类", "牛奶乳品", "坚果炒货", "蜜饯果干"],
-              ["厨卫用品", "收纳用品", "洗护用品", "文具", "体育用品"],
-              ["电脑", "手机", "电子芯片", "电脑周边", "线材", "家电", "装修工具"],
-              ["医保药品", "中成药", "西成药"]
-          ];
+          var city = <s:property value="allSubCategoryListString" escape="false"/>;
 
           var expressP, expressC, expressD, expressArea, areaCont;
           var arrow = " <font>&gt;</font> ";
@@ -616,7 +613,7 @@
               var releaseS = $(this).prop("disabled");
               if (releaseS == false) {//未被禁用
                   $("#selected-category").val($("#selectedSort").text());
-                  $("#category-dialog").modal('hide');
+                  $("#category-dialog").modal('close');
               }
           });
       </script>

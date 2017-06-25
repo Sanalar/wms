@@ -259,7 +259,7 @@
                                   </small>
                                   <h4 class="text-primary"><s:property value="#p.productName"/></h4>
                                   <p style="height: 60px; overflow: hidden"><s:property value="#p.productDescription"/></p>
-                                  <p><a href='product-detail.html?id=<s:property value="#p.productId"/>' class="btn btn-primary btn-block" role="button">查看详情</a></p>
+                                  <p><a href='product-details.html?id=<s:property value="#p.productId"/>' class="btn btn-primary btn-block" role="button">查看详情</a></p>
                               </div>
                           </div>
                   	</div>

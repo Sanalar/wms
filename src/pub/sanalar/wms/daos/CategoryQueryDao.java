@@ -43,4 +43,39 @@ public class CategoryQueryDao extends HibernateDaoSupport {
 		
 		return results;
 	}
+	
+	public String getTopCategoryListString(Map<Integer, String> categoryList){
+		StringBuilder sb = new StringBuilder("[");
+		
+		for(String name : categoryList.values()){
+			sb.append("\"" + name + "\",");
+		}
+		
+		sb.setCharAt(sb.length() - 1, ']');
+		return sb.toString();
+	}
+	
+	private StringBuilder getSubCategoryListStringOfOneKind(Integer parentId){
+		Map<Integer, String> categoryList = getSubCategories(parentId);
+		StringBuilder sb = new StringBuilder("[");
+		
+		for(String name : categoryList.values()){
+			sb.append("\"" + name + "\",");
+		}
+		
+		sb.setCharAt(sb.length() - 1, ']');
+		return sb;
+	}
+	
+	public String getAllSubCategoryListString(Map<Integer, String> categoryList){
+		StringBuilder sb = new StringBuilder("[");
+		
+		for(Integer id : categoryList.keySet()){
+			sb.append(getSubCategoryListStringOfOneKind(id));
+			sb.append(',');
+		}
+		
+		sb.setCharAt(sb.length() - 1, ']');
+		return sb.toString();
+	}
 }
