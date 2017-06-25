@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="description" content="仓库管理系统">
+    <meta name="author" content="詹娜娜">
+    <meta name="keyword" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>仓库管理系统 - WMS - 詹娜娜</title>
+
+    <!-- start: Css -->
+    <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">
+
+    <!-- plugins -->
+    <link rel="stylesheet" href="asset/css/plugins/amazeui.min.css">
+    <link rel="stylesheet" href="asset/css/plugins/amazeui.cropper.css">
+    <link rel="stylesheet" href="asset/css/plugins/custom_up_img.css">
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/simple-line-icons.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/select2.min.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/fullcalendar.min.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/datatables.bootstrap.min.css"/>
+    <link href="asset/css/style.css" rel="stylesheet">
+    <style type="text/css">
+        .up-img-cover {width: 250px;height: 250px;}
+        .up-img-cover img{width: 100%;}
+    </style>
+
+    <!-- end: Css -->
+
+    <link rel="shortcut icon" href="asset/img/logomi.png">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="asset/js/plugins/html5shiv.js"></script>
+    <script src="asset/js/plugins/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body id="mimin" class="dashboard">
+<!-- start: Header -->
+<nav class="navbar navbar-default header navbar-fixed-top">
+    <div class="col-md-12 nav-wrapper">
+        <div class="navbar-header" style="width:100%;">
+            <div class="opener-left-menu is-open">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </div>
+            <a href="index.html" class="navbar-brand">
+                <b>筛选厂商</b>
+            </a>
+
+            <ul class="nav navbar-nav search-nav">
+                <li>
+                    <div class="search">
+                        <span class="fa fa-search icon-search" style="font-size:23px;"></span>
+                        <div class="form-group form-animate-text">
+                            <input name="goodsname" id="goodsname" type="text" class="form-text" required>
+                            <span class="bar"></span>
+                            <label for="goodsname" class="label-search">筛选厂商</label>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right user-nav">
+                <li class="user-name"><span>詹娜娜</span></li>
+                <li class="dropdown avatar-dropdown">
+                    <img src="asset/img/avatar.png" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+                    <ul class="dropdown-menu user-dropdown">
+                        <li><a href="#"><span class="fa fa-user"></span> 用户设置</a></li>
+                        <li><a href="#"><span class="fa fa-calendar"></span> 我的日程安排</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="more">
+                            <ul>
+                                <li><a href=""><span class="fa fa-cogs"></span></a></li>
+                                <li><a href=""><span class="fa fa-lock"></span></a></li>
+                                <li><a href=""><span class="fa fa-power-off "></span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ><a href="#" class="opener-right-menu"><span class="fa fa-coffee"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- end: Header -->
+
+<div class="container-fluid mimin-wrapper">
+
+    <!-- start:Left Menu -->
+    <div id="left-menu">
+        <div class="sub-left-menu scroll">
+            <ul class="nav nav-list">
+                <li><div class="left-bg"></div></li>
+                <li class="time">
+                    <h1 class="animated fadeInLeft">21:00</h1>
+                    <p class="animated fadeInRight">Sat,October 1st 2029</p>
+                </li>
+                <li class="ripple">
+                    <a href="index.html"><span class="fa-home fa"></span> 主页
+                    </a>
+                </li>
+                <li class="ripple">
+                    <a class="tree-toggle nav-header">
+                        <span class=" icon-list"></span> 采购
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    </a>
+                    <ul class="nav nav-list tree">
+                        <li><a href="materialreq.html">物料需求信息管理</a></li>
+                        <li><a href="factory.html">厂商信息管理</a></li>
+                        <li><a href="selectfa.html">筛选厂商</a></li>
+                        <li><a href="fasupply.html">供货信息管理</a></li>
+                    </ul>
+                </li>
+
+                <li class="ripple">
+                    <a class="tree-toggle nav-header">
+                        <span class="fa fa-balance-scale"></span> 质量检验
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    </a>
+                    <ul class="nav nav-list tree">
+                        <li><a href="qualityre.html">质检结果管理</a></li>
+                        <li><a href="conformity.html">合格证明</a></li>
+                    </ul>
+                </li>
+                <li class="ripple">
+                    <a class="tree-toggle nav-header">
+                        <span class="fa-sign-in fa"></span> 入库管理
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    </a>
+                    <ul class="nav nav-list tree">
+                        <li><a href="new-in.html">新建入库申请</a></li>
+                        <li><a href="ins.html">入库单</a></li>
+                        <li><a href="suppliers.html">供应商管理</a></li>
+                    </ul>
+                </li>
+                <li class="ripple">
+                    <a class="tree-toggle nav-header">
+                        <span class="fa-sign-out fa"></span> 出库管理
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    </a>
+                    <ul class="nav nav-list tree">
+                        <li><a href="new-out.html">新建出库申请</a></li>
+                        <li><a href="outs.html">出库单</a></li>
+                        <li><a href="customers.html">客户管理</a></li>
+                    </ul>
+                </li>
+                <li class="ripple">
+                    <a class="tree-toggle nav-header">
+                        <span class="fa-area-chart fa"></span> 仓库盘点
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    </a>
+                    <ul class="nav nav-list tree">
+                        <li><a href="new-check.html">新建库存盘点</a></li>
+                        <li><a href="checks.html">库存盘点列表</a></li>
+                    </ul>
+                </li>
+                <li class="ripple">
+                    <a class="tree-toggle nav-header">
+                        <span class="fa-truck fa"></span> 仓库调度
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    </a>
+                    <ul class="nav nav-list tree">
+                        <li><a href="new-transport.html">新建调度任务</a></li>
+                        <li><a href="transports.html">仓库调度列表</a></li>
+                    </ul>
+                </li>
+                <li class="ripple active">
+                    <a class="tree-toggle nav-header">
+                        <span class="fa-search fa"></span> 产品库存
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    </a>
+                    <ul class="nav nav-list tree">
+                        <li><a href="product.html">产品管理</a></li>
+                        <li><a href="storage.html">库存查询</a></li>
+                        <li><a href="stream.html">仓库流水</a></li>
+                    </ul>
+                </li>
+                <li class="ripple"><a href="calendar.html"><span class="fa fa-calendar-o"></span> 日程表 </a></li>
+                <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-envelope-o"></span> 邮件 <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                    <ul class="nav nav-list tree">
+                        <li><a href="mail-box.html">收件箱</a></li>
+                        <li><a href="compose-mail.html">Compose Mail</a></li>
+                        <li><a href="view-mail.html">View Mail</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- end: Left Menu -->
+    <!-- start:Header Menu -->
+    <div id="content">
+        <div class="tabs-wrapper text-center">
+            <div class="panel box-shadow-none text-left content-header">
+                <div class="panel-body" style="padding-bottom:0px;">
+                    <div class="col-md-12">
+                        <h3 class="animated fadeInLeft"><b class="text-primary">筛选厂商</b> 厂商详情</h3>
+                        <p class="animated fadeInDown">
+                            仓库管理系统 <span class="fa-angle-right fa"></span> 采购<span class="fa-angle-right fa"></span> 筛选
+                            <span class="fa-angle-right fa"></span> 厂商详情
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end:Header Menu -->
+        <!-- start:Content -->
+        <!--select-->
+        <div class="col-md-12 tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="new-materialreq" aria-labelledby="tabs1">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+
+                                <div class="form-group"><label class="col-sm-2 control-label text-right"
+                                                               style="text-overflow:ellipsis;word-break:keep-all;
+                                                                white-space:nowrap;margin-top:10px;
+                                                                margin-bottom: 10px">采购员姓名<span class="name-materialreq">*</span></label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-12 padding-0"style="margin-left:10px;width:120px">
+                                            <select class="form-control">
+                                                <option>李毅</option>
+                                                <option>王军</option>
+                                                <option>宋涛</option>
+                                                <option>周平</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--table-->
+
+                                <div class="col-md-12 top-20 padding-0">
+                                    <div class="col-md-12">
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <div class="col-md-12 padding-0" style="padding-bottom:20px;">
+                                                </div>
+                                                <div class="responsive-table">
+
+                                                    <table class="table table-striped table-bordered" width="100%" cellspacing="0">
+                                                        <thead>
+                                                        <tr>
+                                                            <th><input type="checkbox" class="icheck" name="checkbox1" /></th>
+                                                            <th>Name</th>
+                                                            <th>Position</th>
+                                                            <th>Office</th>
+                                                            <th>Age</th>
+                                                            <th>Start date</th>
+                                                            <th>Salary</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
+                                                            <td>Tiger Nixon</td>
+                                                            <td>System Architect</td>
+                                                            <td>Edinburgh</td>
+                                                            <td>61</td>
+                                                            <td>2011/04/25</td>
+                                                            <td>$320,800</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
+                                                            <td>Sonya Frost</td>
+                                                            <td>Software Engineer</td>
+                                                            <td>Edinburgh</td>
+                                                            <td>23</td>
+                                                            <td>2008/12/13</td>
+                                                            <td>$103,600</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><input type="checkbox" class="icheck" name="checkbox1" /></td>
+                                                            <td>Tiger Nixon</td>
+                                                            <td>System Architect</td>
+                                                            <td>Edinburgh</td>
+                                                            <td>61</td>
+                                                            <td>2011/04/25</td>
+                                                            <td>$320,800</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <ul class="pagination pull-right">
+                                                        <li>
+                                                            <a href="#" aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="active"><a href="#">1</a></li>
+                                                        <li><a href="#">2</a></li>
+                                                        <li><a href="#">3</a></li>
+                                                        <li><a href="#">4</a></li>
+                                                        <li><a href="#">5</a></li>
+                                                        <li>
+                                                            <a href="#" aria-label="Next">
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end:table-->
+                                <!--end:weight-->
+                                <div class="col-md-10">
+                                    <div class="col-md-12 panel">
+                                        <div class="col-md-12 panel-body" style="padding-bottom:30px;">
+                                            <div class="col-md-12">
+                                                <form class="cmxform" id="signupForm" method="get" action="">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                            <input type="text" class="form-text" id="validate_firstname" name="validate_firstname" required>
+                                                            <span class="bar"></span>
+                                                            <label>价格</label>
+                                                        </div>
+
+                                                        <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                            <input type="text" class="form-text" id="validate_username" name="validate_username" required>
+                                                            <span class="bar"></span>
+                                                            <label>预计到货日期</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                            <input type="password" class="form-text" id="validate_password" name="validate_password" required>
+                                                            <span class="bar"></span>
+                                                            <label>售后服务时长</label>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <div class="col-lg-4">
+                                                    <div class="col-md-6">
+                                                        <input type="button" class=" btn btn-3d btn-primary" value="primary"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- end:Content -->
+    </div>
+</div>
+            <!-- start: Javascript -->
+            <script src="asset/js/jquery.min.js"></script>
+            <script src="asset/js/jquery.ui.min.js"></script>
+            <script src="asset/js/bootstrap.min.js"></script>
+
+
+            <!-- plugins -->
+            <script src="asset/js/plugins/moment.min.js"></script>
+            <script src="asset/js/plugins/jquery.nicescroll.js"></script>
+            <script src="asset/js/plugins/jquery.mask.min.js"></script>
+            <script src="asset/js/plugins/select2.full.min.js"></script>
+            <script src="asset/js/plugins/jquery.datatables.min.js"></script>
+            <script src="asset/js/plugins/datatables.bootstrap.min.js"></script>
+            <script src="asset/js/plugins/chart.min.js"></script>
+
+    <!-- content -->
+
+
+
+
+
+            <!-- custom -->
+            <script src="asset/js/main.js"></script>
+            <script type="text/javascript">
+
+                $(document).ready(function(){
+
+                    $(".nav-tabs a").click(function (e) {
+                        e.preventDefault();
+                        $(this).tab('show');
+                    });
+                    $('.datatable').DataTable();
+
+                });
+
+                function showDetail(id){
+                    $("#show-checks").modal('show');
+                }
+            </script>
+
+            <!-- end: Javascript -->
+</body>
+</html>
