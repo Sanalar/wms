@@ -233,14 +233,14 @@
                                         	<input type="hidden" name="productId" value='<s:property value="id"/>' />
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required value='<s:property value="product.productName"/>'>
+                                                    <input type="text" class="form-text" name="productName" required value='<s:property value="product.productName"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品名称 <span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" required value='<s:property value="product.productCode"/>'>
+                                                    <input type="text" class="form-text" name="productCode" required value='<s:property value="product.productCode"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品编号 <span class="text-danger">*</span></label>
                                                 </div>
@@ -248,7 +248,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
                                                     <input type="text" class="form-text" id="selected-category" data-am-modal="{target: '#category-dialog'}" required
-                                                    value='<s:property value="product.wmsCategory.wmsCategory.categoryName"/> > <s:property value="product.wmsCategory.categoryName"/>'>
+                                                    name="productCategory" value='<s:property value="product.wmsCategory.wmsCategory.categoryName"/> > <s:property value="product.wmsCategory.categoryName"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品分类</label>
                                                 </div>
@@ -278,42 +278,42 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" value='<s:property value="product.productSupplier"/>'>
+                                                    <input type="text" class="form-text" name="productSupplier" value='<s:property value="product.productSupplier"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品厂商</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" value='<s:property value="product.productStandard"/>'>
+                                                    <input type="text" class="form-text" name="productSupplier" value='<s:property value="product.productStandard"/>'>
                                                     <span class="bar"></span>
                                                     <label>规格</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" value='<s:property value="product.productUint"/>'>
+                                                    <input type="text" class="form-text" name="productUnit" value='<s:property value="product.productUint"/>'>
                                                     <span class="bar"></span>
                                                     <label>单位</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text mask-money" value='<s:property value="df.format(product.productInPrice)"/>'>
+                                                    <input type="text" class="form-text mask-money" name="productInPrice" value='<s:property value="df.format(product.productInPrice)"/>'>
                                                     <span class="bar"></span>
                                                     <label>进价</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text mask-money" value='<s:property value="df.format(product.productOutPrice)"/>'>
+                                                    <input type="text" class="form-text mask-money" name="productOutPrice" value='<s:property value="df.format(product.productOutPrice)"/>'>
                                                     <span class="bar"></span>
                                                     <label>售价</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" value='<s:property value="product.productDescription"/>'>
+                                                    <input type="text" class="form-text" name="productDescription" value='<s:property value="product.productDescription"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品描述</label>
                                                 </div>
@@ -321,7 +321,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group form-text" style="margin-top:10px; margin-bottom: 10px">
                                                     <label>特殊存放条件</label>
-                                                    <select class="select2-A btn-block" multiple="multiple">
+                                                    <select class="select2-A btn-block" name="productConditions" multiple="multiple">
                                                         <s:iterator value="conditionList.entrySet()" id="e">
                                                         <option value='<s:property value="#e.key"/>'><s:property value="#e.value"/></option>
                                                         </s:iterator>
@@ -590,6 +590,10 @@
                   $(this).tab('show');
               });
               $('#stream-table').DataTable();
+              
+              <s:if test="msg != null">
+              alert('<s:property value="msg" escape="false"/>');
+              </s:if>
           });
       </script>
 

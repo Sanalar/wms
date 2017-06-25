@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
+import pub.sanalar.wms.models.WmsCategory;
+
 public class CategoryQueryDao extends HibernateDaoSupport {
 
 	public Map<Integer, String> getTopCategories(){
@@ -77,5 +79,30 @@ public class CategoryQueryDao extends HibernateDaoSupport {
 		
 		sb.setCharAt(sb.length() - 1, ']');
 		return sb.toString();
+	}
+	
+	public WmsCategory getCategoryByName(String categoryName){
+		String hql = "from WmsCategory cat where cat.categoryName=?";
+		@SuppressWarnings("unchecked")
+		List<WmsCategory> cat = (List<WmsCategory>) getHibernateTemplate().find(hql, categoryName);
+		
+		if(cat.size() == 0){
+			return null;
+		}
+		
+		return cat.get(0);
+	}
+	
+	public WmsCategory getCategoryByCategoryString(String category){
+		if(category == null){
+			return null;
+		}
+		
+		if(!category.contains(" > ")){
+			return null;
+		}
+		
+		String categoryName = category.substring(category.indexOf('>') + 2).trim();
+		return getCategoryByName(categoryName);
 	}
 }

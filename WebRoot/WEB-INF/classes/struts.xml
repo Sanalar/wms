@@ -52,5 +52,13 @@
 				<param name="root">success</param>
 			</result>
 		</action>
+		<action name="editProduct" class="editProductActionBean">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<result name="success">redirect.jsp</result>
+			<result name="error" type="httpheader">
+				<param name="status">403</param>
+			</result>
+		</action>
 	</package>
 </struts>    

@@ -25,6 +25,7 @@ public class HtmlProductDetailsAction extends ActionSupport {
 	private WmsProduct product;
 	private Map<Integer, String> conditionList;
 	private Integer id;
+	private String msg;
 	private DecimalFormat df = new DecimalFormat("0.00");
 
 	@Override
@@ -109,6 +110,14 @@ public class HtmlProductDetailsAction extends ActionSupport {
 
 	public Map<Integer, String> getConditionList() {
 		return conditionList;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 
 }

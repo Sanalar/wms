@@ -88,4 +88,10 @@
 	scope="prototype">
 		<property name="productQueryDao" ref="productQueryDaoBean"></property>
 	</bean>
+	<bean id="editProductActionBean" 
+	class="pub.sanalar.wms.actions.EditProductAction" 
+	scope="prototype">
+		<property name="productQueryDao" ref="productQueryDaoBean"></property>
+		<property name="categoryQueryDao" ref="categoryQueryDaoBean"></property>
+	</bean>
 </beans>
