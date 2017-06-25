@@ -97,6 +97,31 @@
                         <a href="index.html"><span class="fa-home fa"></span> 主页
                         </a>
                     </li>
+
+                    <li class="ripple">
+                        <a class="tree-toggle nav-header">
+                            <span class=" icon-list"></span> 采购
+                            <span class="fa-angle-right fa right-arrow text-right"></span>
+                        </a>
+                        <ul class="nav nav-list tree">
+                            <li><a href="materialreq.html">物料需求信息管理</a></li>
+                            <li><a href="factory.html">厂商信息管理</a></li>
+                            <li><a href="selectfa.html">筛选厂商</a></li>
+                            <li><a href="fasupply.html">供货信息管理</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="ripple">
+                        <a class="tree-toggle nav-header">
+                            <span class="fa fa-balance-scale"></span> 质量检验
+                            <span class="fa-angle-right fa right-arrow text-right"></span>
+                        </a>
+                        <ul class="nav nav-list tree">
+                            <li><a href="qualityre.html">质检结果管理</a></li>
+                            <li><a href="conformity.html">合格证明</a></li>
+                        </ul>
+                    </li>
+
                     <li class="ripple">
                         <a class="tree-toggle nav-header">
                             <span class="fa-sign-in fa"></span> 入库管理
