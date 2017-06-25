@@ -345,7 +345,7 @@
                                                         <div class="up-control-btns">
                                                             <span class="am-icon-rotate-left"   id="up-btn-left"></span>
                                                             <span class="am-icon-rotate-right"  id="up-btn-right"></span>
-    				<span class="am-icon-check up-btn-ok" url="/admin/user/upload.action"
+    				<span class="am-icon-check up-btn-ok" url="uploadProductImage.action" targetid='<s:property value="id"/>'
                           parameter="{width:'250',height:'250'}">
     				</span>
                                                         </div>

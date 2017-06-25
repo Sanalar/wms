@@ -83,4 +83,9 @@
 		<property name="productQueryDao" ref="productQueryDaoBean"></property>
 		<property name="conditionQueryDao" ref="conditionQueryDaoBean"></property>
 	</bean>
+	<bean id="uploadProductImageActionBean" 
+	class="pub.sanalar.wms.actions.UploadProductImageAction" 
+	scope="prototype">
+		<property name="productQueryDao" ref="productQueryDaoBean"></property>
+	</bean>
 </beans>

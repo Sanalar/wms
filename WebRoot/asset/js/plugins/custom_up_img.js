@@ -11,7 +11,7 @@ $(function() {
         aspectRatio: '1',
         autoCropArea:0.8,
         preview: '.up-pre-after',
-        responsive:true,
+        responsive:true
     });
 
     // 上传图片
@@ -60,6 +60,7 @@ $(function() {
     	var url=$(this).attr("url");
     	//parameter
     	var parameter=$(this).attr("parameter");
+        var targetid=$(this).attr("targetid");
     	//console.log(parameter);
     	var parame_json = eval('(' + parameter + ')');
     	var width=parame_json.width;
@@ -72,24 +73,15 @@ $(function() {
     	var data=canvas.toDataURL(); //转成base64
         $.ajax( {  
                 url:url,  
-                dataType:'json',  
+                dataType:'json',
                 type: "POST",  
-                data: {"image":data.toString()},  
+                data: {"image":data.toString(),"id":targetid},
                 success: function(data, textStatus){
-                	$modal_loading.modal('close');
-                	set_alert_info(data.result);
-                	$modal_alert.modal();
-                	if(data.result=="ok"){
-                		$("#up-img-touch img").attr("src",data.file);
-                		var img_name=data.file.split('/')[2];
-                		//console.log(img_name);
-                		$(".up-img-txt a").text(img_name);
-                		$("#up-modal-frame").modal('close');
-                	}
+                	location.reload();
                 },
                 error: function(){
                 	$modal_loading.modal('close');
-                	set_alert_info("上传文件失败了！");
+                	set_alert_info("上传图片失败了！");
                 	$modal_alert.modal();
                 	//console.log('Upload error');  
                 }  

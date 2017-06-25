@@ -2,6 +2,7 @@ package pub.sanalar.wms.daos;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 import pub.sanalar.wms.models.WmsProduct;
@@ -70,5 +71,11 @@ public class ProductQueryDao extends HibernateDaoSupport {
 	
 	public WmsProduct getProductById(Integer id){
 		return getHibernateTemplate().get(WmsProduct.class, id);
+	}
+	
+	public void updateProduct(WmsProduct product){
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		session.save(product);
+		session.flush();
 	}
 }
