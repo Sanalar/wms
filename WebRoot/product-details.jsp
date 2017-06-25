@@ -229,7 +229,8 @@
                                 <div class="row">
                                     <!-- 产品表单 -->
                                     <div class="col-md-8">
-                                        <form>
+                                        <form action="editProduct.action" method="post">
+                                        	<input type="hidden" name="productId" value='<s:property value="id"/>' />
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
                                                     <input type="text" class="form-text" required value='<s:property value="product.productName"/>'>
