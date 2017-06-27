@@ -14,8 +14,8 @@ public class WmsCategory implements java.io.Serializable {
 	private Integer categoryId;
 	private WmsCategory wmsCategory;
 	private String categoryName;
-	private Set wmsCategories = new HashSet(0);
 	private Set wmsProducts = new HashSet(0);
+	private Set wmsCategories = new HashSet(0);
 
 	// Constructors
 
@@ -24,16 +24,18 @@ public class WmsCategory implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public WmsCategory(String categoryName) {
-		this.categoryName = categoryName;
+	public WmsCategory(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	/** full constructor */
-	public WmsCategory(WmsCategory wmsCategory, String categoryName, Set wmsCategories, Set wmsProducts) {
+	public WmsCategory(Integer categoryId, WmsCategory wmsCategory, String categoryName, Set wmsProducts,
+			Set wmsCategories) {
+		this.categoryId = categoryId;
 		this.wmsCategory = wmsCategory;
 		this.categoryName = categoryName;
-		this.wmsCategories = wmsCategories;
 		this.wmsProducts = wmsProducts;
+		this.wmsCategories = wmsCategories;
 	}
 
 	// Property accessors
@@ -62,20 +64,20 @@ public class WmsCategory implements java.io.Serializable {
 		this.categoryName = categoryName;
 	}
 
-	public Set getWmsCategories() {
-		return this.wmsCategories;
-	}
-
-	public void setWmsCategories(Set wmsCategories) {
-		this.wmsCategories = wmsCategories;
-	}
-
 	public Set getWmsProducts() {
 		return this.wmsProducts;
 	}
 
 	public void setWmsProducts(Set wmsProducts) {
 		this.wmsProducts = wmsProducts;
+	}
+
+	public Set getWmsCategories() {
+		return this.wmsCategories;
+	}
+
+	public void setWmsCategories(Set wmsCategories) {
+		this.wmsCategories = wmsCategories;
 	}
 
 }

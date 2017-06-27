@@ -1,5 +1,5 @@
 #MyEclipse Hibernate Properties
-#Sat Jun 17 16:13:34 CST 2017
+#Tue Jun 27 21:20:48 CST 2017
 genBasicCompId=false
 sessionFactoryName=pub.sanalar.wms.db.HibernateSessionFactory
 profile=

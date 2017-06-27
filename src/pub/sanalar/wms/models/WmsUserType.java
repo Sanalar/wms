@@ -22,12 +22,13 @@ public class WmsUserType implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public WmsUserType(String userTypeName) {
-		this.userTypeName = userTypeName;
+	public WmsUserType(Integer userTypeId) {
+		this.userTypeId = userTypeId;
 	}
 
 	/** full constructor */
-	public WmsUserType(String userTypeName, Set wmsUsers) {
+	public WmsUserType(Integer userTypeId, String userTypeName, Set wmsUsers) {
+		this.userTypeId = userTypeId;
 		this.userTypeName = userTypeName;
 		this.wmsUsers = wmsUsers;
 	}

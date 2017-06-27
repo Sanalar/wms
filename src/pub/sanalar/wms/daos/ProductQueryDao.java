@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import pub.sanalar.wms.models.WmsProduct;
 
+@Transactional
 public class ProductQueryDao extends HibernateDaoSupport {
 
 	private String getQueryConditionHql(Integer category1, Integer category2, String search){

@@ -49,11 +49,7 @@ public class EditProductAction extends ActionSupport {
 		
 		product.setProductName(productName);
 		product.setProductCode(productCode);
-		product.setProductSupplier(productSupplier);
 		product.setProductStandard(productStandard);
-		product.setProductUint(productUnit);
-		product.setProductInPrice(productInPrice);
-		product.setProductOutPrice(productOutPrice);
 		product.setProductDescription(productDescription);
 		product.setWmsCategory(category);
 		productQueryDao.updateProduct(product);

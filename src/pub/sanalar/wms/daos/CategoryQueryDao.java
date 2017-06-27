@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import pub.sanalar.wms.models.WmsCategory;
 
+@Transactional
 public class CategoryQueryDao extends HibernateDaoSupport {
 
 	public Map<Integer, String> getTopCategories(){

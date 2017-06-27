@@ -12,8 +12,9 @@ public class WmsCondition implements java.io.Serializable {
 	// Fields
 
 	private Integer conditionId;
-	private String conditionDesciption;
+	private String conditionName;
 	private Set wmsProductConditions = new HashSet(0);
+	private Set wmsStorageConditions = new HashSet(0);
 
 	// Constructors
 
@@ -22,14 +23,16 @@ public class WmsCondition implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public WmsCondition(String conditionDesciption) {
-		this.conditionDesciption = conditionDesciption;
+	public WmsCondition(Integer conditionId) {
+		this.conditionId = conditionId;
 	}
 
 	/** full constructor */
-	public WmsCondition(String conditionDesciption, Set wmsProductConditions) {
-		this.conditionDesciption = conditionDesciption;
+	public WmsCondition(Integer conditionId, String conditionName, Set wmsProductConditions, Set wmsStorageConditions) {
+		this.conditionId = conditionId;
+		this.conditionName = conditionName;
 		this.wmsProductConditions = wmsProductConditions;
+		this.wmsStorageConditions = wmsStorageConditions;
 	}
 
 	// Property accessors
@@ -42,12 +45,12 @@ public class WmsCondition implements java.io.Serializable {
 		this.conditionId = conditionId;
 	}
 
-	public String getConditionDesciption() {
-		return this.conditionDesciption;
+	public String getConditionName() {
+		return this.conditionName;
 	}
 
-	public void setConditionDesciption(String conditionDesciption) {
-		this.conditionDesciption = conditionDesciption;
+	public void setConditionName(String conditionName) {
+		this.conditionName = conditionName;
 	}
 
 	public Set getWmsProductConditions() {
@@ -56,6 +59,14 @@ public class WmsCondition implements java.io.Serializable {
 
 	public void setWmsProductConditions(Set wmsProductConditions) {
 		this.wmsProductConditions = wmsProductConditions;
+	}
+
+	public Set getWmsStorageConditions() {
+		return this.wmsStorageConditions;
+	}
+
+	public void setWmsStorageConditions(Set wmsStorageConditions) {
+		this.wmsStorageConditions = wmsStorageConditions;
 	}
 
 }

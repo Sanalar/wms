@@ -385,3 +385,11 @@
    <param name="root">success</param>
 </result>
 ```
+
+### 报错 `Spring Hibernate - Could not obtain transaction-synchronized Session for current thread`
+
+在每一个 `dao` 类的前面加上一行：
+
+```java
+@Transactional
+```

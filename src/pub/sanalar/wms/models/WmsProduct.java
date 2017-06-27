@@ -15,13 +15,17 @@ public class WmsProduct implements java.io.Serializable {
 	private WmsCategory wmsCategory;
 	private String productName;
 	private String productCode;
-	private String productSupplier;
-	private String productStandard;
-	private String productUint;
-	private Double productInPrice;
-	private Double productOutPrice;
 	private String productDescription;
 	private String productImage;
+	private String productStandard;
+	private String productUnit;
+	private Set wmsDispatchProductShelfs = new HashSet(0);
+	private Set wmsInApplicationProducts = new HashSet(0);
+	private Set wmsOrderLines = new HashSet(0);
+	private Set wmsProductShelfs = new HashSet(0);
+	private Set wmsProductSuppliers = new HashSet(0);
+	private Set wmsOutApplicationProducts = new HashSet(0);
+	private Set wmsCheckProductShelfs = new HashSet(0);
 	private Set wmsProductConditions = new HashSet(0);
 
 	// Constructors
@@ -31,30 +35,31 @@ public class WmsProduct implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public WmsProduct(WmsCategory wmsCategory, String productName, String productCode, Double productInPrice,
-			Double productOutPrice, String productImage) {
-		this.wmsCategory = wmsCategory;
-		this.productName = productName;
-		this.productCode = productCode;
-		this.productInPrice = productInPrice;
-		this.productOutPrice = productOutPrice;
-		this.productImage = productImage;
+	public WmsProduct(Integer productId) {
+		this.productId = productId;
 	}
 
 	/** full constructor */
-	public WmsProduct(WmsCategory wmsCategory, String productName, String productCode, String productSupplier,
-			String productStandard, String productUint, Double productInPrice, Double productOutPrice,
-			String productDescription, String productImage, Set wmsProductConditions) {
+	public WmsProduct(Integer productId, WmsCategory wmsCategory, String productName, String productCode,
+			String productDescription, String productImage, String productStandard, String productUnit,
+			Set wmsDispatchProductShelfs, Set wmsInApplicationProducts, Set wmsOrderLines, Set wmsProductShelfs,
+			Set wmsProductSuppliers, Set wmsOutApplicationProducts, Set wmsCheckProductShelfs,
+			Set wmsProductConditions) {
+		this.productId = productId;
 		this.wmsCategory = wmsCategory;
 		this.productName = productName;
 		this.productCode = productCode;
-		this.productSupplier = productSupplier;
-		this.productStandard = productStandard;
-		this.productUint = productUint;
-		this.productInPrice = productInPrice;
-		this.productOutPrice = productOutPrice;
 		this.productDescription = productDescription;
 		this.productImage = productImage;
+		this.productStandard = productStandard;
+		this.productUnit = productUnit;
+		this.wmsDispatchProductShelfs = wmsDispatchProductShelfs;
+		this.wmsInApplicationProducts = wmsInApplicationProducts;
+		this.wmsOrderLines = wmsOrderLines;
+		this.wmsProductShelfs = wmsProductShelfs;
+		this.wmsProductSuppliers = wmsProductSuppliers;
+		this.wmsOutApplicationProducts = wmsOutApplicationProducts;
+		this.wmsCheckProductShelfs = wmsCheckProductShelfs;
 		this.wmsProductConditions = wmsProductConditions;
 	}
 
@@ -92,46 +97,6 @@ public class WmsProduct implements java.io.Serializable {
 		this.productCode = productCode;
 	}
 
-	public String getProductSupplier() {
-		return this.productSupplier;
-	}
-
-	public void setProductSupplier(String productSupplier) {
-		this.productSupplier = productSupplier;
-	}
-
-	public String getProductStandard() {
-		return this.productStandard;
-	}
-
-	public void setProductStandard(String productStandard) {
-		this.productStandard = productStandard;
-	}
-
-	public String getProductUint() {
-		return this.productUint;
-	}
-
-	public void setProductUint(String productUint) {
-		this.productUint = productUint;
-	}
-
-	public Double getProductInPrice() {
-		return this.productInPrice;
-	}
-
-	public void setProductInPrice(Double productInPrice) {
-		this.productInPrice = productInPrice;
-	}
-
-	public Double getProductOutPrice() {
-		return this.productOutPrice;
-	}
-
-	public void setProductOutPrice(Double productOutPrice) {
-		this.productOutPrice = productOutPrice;
-	}
-
 	public String getProductDescription() {
 		return this.productDescription;
 	}
@@ -146,6 +111,78 @@ public class WmsProduct implements java.io.Serializable {
 
 	public void setProductImage(String productImage) {
 		this.productImage = productImage;
+	}
+
+	public String getProductStandard() {
+		return this.productStandard;
+	}
+
+	public void setProductStandard(String productStandard) {
+		this.productStandard = productStandard;
+	}
+
+	public String getProductUnit() {
+		return this.productUnit;
+	}
+
+	public void setProductUnit(String productUnit) {
+		this.productUnit = productUnit;
+	}
+
+	public Set getWmsDispatchProductShelfs() {
+		return this.wmsDispatchProductShelfs;
+	}
+
+	public void setWmsDispatchProductShelfs(Set wmsDispatchProductShelfs) {
+		this.wmsDispatchProductShelfs = wmsDispatchProductShelfs;
+	}
+
+	public Set getWmsInApplicationProducts() {
+		return this.wmsInApplicationProducts;
+	}
+
+	public void setWmsInApplicationProducts(Set wmsInApplicationProducts) {
+		this.wmsInApplicationProducts = wmsInApplicationProducts;
+	}
+
+	public Set getWmsOrderLines() {
+		return this.wmsOrderLines;
+	}
+
+	public void setWmsOrderLines(Set wmsOrderLines) {
+		this.wmsOrderLines = wmsOrderLines;
+	}
+
+	public Set getWmsProductShelfs() {
+		return this.wmsProductShelfs;
+	}
+
+	public void setWmsProductShelfs(Set wmsProductShelfs) {
+		this.wmsProductShelfs = wmsProductShelfs;
+	}
+
+	public Set getWmsProductSuppliers() {
+		return this.wmsProductSuppliers;
+	}
+
+	public void setWmsProductSuppliers(Set wmsProductSuppliers) {
+		this.wmsProductSuppliers = wmsProductSuppliers;
+	}
+
+	public Set getWmsOutApplicationProducts() {
+		return this.wmsOutApplicationProducts;
+	}
+
+	public void setWmsOutApplicationProducts(Set wmsOutApplicationProducts) {
+		this.wmsOutApplicationProducts = wmsOutApplicationProducts;
+	}
+
+	public Set getWmsCheckProductShelfs() {
+		return this.wmsCheckProductShelfs;
+	}
+
+	public void setWmsCheckProductShelfs(Set wmsCheckProductShelfs) {
+		this.wmsCheckProductShelfs = wmsCheckProductShelfs;
 	}
 
 	public Set getWmsProductConditions() {

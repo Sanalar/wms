@@ -7,33 +7,55 @@
 
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://localhost:3306/wms"></property>
-		<property name="username" value="wms"></property>
-		<property name="password" value="liugehetao"></property>
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"></property>
+		<property name="url" value="jdbc:sqlserver://localhost:1433;database=wms"></property>
+		<property name="username" value="rg"></property>
+		<property name="password" value="123"></property>
 		<property name="defaultAutoCommit"><value>true</value></property>
 	</bean>
 
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		scope="prototype">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">
-					org.hibernate.dialect.MySQLDialect
+					org.hibernate.dialect.SQLServerDialect
 				</prop>
 			</props>
 		</property>
 		<property name="mappingResources">
 			<list>
-				<value>pub/sanalar/wms/models/WmsUser.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsCheckProductShelf.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsStorage.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsProductSupplier.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsApplicationState.hbm.xml</value>
 				<value>pub/sanalar/wms/models/WmsUserType.hbm.xml</value>
-				<value>pub/sanalar/wms/models/WmsCategory.hbm.xml</value>
-				<value>pub/sanalar/wms/models/WmsCondition.hbm.xml</value>
-				<value>pub/sanalar/wms/models/WmsProduct.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsStorageCondition.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsCheckState.hbm.xml</value>
 				<value>pub/sanalar/wms/models/WmsProductCondition.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsDispatch.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsOrderState.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsOutApplicationProduct.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsCategory.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsProductShelf.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsWarehouse.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsInApplication.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsInApplicationProduct.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsCondition.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsDispatchState.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsProduct.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsDispatchProductShelf.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsSupplier.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsUser.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsShelf.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsOrderLine.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsCheck.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsOutApplication.hbm.xml</value>
+				<value>pub/sanalar/wms/models/WmsOrder.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

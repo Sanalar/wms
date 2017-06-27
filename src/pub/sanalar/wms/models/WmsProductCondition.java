@@ -8,7 +8,7 @@ public class WmsProductCondition implements java.io.Serializable {
 
 	// Fields
 
-	private Integer productConditionId;
+	private Integer pcId;
 	private WmsProduct wmsProduct;
 	private WmsCondition wmsCondition;
 
@@ -18,20 +18,26 @@ public class WmsProductCondition implements java.io.Serializable {
 	public WmsProductCondition() {
 	}
 
+	/** minimal constructor */
+	public WmsProductCondition(Integer pcId) {
+		this.pcId = pcId;
+	}
+
 	/** full constructor */
-	public WmsProductCondition(WmsProduct wmsProduct, WmsCondition wmsCondition) {
+	public WmsProductCondition(Integer pcId, WmsProduct wmsProduct, WmsCondition wmsCondition) {
+		this.pcId = pcId;
 		this.wmsProduct = wmsProduct;
 		this.wmsCondition = wmsCondition;
 	}
 
 	// Property accessors
 
-	public Integer getProductConditionId() {
-		return this.productConditionId;
+	public Integer getPcId() {
+		return this.pcId;
 	}
 
-	public void setProductConditionId(Integer productConditionId) {
-		this.productConditionId = productConditionId;
+	public void setPcId(Integer pcId) {
+		this.pcId = pcId;
 	}
 
 	public WmsProduct getWmsProduct() {

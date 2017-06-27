@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class ConditionQueryDao extends HibernateDaoSupport {
 
 	public Map<Integer, String> getAllConditions(){
