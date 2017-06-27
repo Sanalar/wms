@@ -1,7 +1,9 @@
 package pub.sanalar.wms.actions;
 
 import java.text.DecimalFormat;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -9,6 +11,7 @@ import pub.sanalar.wms.daos.CategoryQueryDao;
 import pub.sanalar.wms.daos.ConditionQueryDao;
 import pub.sanalar.wms.daos.ProductQueryDao;
 import pub.sanalar.wms.models.WmsProduct;
+import pub.sanalar.wms.models.WmsProductSupplier;
 
 public class HtmlProductDetailsAction extends ActionSupport {
 
@@ -23,11 +26,14 @@ public class HtmlProductDetailsAction extends ActionSupport {
 	private String topCategoryListString;
 	private String allSubCategoryListString;
 	private WmsProduct product;
+	private Set<WmsProductSupplier> productSupplier;
 	private Map<Integer, String> conditionList;
+	private HashSet<Integer> productConditions;
 	private Integer id;
 	private String msg;
 	private DecimalFormat df = new DecimalFormat("0.00");
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String execute() throws Exception {
 		if(id == null || id == 0){
@@ -38,7 +44,9 @@ public class HtmlProductDetailsAction extends ActionSupport {
 		if(product == null){
 			return ERROR;
 		}
-
+		productSupplier = product.getWmsProductSuppliers();
+		productConditions = conditionQueryDao.getProductConditions(product.getProductId());
+		
 		Map<Integer, String> topCategories = categoryQueryDao.getTopCategories();
 		topCategoryListString = categoryQueryDao.getTopCategoryListString(topCategories);
 		allSubCategoryListString = categoryQueryDao.getAllSubCategoryListString(topCategories);
@@ -118,6 +126,22 @@ public class HtmlProductDetailsAction extends ActionSupport {
 
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+
+	public Set<WmsProductSupplier> getProductSupplier() {
+		return productSupplier;
+	}
+
+	public void setProductSupplier(Set<WmsProductSupplier> productSupplier) {
+		this.productSupplier = productSupplier;
+	}
+
+	public HashSet<Integer> getProductConditions() {
+		return productConditions;
+	}
+
+	public void setProductConditions(HashSet<Integer> productConditions) {
+		this.productConditions = productConditions;
 	}
 
 }

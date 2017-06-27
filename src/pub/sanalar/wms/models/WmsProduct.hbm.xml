@@ -55,7 +55,7 @@
             </key>
             <one-to-many class="pub.sanalar.wms.models.WmsProductShelf" />
         </set>
-        <set name="wmsProductSuppliers" inverse="true">
+        <set name="wmsProductSuppliers" inverse="true" lazy="false">
             <key>
                 <column name="product_id" not-null="true" />
             </key>

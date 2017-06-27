@@ -278,13 +278,6 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" name="productSupplier" value='<s:property value="product.productSupplier"/>'>
-                                                    <span class="bar"></span>
-                                                    <label>产品厂商</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
                                                     <input type="text" class="form-text" name="productSupplier" value='<s:property value="product.productStandard"/>'>
                                                     <span class="bar"></span>
                                                     <label>规格</label>
@@ -292,23 +285,19 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text" name="productUnit" value='<s:property value="product.productUint"/>'>
+                                                    <input type="text" class="form-text" name="productUnit" value='<s:property value="product.productUnit"/>'>
                                                     <span class="bar"></span>
                                                     <label>单位</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text mask-money" name="productInPrice" value='<s:property value="df.format(product.productInPrice)"/>'>
-                                                    <span class="bar"></span>
-                                                    <label>进价</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <input type="text" class="form-text mask-money" name="productOutPrice" value='<s:property value="df.format(product.productOutPrice)"/>'>
-                                                    <span class="bar"></span>
-                                                    <label>售价</label>
+                                                <div class="form-group form-text" style="margin-top:10px; margin-bottom: 10px">
+                                                    <label>特殊存放条件</label>
+                                                    <select class="select2-A btn-block" name="productConditions" multiple="multiple">
+                                                        <s:iterator value="conditionList.entrySet()" id="e">
+                                                        <option value='<s:property value="#e.key"/>' <s:if test="productConditions.contains(#e.key)">selected</s:if>><s:property value="#e.value"/></option>
+                                                        </s:iterator>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -316,16 +305,6 @@
                                                     <input type="text" class="form-text" name="productDescription" value='<s:property value="product.productDescription"/>'>
                                                     <span class="bar"></span>
                                                     <label>产品描述</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group form-text" style="margin-top:10px; margin-bottom: 10px">
-                                                    <label>特殊存放条件</label>
-                                                    <select class="select2-A btn-block" name="productConditions" multiple="multiple">
-                                                        <s:iterator value="conditionList.entrySet()" id="e">
-                                                        <option value='<s:property value="#e.key"/>'><s:property value="#e.value"/></option>
-                                                        </s:iterator>
-                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -407,6 +386,37 @@
                                     </div>
                                     <!-- end 产品图片 -->
                                 </div>
+                            </div>
+                          </div>
+                          <div class="panel panel-default">
+                            <div class="panel-heading bg-white border-none">
+                              <h4>货品供应商</h4>
+                            </div>
+                            <div class="panel-body">
+                              <div class="responsive-table" style="padding: 15px;">
+                                <table class="table table-striped table-bordered" width="100%" cellspacing="0">
+                                  <thead>
+                                    <tr>
+                                      <th>供货商名称</th>
+                                      <th>供货商联系人</th>
+                                      <th>供货商电话</th>
+                                      <th>供货商地址</th>
+                                      <th>进价</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                     <s:iterator value="productSupplier" id="s">
+                                     <tr>
+                                       <td><s:property value="#s.wmsSupplier.supplierName"/></td>
+                                       <td><s:property value="#s.wmsSupplier.supplierContactPerson"/></td>
+                                       <td><s:property value="#s.wmsSupplier.supplierPhone"/></td>
+                                       <td><s:property value="#s.wmsSupplier.supplierAddress"/></td>
+                                       <td><s:property value="df.format(#s.psInPrice)"/></td>
+                                     </tr>
+                                     </s:iterator>
+                                   </tbody>
+                                 </table>
+                               </div>
                             </div>
                           </div>
                         </div>

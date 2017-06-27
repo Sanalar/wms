@@ -10,10 +10,10 @@
             <column name="pc_id" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="wmsProduct" class="pub.sanalar.wms.models.WmsProduct" fetch="select">
+        <many-to-one name="wmsProduct" class="pub.sanalar.wms.models.WmsProduct" fetch="select" lazy="false">
             <column name="product_id" />
         </many-to-one>
-        <many-to-one name="wmsCondition" class="pub.sanalar.wms.models.WmsCondition" fetch="select">
+        <many-to-one name="wmsCondition" class="pub.sanalar.wms.models.WmsCondition" fetch="select" lazy="false">
             <column name="condition_id" />
         </many-to-one>
     </class>

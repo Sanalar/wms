@@ -1,11 +1,14 @@
 package pub.sanalar.wms.daos;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
+
+import pub.sanalar.wms.models.WmsProductCondition;
 
 @Transactional
 public class ConditionQueryDao extends HibernateDaoSupport {
@@ -21,5 +24,18 @@ public class ConditionQueryDao extends HibernateDaoSupport {
 		}
 		
 		return results;
+	}
+	
+	public HashSet<Integer> getProductConditions(Integer productId){
+		String hql = "from WmsProductCondition pc where pc.wmsProduct.productId=?";
+		List<?> wps = getHibernateTemplate().find(hql, productId);
+		
+		HashSet<Integer> res = new HashSet<Integer>();
+		for(int i=0; i < wps.size(); ++i){
+			WmsProductCondition condition = (WmsProductCondition)wps.get(i);
+			res.add(condition.getWmsCondition().getConditionId());
+		}
+		
+		return res;
 	}
 }

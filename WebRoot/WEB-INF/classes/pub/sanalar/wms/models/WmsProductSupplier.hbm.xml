@@ -10,10 +10,10 @@
             <column name="ps_id" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="wmsProduct" class="pub.sanalar.wms.models.WmsProduct" fetch="select">
+        <many-to-one name="wmsProduct" class="pub.sanalar.wms.models.WmsProduct" fetch="select" lazy="false">
             <column name="product_id" not-null="true" />
         </many-to-one>
-        <many-to-one name="wmsSupplier" class="pub.sanalar.wms.models.WmsSupplier" fetch="select">
+        <many-to-one name="wmsSupplier" class="pub.sanalar.wms.models.WmsSupplier" fetch="select" lazy="false">
             <column name="supplier_id" not-null="true" />
         </many-to-one>
         <property name="psInPrice" type="java.lang.Double">
