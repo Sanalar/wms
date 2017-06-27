@@ -10,13 +10,13 @@
             <column name="ap_id" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="wmsShelf" class="pub.sanalar.wms.models.WmsShelf" fetch="select">
+        <many-to-one name="wmsShelf" class="pub.sanalar.wms.models.WmsShelf" fetch="select" lazy="false">
             <column name="shelf_id" />
         </many-to-one>
-        <many-to-one name="wmsInApplication" class="pub.sanalar.wms.models.WmsInApplication" fetch="select">
+        <many-to-one name="wmsInApplication" class="pub.sanalar.wms.models.WmsInApplication" fetch="select" lazy="false">
             <column name="app_id" length="50" />
         </many-to-one>
-        <many-to-one name="wmsProduct" class="pub.sanalar.wms.models.WmsProduct" fetch="select">
+        <many-to-one name="wmsProduct" class="pub.sanalar.wms.models.WmsProduct" fetch="select" lazy="false">
             <column name="product_id" />
         </many-to-one>
         <property name="apNumber" type="java.lang.Integer">

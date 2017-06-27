@@ -439,41 +439,13 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <s:iterator value="warehouseAndNumbers" id="w">
                                         <tr>
-                                            <td>北京海淀仓库</td>
-                                            <td>594</td>
-                                            <td><a href="#">查看流水</a></td>
+                                            <td><s:property value="#w.warehouseName"/></td>
+                                            <td><s:property value="#w.storeNumber"/></td>
+                                            <td><a href='product-details.html?id=<s:property value="id"/>&warehouse=<s:property value="#w.warehouseId"/>'>查看流水</a></td>
                                         </tr>
-                                        <tr>
-                                            <td>北京海淀仓库</td>
-                                            <td>594</td>
-                                            <td><a href="#">查看流水</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>北京海淀仓库</td>
-                                            <td>594</td>
-                                            <td><a href="#">查看流水</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>北京海淀仓库</td>
-                                            <td>594</td>
-                                            <td><a href="#">查看流水</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>北京海淀仓库</td>
-                                            <td>594</td>
-                                            <td><a href="#">查看流水</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>北京海淀仓库</td>
-                                            <td>594</td>
-                                            <td><a href="#">查看流水</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>北京海淀仓库</td>
-                                            <td>594</td>
-                                            <td><a href="#">查看流水</a></td>
-                                        </tr>
+                                        </s:iterator>
                                         </tbody>
                                     </table>
                                 </div>
@@ -483,7 +455,7 @@
                           <div class="col-md-12 panel-info">
                               <div class="panel-heading">
                                   <h4 class="panel-title text-white">
-                                      <span class="text-danger">北京海淀仓库</span> 库存流水详情
+                                      <span class="text-danger"><s:property value="warehouseName"/></span> 库存流水详情
                                   </h4>
                               </div>
                               <div class="panel panel-default">
@@ -491,71 +463,41 @@
                                       <table id="stream-table" class="table table-striped table-bordered" width="100%" cellspacing="0">
                                           <thead>
                                           <tr>
-                                              <th>序号</th>
-                                              <th>时间</th>
+                                              <th>流水号</th>
                                               <th>出入库类型</th>
-                                              <th>单价</th>
-                                              <th>出入库数量</th>
-                                              <th>库存余量</th>
+                                              <th>创建时间</th>
+                                              <th>创建人</th>
+                                              <th>确认时间</th>
+                                              <th>确认人</th>
+                                              <th>数量</th>
+                                              <th>出入状态</th>
                                           </tr>
                                           </thead>
                                           <tbody>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>2017-06-01</td>
-                                              <td>采购入库</td>
-                                              <td>9.30</td>
-                                              <td class="text-success">+500</td>
-                                              <td>594</td>
-                                          </tr>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>2017-06-01</td>
-                                              <td>采购入库</td>
-                                              <td>9.30</td>
-                                              <td class="text-success">+500</td>
-                                              <td>594</td>
-                                          </tr>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>2017-06-01</td>
-                                              <td>采购入库</td>
-                                              <td>9.30</td>
-                                              <td class="text-success">+500</td>
-                                              <td>594</td>
-                                          </tr>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>2017-06-01</td>
-                                              <td>采购入库</td>
-                                              <td>9.30</td>
-                                              <td class="text-success">+500</td>
-                                              <td>594</td>
-                                          </tr>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>2017-06-01</td>
-                                              <td>采购入库</td>
-                                              <td>9.30</td>
-                                              <td class="text-success">+500</td>
-                                              <td>594</td>
-                                          </tr>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>2017-06-01</td>
-                                              <td>采购入库</td>
-                                              <td>9.30</td>
-                                              <td class="text-success">+500</td>
-                                              <td>594</td>
-                                          </tr>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>2017-06-01</td>
-                                              <td>采购入库</td>
-                                              <td>9.30</td>
-                                              <td class="text-success">+500</td>
-                                              <td>594</td>
-                                          </tr>
+                                          <s:if test="streams != null">
+                                          <s:iterator value="streams" id="s">
+                                            <tr>
+                                              <td><a href='#'><s:property value="#s.streamId"/></a>
+                                              <s:if test="#s.isInStream()">
+                                              <td class="text-success">入库</td>
+                                              </s:if>
+                                              <s:else>
+                                              <td class="text-danger">出库</td>
+                                              </s:else>
+                                              <td><s:property value="sdf.format(#s.streamCreateTime)"/></td>
+                                              <td><s:property value="#s.createUser"/></td>
+                                              <td><s:property value="sdf.format(#s.streamAcceptTime)"/></td>
+                                              <td><s:property value="#s.acceptUser"/></td>
+                                              <s:if test="#s.isInStream()">
+                                              <td class="text-success">+<s:property value="#s.streamNumber"/></td>
+                                              </s:if>
+                                              <s:else>
+                                              <td class="text-danger">-<s:property value="#s.streamNumber"/></td>
+                                              </s:else>
+                                              <td><s:property value="#s.state"/></td>
+                                            </tr>
+                                          </s:iterator>
+                                          </s:if>
                                           </tbody>
                                       </table>
                                   </div>
@@ -603,6 +545,10 @@
               
               <s:if test="msg != null">
               alert('<s:property value="msg" escape="false"/>');
+              </s:if>
+              
+              <s:if test="warehouse != null">
+              $("#tabs2").tab("show");
               </s:if>
           });
       </script>

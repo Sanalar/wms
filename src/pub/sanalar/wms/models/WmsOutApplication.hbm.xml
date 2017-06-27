@@ -10,16 +10,16 @@
             <column name="application_id" length="50" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="wmsUserByApplicationCreator" class="pub.sanalar.wms.models.WmsUser" fetch="select">
+        <many-to-one name="wmsUserByApplicationCreator" class="pub.sanalar.wms.models.WmsUser" fetch="select" lazy="false">
             <column name="application_creator" />
         </many-to-one>
-        <many-to-one name="wmsApplicationState" class="pub.sanalar.wms.models.WmsApplicationState" fetch="select">
+        <many-to-one name="wmsApplicationState" class="pub.sanalar.wms.models.WmsApplicationState" fetch="select" lazy="false">
             <column name="application_state" />
         </many-to-one>
-        <many-to-one name="wmsUserByApplicationAcceptor" class="pub.sanalar.wms.models.WmsUser" fetch="select">
+        <many-to-one name="wmsUserByApplicationAcceptor" class="pub.sanalar.wms.models.WmsUser" fetch="select" lazy="false">
             <column name="application_acceptor" />
         </many-to-one>
-        <many-to-one name="wmsWarehouse" class="pub.sanalar.wms.models.WmsWarehouse" fetch="select">
+        <many-to-one name="wmsWarehouse" class="pub.sanalar.wms.models.WmsWarehouse" fetch="select" lazy="false">
             <column name="application_warehouse" />
         </many-to-one>
         <property name="applicationTime" type="java.sql.Timestamp">

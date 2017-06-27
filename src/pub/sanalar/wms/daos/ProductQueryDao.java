@@ -1,12 +1,22 @@
 package pub.sanalar.wms.daos;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
+import pub.sanalar.wms.models.ProductInOutStreamOfWarehouse;
+import pub.sanalar.wms.models.WarehouseAndNumber;
+import pub.sanalar.wms.models.WmsInApplicationProduct;
+import pub.sanalar.wms.models.WmsOutApplicationProduct;
 import pub.sanalar.wms.models.WmsProduct;
+import pub.sanalar.wms.models.WmsProductShelf;
+import pub.sanalar.wms.models.WmsUser;
+import pub.sanalar.wms.models.WmsWarehouse;
 
 @Transactional
 public class ProductQueryDao extends HibernateDaoSupport {
@@ -79,5 +89,74 @@ public class ProductQueryDao extends HibernateDaoSupport {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.save(product);
 		session.flush();
+	}
+	
+	public List<WarehouseAndNumber> getAllWarehouseStoreNumberOfProduct(Integer productId){
+		String hql = "from WmsProductShelf wps where wps.wmsProduct.productId=?";
+		@SuppressWarnings("unchecked")
+		List<WmsProductShelf> shelfs = (List<WmsProductShelf>) getHibernateTemplate().find(hql, productId);
+		
+		List<WarehouseAndNumber> res = new ArrayList<WarehouseAndNumber>();
+		HashMap<Integer, Integer> idMap = new HashMap<Integer, Integer>();
+		HashMap<Integer, String> nameMap = new HashMap<Integer, String>();
+		for(WmsProductShelf s : shelfs){
+			WmsWarehouse house = s.getWmsShelf().getWmsStorage().getWmsWarehouse();
+			if(idMap.containsKey(house.getWarehouseId())){
+				idMap.put(house.getWarehouseId(), idMap.get(house.getWarehouseId()) + s.getPsNumber());
+			}else{
+				idMap.put(house.getWarehouseId(), s.getPsNumber());
+			}
+			nameMap.put(house.getWarehouseId(), house.getWarehouseName());
+		}
+		
+		for(Integer key : idMap.keySet()){
+			WarehouseAndNumber number = new WarehouseAndNumber();
+			number.setWarehouseId(key);
+			number.setWarehouseName(nameMap.get(key));
+			number.setStoreNumber(idMap.get(key));
+			res.add(number);
+		}
+		
+		return res;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ProductInOutStreamOfWarehouse> getProductInOutStream(Integer productId, Integer warehouseId){
+		String hql = "from WmsInApplicationProduct p where p.wmsProduct.productId=? and p.wmsInApplication.wmsWarehouse.warehouseId=?";
+		List<WmsInApplicationProduct> inList = (List<WmsInApplicationProduct>) getHibernateTemplate().find(hql, productId, warehouseId);
+		hql = "from WmsOutApplicationProduct p where p.wmsProduct.productId=? and p.wmsOutApplication.wmsWarehouse.warehouseId=?";
+		List<WmsOutApplicationProduct> outList = (List<WmsOutApplicationProduct>) getHibernateTemplate().find(hql, productId, warehouseId);
+		
+		List<ProductInOutStreamOfWarehouse> res = new ArrayList<ProductInOutStreamOfWarehouse>();
+		for(WmsInApplicationProduct p : inList){
+			ProductInOutStreamOfWarehouse item = new ProductInOutStreamOfWarehouse();
+			WmsUser user = p.getWmsInApplication().getWmsUserByApplicationAcceptor();
+			item.setAcceptUser(user == null ? "<无>" : user.getUserRealName());
+			item.setCreateUser(p.getWmsInApplication().getWmsUserByApplicationCreator().getUserRealName());
+			item.setInStream(true);
+			item.setState(p.getWmsInApplication().getWmsApplicationState().getStateName());
+			item.setStreamAcceptTime(p.getWmsInApplication().getApplicationAcceptTime());
+			item.setStreamCreateTime(p.getWmsInApplication().getApplicationTime());
+			item.setStreamId(p.getWmsInApplication().getApplicationId());
+			item.setStreamNumber(p.getApNumber());
+			res.add(item);
+		}
+		for(WmsOutApplicationProduct p : outList){
+			ProductInOutStreamOfWarehouse item = new ProductInOutStreamOfWarehouse();
+			WmsUser user = p.getWmsOutApplication().getWmsUserByApplicationAcceptor();
+			item.setAcceptUser(user == null ? "<无>" : user.getUserRealName());
+			item.setCreateUser(p.getWmsOutApplication().getWmsUserByApplicationCreator().getUserRealName());
+			item.setInStream(false);
+			item.setState(p.getWmsOutApplication().getWmsApplicationState().getStateName());
+			item.setStreamAcceptTime(p.getWmsOutApplication().getApplicationAcceptTime());
+			item.setStreamCreateTime(p.getWmsOutApplication().getApplicationTime());
+			item.setStreamId(p.getWmsOutApplication().getApplicationId());
+			item.setStreamNumber(p.getApNumber());
+			res.add(item);
+		}
+		
+		// 按照创建时间排序
+		Collections.sort(res);
+		return res;
 	}
 }

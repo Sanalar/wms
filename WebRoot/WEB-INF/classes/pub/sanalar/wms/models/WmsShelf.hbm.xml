@@ -10,7 +10,7 @@
             <column name="shelf_id" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="wmsStorage" class="pub.sanalar.wms.models.WmsStorage" fetch="select">
+        <many-to-one name="wmsStorage" class="pub.sanalar.wms.models.WmsStorage" fetch="select" lazy="false">
             <column name="storage_id" />
         </many-to-one>
         <property name="shelfName" type="java.lang.String">
