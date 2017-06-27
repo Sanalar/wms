@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ConditionQueryDao extends HibernateDaoSupport {
 
 	public Map<Integer, String> getAllConditions(){
-		String hql = "select con.conditionId, con.conditionDesciption from WmsCondition con";
+		String hql = "select con.conditionId, con.conditionName from WmsCondition con";
 		List<?> conditions = getHibernateTemplate().find(hql);
 		
 		Map<Integer, String> results = new HashMap<Integer, String>();

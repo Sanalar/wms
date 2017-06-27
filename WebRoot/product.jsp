@@ -269,12 +269,6 @@
                   	<s:iterator value="products" id="p">
                   	<div class="col-sm-6 col-md-3 product-grid">
                   		<div class="thumbnail">
-                              <div class="product-location">
-                                  <span class="fa-map-marker fa"></span> 北京海淀仓库
-                              </div>
-                              <div class="product-price product-price-bottom">
-                                  <h4 class="text-danger">￥<s:property value="df.format(#p.productOutPrice)"/></h4>
-                              </div>
                               <img src='products/<s:property value="#p.productImage"/>' alt="..." style="width:250px;height:250px">
                               <div class="caption">
                                   <small><s:property value="#p.wmsCategory.wmsCategory.categoryName"/> <span class="fa-angle-right fa"></span> 

@@ -10,7 +10,7 @@
             <column name="product_id" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="wmsCategory" class="pub.sanalar.wms.models.WmsCategory" fetch="select">
+        <many-to-one name="wmsCategory" class="pub.sanalar.wms.models.WmsCategory" fetch="select" lazy="false">
             <column name="product_category" />
         </many-to-one>
         <property name="productName" type="java.lang.String">
