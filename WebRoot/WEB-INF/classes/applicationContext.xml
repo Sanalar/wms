@@ -124,7 +124,7 @@
 	<bean id="htmlStorageActionBean" 
 	class="pub.sanalar.wms.actions.HtmlStorageAction" 
 	scope="prototype">
-
+		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
 	</bean>
 	<bean id="jsonDataProviderActionBean" 
 	class="pub.sanalar.wms.actions.JsonDataProvideAction" 

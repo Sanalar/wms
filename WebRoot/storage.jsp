@@ -225,7 +225,7 @@
                   <div class="panel box-shadow-none text-left content-header">
                       <div class="panel-body" style="padding-bottom:0px;">
                           <div class="col-md-12">
-                              <h3 class="animated fadeInLeft"><a class="text-primary" href="#" id="select-warehouse-bt">北京海淀仓库</a> 库存信息</h3>
+                              <h3 class="animated fadeInLeft"><a class="text-primary" href="#" id="select-warehouse-bt"><s:property value="warehouseName"/></a> 库存信息</h3>
                               <p class="animated fadeInDown">
                                   仓库管理系统 <span class="fa-angle-right fa"></span> 库存查询
                               </p>
@@ -327,62 +327,16 @@
                                           </tr>
                                           </thead>
                                           <tbody>
+                                          <s:iterator value="storageInfos" id="s">
                                           <tr>
-                                              <td>1</td>
-                                              <td>D12</td>
-                                              <td>1000</td>
-                                              <td>354</td>
-                                              <td>干燥，通风</td>
-                                              <td>郝爱国</td>
+                                          	  <td><s:property value="#s.id"/></td>
+                                              <td><s:property value="#s.name"/></td>
+                                              <td><s:property value="#s.capacity"/></td>
+                                              <td><s:property value="#s.used"/></td>
+                                              <td><s:property value="#s.conditions"/></td>
+                                              <td><s:property value="#s.charger"/></td>
                                           </tr>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>D12</td>
-                                              <td>1000</td>
-                                              <td>354</td>
-                                              <td>干燥，通风</td>
-                                              <td>郝爱国</td>
-                                          </tr>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>D12</td>
-                                              <td>1000</td>
-                                              <td>354</td>
-                                              <td>干燥，通风</td>
-                                              <td>郝爱国</td>
-                                          </tr>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>D12</td>
-                                              <td>1000</td>
-                                              <td>354</td>
-                                              <td>干燥，通风</td>
-                                              <td>郝爱国</td>
-                                          </tr>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>D12</td>
-                                              <td>1000</td>
-                                              <td>354</td>
-                                              <td>干燥，通风</td>
-                                              <td>郝爱国</td>
-                                          </tr>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>D12</td>
-                                              <td>1000</td>
-                                              <td>354</td>
-                                              <td>干燥，通风</td>
-                                              <td>郝爱国</td>
-                                          </tr>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>D12</td>
-                                              <td>1000</td>
-                                              <td>354</td>
-                                              <td>干燥，通风</td>
-                                              <td>郝爱国</td>
-                                          </tr>
+                                          </s:iterator>
                                           </tbody>
                                       </table>
                                   </div>
