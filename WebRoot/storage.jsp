@@ -260,15 +260,15 @@
                                                 </div>
                                                 <div class="col-md-12" style="padding-top:20px;">
                                                     <div class="col-md-4 col-sm-4 col-xs-6 text-center">
-                                                        <h2 style="line-height:.4;">10,086</h2>
+                                                        <h2 style="line-height:.4;"><s:property value="totalCapacity"/></h2>
                                                         <small>总库位数</small>
                                                     </div>
                                                     <div class="col-md-4 col-sm-4 col-xs-6 text-center">
-                                                        <h2 style="line-height:.4;">9,793</h2>
+                                                        <h2 style="line-height:.4;"><s:property value="totalUsedCapacity"/></h2>
                                                         <small>已使用库位数</small>
                                                     </div>
                                                     <div class="col-md-4 col-sm-4 col-xs-12 text-center">
-                                                        <h2 style="line-height:.4;">88,888</h2>
+                                                        <h2 style="line-height:.4;"><s:property value="totalCapacity - totalUsedCapacity"/></h2>
                                                         <small>剩余库位数</small>
                                                     </div>
                                                 </div>
@@ -288,15 +288,15 @@
                                                 </div>
                                                 <div class="col-md-12" style="padding-top:20px;">
                                                     <div class="col-md-4 col-sm-4 col-xs-6 text-center">
-                                                        <h2 style="line-height:.4;">10,086</h2>
+                                                        <h2 style="line-height:.4;"><s:property value="totalProduct" /></h2>
                                                         <small>产品总数</small>
                                                     </div>
                                                     <div class="col-md-4 col-sm-4 col-xs-6 text-center">
-                                                        <h2 style="line-height:.4;">12</h2>
+                                                        <h2 style="line-height:.4;"><s:property value="totalCategory" /></h2>
                                                         <small>产品种类数</small>
                                                     </div>
                                                     <div class="col-md-4 col-sm-4 col-xs-12 text-center">
-                                                        <h2 style="line-height:.4;">65.6%</h2>
+                                                        <h2 style="line-height:.4;"><s:property value="percentage" /></h2>
                                                         <small>库位占用率</small>
                                                     </div>
                                                 </div>
@@ -424,39 +424,8 @@
       <!-- custom -->
       <script src="asset/js/main.js"></script>
       <script type="text/javascript">
-          var doughnutData = [
-              {
-                  value: 26.3,
-                  color:"#4ED18F",
-                  highlight: "#15BA67",
-                  label: "D12"
-              },
-              {
-                  value: 46.7,
-                  color: "#15BA67",
-                  highlight: "#15BA67",
-                  label: "C3"
-              },
-              {
-                  value: 76.8,
-                  color: "#5BAABF",
-                  highlight: "#15BA67",
-                  label: "G5"
-              },
-              {
-                  value: 40,
-                  color: "#94D7E9",
-                  highlight: "#15BA67",
-                  label: "A1"
-              },
-              {
-                  value: 98.3,
-                  color: "#BBE0E9",
-                  highlight: "#15BA67",
-                  label: "X4"
-              }
-
-          ];
+          var capacityData = <s:property value="capacityJson" escape="false"/>;
+          var categoryData = <s:property value="categoryJson" escape="false"/>;
 
           $('.mask-money').mask('000,000,000,000,000.00', {reverse: true});
           $(".select2-A").select2({
@@ -494,13 +463,13 @@
               });
 
               var ctx = $(".doughnut-chart")[0].getContext("2d");
-              window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {
+              window.myDoughnut = new Chart(ctx).Doughnut(categoryData, {
                   responsive : true,
                   showTooltips: true
               });
 
               var ctx6 = $(".polar-chart")[0].getContext("2d");
-              window.myPolar = new Chart(ctx6).PolarArea(doughnutData, {
+              window.myPolar = new Chart(ctx6).PolarArea(capacityData, {
                   responsive : true,
                   showTooltips: true
               });

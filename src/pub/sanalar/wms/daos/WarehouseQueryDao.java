@@ -1,7 +1,10 @@
 package pub.sanalar.wms.daos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
@@ -111,5 +114,36 @@ public class WarehouseQueryDao extends HibernateDaoSupport {
 		}
 		
 		return res;
+	}
+	
+	public Map<String, Integer> getCategoryProductNumber(Integer warehouseId){
+		Map<String, Integer> res = new HashMap<String, Integer>();
+		String hql = "from WmsProductShelf ps where ps.wmsShelf.wmsStorage.wmsWarehouse.warehouseId=?";
+		@SuppressWarnings("unchecked")
+		List<WmsProductShelf> list = (List<WmsProductShelf>)getHibernateTemplate().find(hql, warehouseId);
+		
+		for(WmsProductShelf s : list){
+			String key = s.getWmsProduct().getWmsCategory().getCategoryName();
+			if(res.containsKey(key)){
+				res.put(key, res.get(key) + s.getPsNumber());
+			}else{
+				res.put(key, s.getPsNumber());
+			}
+		}
+		
+		return res;
+	}
+
+	public Integer getProductKindsNumber(Integer warehouseId) {
+		HashSet<Integer> kindSet = new HashSet<Integer>();
+		String hql = "from WmsProductShelf ps where ps.wmsShelf.wmsStorage.wmsWarehouse.warehouseId=?";
+		@SuppressWarnings("unchecked")
+		List<WmsProductShelf> list = (List<WmsProductShelf>)getHibernateTemplate().find(hql, warehouseId);
+		
+		for(WmsProductShelf s : list){
+			kindSet.add(s.getWmsProduct().getProductId());
+		}
+		
+		return kindSet.size();
 	}
 }
