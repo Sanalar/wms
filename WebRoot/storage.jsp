@@ -364,54 +364,16 @@
                                           </tr>
                                           </thead>
                                           <tbody>
+                                          <s:iterator value="products" id="p">
                                           <tr>
-                                              <td><a href="#">德芙巧克力</a></td>
-                                              <td>dfqkl-1011</td>
-                                              <td>D12</td>
-                                              <td>TP-312</td>
-                                              <td>食品 > 糖果/巧克力</td>
-                                              <td>312</td>
+                                              <td><a href='product-details.html?id=<s:property value="#p.productId"/>'><s:property value="#p.productName"/></a></td>
+                                              <td><s:property value="#p.productCode"/></td>
+                                              <td><s:property value="#p.storageName"/></td>
+                                              <td><s:property value="#p.shelfName"/></td>
+                                              <td><s:property value="#p.productCategory"/></td>
+                                              <td><s:property value="#p.number"/></td>
                                           </tr>
-                                          <tr>
-                                              <td><a href="#">德芙巧克力</a></td>
-                                              <td>dfqkl-1011</td>
-                                              <td>D12</td>
-                                              <td>TP-312</td>
-                                              <td>食品 > 糖果/巧克力</td>
-                                              <td>312</td>
-                                          </tr>
-                                          <tr>
-                                              <td><a href="#">德芙巧克力</a></td>
-                                              <td>dfqkl-1011</td>
-                                              <td>D12</td>
-                                              <td>TP-312</td>
-                                              <td>食品 > 糖果/巧克力</td>
-                                              <td>312</td>
-                                          </tr>
-                                          <tr>
-                                              <td><a href="#">德芙巧克力</a></td>
-                                              <td>dfqkl-1011</td>
-                                              <td>D12</td>
-                                              <td>TP-312</td>
-                                              <td>食品 > 糖果/巧克力</td>
-                                              <td>312</td>
-                                          </tr>
-                                          <tr>
-                                              <td><a href="#">德芙巧克力</a></td>
-                                              <td>dfqkl-1011</td>
-                                              <td>D12</td>
-                                              <td>TP-312</td>
-                                              <td>食品 > 糖果/巧克力</td>
-                                              <td>312</td>
-                                          </tr>
-                                          <tr>
-                                              <td><a href="#">德芙巧克力</a></td>
-                                              <td>dfqkl-1011</td>
-                                              <td>D12</td>
-                                              <td>TP-312</td>
-                                              <td>食品 > 糖果/巧克力</td>
-                                              <td>312</td>
-                                          </tr>
+                                          </s:iterator>
                                           </tbody>
                                       </table>
                                   </div>

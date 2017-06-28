@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
+import pub.sanalar.wms.models.ProductStorageObject;
 import pub.sanalar.wms.models.StorageInfoObject;
 import pub.sanalar.wms.models.WmsProductShelf;
 import pub.sanalar.wms.models.WmsShelf;
@@ -63,9 +64,10 @@ public class WarehouseQueryDao extends HibernateDaoSupport {
 		}
 		if(sb.length() > 0){
 			sb.deleteCharAt(sb.length() - 1);
+			return sb.toString();
 		}
 		
-		return sb.toString();
+		return "<нч>";
 	}
 
 	private void setStorageInfoCapacities(Integer storageId, StorageInfoObject o) {
@@ -87,5 +89,27 @@ public class WarehouseQueryDao extends HibernateDaoSupport {
 		
 		o.setCapacity(capacity);
 		o.setUsed(used);
+	}
+	
+	public List<ProductStorageObject> getProductStorages(Integer warehouseId){
+		String hql = "from WmsProductShelf ps where ps.wmsShelf.wmsStorage.wmsWarehouse.warehouseId=?";
+		@SuppressWarnings("unchecked")
+		List<WmsProductShelf> list = (List<WmsProductShelf>)getHibernateTemplate().find(hql, warehouseId);
+		
+		List<ProductStorageObject> res = new ArrayList<ProductStorageObject>();
+		for(WmsProductShelf s : list){
+			ProductStorageObject o = new ProductStorageObject();
+			o.setNumber(s.getPsNumber());
+			o.setProductCategory(s.getWmsProduct().getWmsCategory().getWmsCategory().getCategoryName() + " > "
+					+ s.getWmsProduct().getWmsCategory().getCategoryName());
+			o.setProductCode(s.getWmsProduct().getProductCode());
+			o.setProductName(s.getWmsProduct().getProductName());
+			o.setProductId(s.getWmsProduct().getProductId());
+			o.setShelfName(s.getWmsShelf().getShelfName());
+			o.setStorageName(s.getWmsShelf().getWmsStorage().getStorageName());
+			res.add(o);
+		}
+		
+		return res;
 	}
 }

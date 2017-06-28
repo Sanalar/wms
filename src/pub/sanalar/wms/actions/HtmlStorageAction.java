@@ -6,6 +6,7 @@ import java.util.Map;
 import com.opensymphony.xwork2.ActionSupport;
 
 import pub.sanalar.wms.daos.WarehouseQueryDao;
+import pub.sanalar.wms.models.ProductStorageObject;
 import pub.sanalar.wms.models.StorageInfoObject;
 
 public class HtmlStorageAction extends ActionSupport {
@@ -19,11 +20,13 @@ public class HtmlStorageAction extends ActionSupport {
 	private String warehouseName;
 	private Map<Integer, String> warehouses;
 	private List<StorageInfoObject> storageInfos;
+	private List<ProductStorageObject> products;
 	
 	@Override
 	public String execute() throws Exception {
 		storageInfos = warehouseQueryDao.getStorageInfos(warehouseId);
 		warehouseName = warehouseQueryDao.getWarehouseNameById(warehouseId);
+		products = warehouseQueryDao.getProductStorages(warehouseId);
 		return SUCCESS;
 	}
 
@@ -65,6 +68,14 @@ public class HtmlStorageAction extends ActionSupport {
 
 	public void setStorageInfos(List<StorageInfoObject> storageInfos) {
 		this.storageInfos = storageInfos;
+	}
+
+	public List<ProductStorageObject> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<ProductStorageObject> products) {
+		this.products = products;
 	}
 
 }
