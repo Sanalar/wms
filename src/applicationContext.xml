@@ -121,4 +121,14 @@
 		<property name="productQueryDao" ref="productQueryDaoBean"></property>
 		<property name="categoryQueryDao" ref="categoryQueryDaoBean"></property>
 	</bean>
+	<bean id="htmlStorageActionBean" 
+	class="pub.sanalar.wms.actions.HtmlStorageAction" 
+	scope="prototype">
+
+	</bean>
+	<bean id="jsonDataProviderActionBean" 
+	class="pub.sanalar.wms.actions.JsonDataProvideAction" 
+	scope="prototype">
+		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
+	</bean>
 </beans>

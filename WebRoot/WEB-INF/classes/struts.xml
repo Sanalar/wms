@@ -29,6 +29,11 @@
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result>product.jsp</result>
 		</action>
+		<action name="storage" class="htmlStorageActionBean">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<result>storage.jsp</result>
+		</action>
 		<action name="checkLogin" class="checkLoginActionBean">
 			<result name="error-login">error-login.html</result>
 			<result name="success" type="redirect">index.html</result>
@@ -58,6 +63,12 @@
 			<result name="success">redirect.jsp</result>
 			<result name="error" type="httpheader">
 				<param name="status">403</param>
+			</result>
+		</action>
+		
+		<action name="fetchWarehouseList" class="jsonDataProviderActionBean" method="getAllWarehouseList">
+			<result name="success" type="json">
+				<param name="root">warehouseList</param>
 			</result>
 		</action>
 	</package>

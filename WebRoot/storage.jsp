@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -202,7 +204,7 @@
                           <div class="row">
                               <div class="col-md-12">
                                   <div class="form-group">
-                                      <select class="form-control" name="warehouseId">
+                                      <select class="form-control" name="warehouseId" id="warehouseId-select">
                                           <option value="1">北京海淀仓库</option>
                                       </select>
                                   </div>
@@ -480,7 +482,7 @@
                   <div class="modal-body">
                       <div class="row">
                           <div class="col-md-12" style="font-size:22px">
-                            <span class="fa fa-spinner faa-spin animated"></span> 正在拼命加载数据，请稍后...
+                            <span class="fa fa-spinner faa-spin animated"></span> <span id="loading-msg">正在拼命加载数据，请稍后...</span>
                           </div>
                       </div>
                   </div>
@@ -554,8 +556,25 @@
               $('.datatable').DataTable();
               $("#select-warehouse-bt").click(function(event){
                   event.preventDefault();
-                  $("#select-warehouse").modal();
                   $("#loading-box").modal({backdrop: 'static', keyboard: false});
+                  $.ajax( {  
+                	url:'fetchWarehouseList.action',  
+                	dataType:'json',
+                	type: "POST",
+                	success: function(data, textStatus){
+                		var widSel = $("#warehouseId-select");
+                		widSel.empty();
+                		$.each(data,function(i,n){ 
+							widSel.append('<option value="'+n["id"]+'">'+n["name"]+'</option>'); 
+						}); 
+						$("#loading-box").modal("hide");
+						$("#select-warehouse").modal();
+                	},
+                	error: function(){
+                		$("#loading-box").modal("hide");
+                		alert("请求仓库列表失败！请检查网络设置！"); 
+                	}  
+         		});
               });
 
               var ctx = $(".doughnut-chart")[0].getContext("2d");
@@ -569,64 +588,6 @@
                   responsive : true,
                   showTooltips: true
               });
-          });
-      </script>
-
-      <script>
-          /*定义三级分类数据*/
-          //一级分类
-          var province = ["危化品", "食品", "日用品", "电子设备", "医药品"];
-          //二级分类
-          var city = [
-              ["爆炸品", "压缩气体和液化气体", "易燃液体", "易燃固体、自燃物品和遇湿易燃物品", "氧化剂和有机过氧化物", "毒害品和感染性物品", "放射性物品", "腐蚀品"],
-              ["糖果/巧克力", "饮料/水", "肉类/豆制品零食", "饼干糕点", "冲调保健", "酒类", "牛奶乳品", "坚果炒货", "蜜饯果干"],
-              ["厨卫用品", "收纳用品", "洗护用品", "文具", "体育用品"],
-              ["电脑", "手机", "电子芯片", "电脑周边", "线材", "家电", "装修工具"],
-              ["医保药品", "中成药", "西成药"]
-          ];
-
-          var expressP, expressC, expressD, expressArea, areaCont;
-          var arrow = " <font>&gt;</font> ";
-
-          /*初始化一级目录*/
-          function intProvince() {
-              areaCont = "";
-              for (var i=0; i<province.length; i++) {
-                  areaCont += '<li onClick="selectP(' + i + ');"><a href="javascript:void(0)">' + province[i] + '</a></li>';
-              }
-              $("#sort1").html(areaCont);
-          }
-          intProvince();
-
-          /*选择一级目录*/
-          function selectP(p) {
-              areaCont = "";
-              for (var j=0; j<city[p].length; j++) {
-                  areaCont += '<li onClick="selectC(' + p + ',' + j + ');"><a href="javascript:void(0)">' + city[p][j] + '</a></li>';
-              }
-              $("#sort2").html(areaCont).show();
-              $("#sort1 li").eq(p).addClass("active").siblings("li").removeClass("active");
-              expressP = province[p];
-              $("#selectedSort").html(expressP);
-              $("#releaseBtn").attr("disabled", "disabled");
-          }
-
-          /*选择二级目录*/
-          function selectC(p,c) {
-              areaCont = "";
-              $("#sort2 li").eq(c).addClass("active").siblings("li").removeClass("active");
-              expressC = expressP + arrow + city[p][c];
-              $("#selectedSort").html(expressC);
-              $("#releaseBtn").removeAttr("disabled");
-          }
-
-          /*点击下一步*/
-          $("#releaseBtn").click(function() {
-              var releaseS = $(this).prop("disabled");
-              if (releaseS == false) {//未被禁用
-                  $("#selected-category").val($("#selectedSort").text());
-                  $("#category-dialog").modal('hide');
-              }
           });
       </script>
   <!-- end: Javascript -->
