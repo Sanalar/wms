@@ -333,10 +333,11 @@
 1. 2017-06-12 完成第一部分的界面设计初稿。
 2. 2017-06-16 完成项目的 SSH 构架搭建，并成功实现登录操作。
 3. 2017-06-21 完成了产品列表页面的显示，分页，按类别筛选和按名称查询。
-4. 2017-06-25 完成产品详情中的显示和图片修改功能。、
+4. 2017-06-25 完成产品详情中的显示和图片修改功能。
 5. 2017-06-26 完善数据库设计。
 6. 2017-06-27 完成项目从 `MySQL` 到 `SQL Server` 的迁移。
 7. 2017-06-27 完成 **产品管理** 页面的逻辑实现。
+8. 2017-06-28 完成 **库存查询** 页面的逻辑实现。
 
 ## 遇到的问题
 
@@ -394,4 +395,38 @@
 
 ```java
 @Transactional
+```
+
+### 怎样防止 `<s:property>` 标签输出文本被转义？
+
+给 `<s:property>` 标签加上 `escape` 属性，如：
+
+```xml
+<s:property value="str" escape="false" />
+```
+
+### 怎样使用 `ajax` 异步请求并解析 `json` 数据？
+
+使用 `jQuery` 的 `ajax` 的请求方法：
+
+```javascript
+$.ajax( {
+	url:'fetchWarehouseList.action',  
+	dataType:'json',
+	type: "POST",
+	data: {"data1":1,"data2":"str"}
+	success: function(data, textStatus){
+		alert("执行成功，data 是返回的 json 数据。");
+	},
+	error: function(){
+		alert("请求失败！");
+	});
+```
+
+然后可以通过以下方法解析获得的 `json` 数据：
+
+```javascript
+$.each(data,function(i,n){ 
+	$("select").append('<option value="'+n["id"]+'">'+n["name"]+'</option>'); 
+	}); 
 ```
