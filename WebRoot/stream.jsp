@@ -309,7 +309,7 @@
                                     <div class="panel">
                                         <div class="panel-heading bg-white border-none" style="padding:20px;">
                                             <div class="col-md-12 col-sm-12 col-sm-12 text-left">
-                                                <h4>6 月各品类流水统计</h4>
+                                                <h4><s:property value="statMonth"/> 月各品类流水统计</h4>
                                             </div>
                                         </div>
                                         <div class="panel-body" style="padding-bottom:50px;">
@@ -318,20 +318,20 @@
                                             </div>
                                             <div class="col-md-12" style="padding-top:20px;">
                                                 <div class="col-md-6 col-sm-6 col-xs-6 text-center">
-                                                    <h2 style="line-height:.4;">10,086</h2>
-                                                    <small>最多入库品类:<b class="text-danger">食品</b></small>
+                                                    <h2 style="line-height:.4;"><s:property value="catInMaxNum"/></h2>
+                                                    <small>最多入库品类:<b class="text-danger"><s:property value="catInMaxName"/></b></small>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-6 text-center">
-                                                    <h2 style="line-height:.4;">12</h2>
-                                                    <small>最多出库品类:<b class="text-danger">日用品</b></small>
+                                                    <h2 style="line-height:.4;"><s:property value="catOutMaxNum"/></h2>
+                                                    <small>最多出库品类:<b class="text-danger"><s:property value="catOutMaxName"/></b></small>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-6 text-center">
-                                                    <h2 style="line-height:.4;">10,086</h2>
-                                                    <small>最少入库品类:<b class="text-danger">食品</b></small>
+                                                    <h2 style="line-height:.4;"><s:property value="catInMinNum"/></h2>
+                                                    <small>最少入库品类:<b class="text-danger"><s:property value="catInMinName"/></b></small>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-6 text-center">
-                                                    <h2 style="line-height:.4;">12</h2>
-                                                    <small>最少出库品类:<b class="text-danger">日用品</b></small>
+                                                    <h2 style="line-height:.4;"><s:property value="catOutMinNum"/></h2>
+                                                    <small>最少出库品类:<b class="text-danger"><s:property value="catOutMinName"/></b></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -341,7 +341,7 @@
                                     <div class="panel">
                                         <div class="panel-heading bg-white border-none" style="padding:20px;">
                                             <div class="col-md-12 col-sm-12 col-sm-12 text-left">
-                                                <h4>6 月各货架流水统计</h4>
+                                                <h4><s:property value="statMonth"/> 月各货架流水统计</h4>
                                             </div>
                                         </div>
                                         <div class="panel-body" style="padding-bottom:50px;">
@@ -349,20 +349,20 @@
                                                 <canvas class="bar-chart" style="margin-top:30px;height:200px;"></canvas>
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-6 text-center">
-                                                <h2 style="line-height:.4;">10,086</h2>
-                                                <small>最多入库库位:<b class="text-danger">D12</b></small>
+                                                <h2 style="line-height:.4;"><s:property value="shInMaxNum"/></h2>
+                                                <small>最多入库库位:<b class="text-danger"><s:property value="shInMaxName"/></b></small>
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-6 text-center">
-                                                <h2 style="line-height:.4;">12</h2>
-                                                <small>最多出库库位:<b class="text-danger">D12</b></small>
+                                                <h2 style="line-height:.4;"><s:property value="shOutMaxNum"/></h2>
+                                                <small>最多出库库位:<b class="text-danger"><s:property value="shOutMaxName"/></b></small>
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-6 text-center">
-                                                <h2 style="line-height:.4;">10,086</h2>
-                                                <small>最少入库库位:<b class="text-danger">D12</b></small>
+                                                <h2 style="line-height:.4;"><s:property value="shInMinNum"/></h2>
+                                                <small>最少入库库位:<b class="text-danger"><s:property value="shInMinName"/></b></small>
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-6 text-center">
-                                                <h2 style="line-height:.4;">12</h2>
-                                                <small>最少出库库位:<b class="text-danger">D12</b></small>
+                                                <h2 style="line-height:.4;"><s:property value="shOutMinNum"/></h2>
+                                                <small>最少出库库位:<b class="text-danger"><s:property value="shOutMinName"/></b></small>
                                             </div>
                                         </div>
                                     </div>
@@ -548,58 +548,53 @@
           };
 
           var radarData = {
-              labels: ["危化品", "食品", "日用品", "电子设备", "医药品"],
+              labels: <s:property value="categoryJson" escape="false"/>,
               datasets: [
                   {
                       label: "入库数量",
                       fillColor: "rgba(21,255,22,0.5)",
-                      strokeColor: "rgba(220,220,220,1)",
-                      pointColor: "rgba(220,220,220,1)",
+                      strokeColor: "rgba(21,255,22,1)",
+                      pointColor: "rgba(21,255,22,1)",
                       pointStrokeColor: "#fff",
                       pointHighlightFill: "#fff",
                       pointHighlightStroke: "rgba(220,220,220,1)",
-                      data: [65, 59, 90, 81, 56]
+                      data: <s:property value="catInJson" escape="false"/>
                   },
                   {
                       label: "出库数量",
                       fillColor: "rgba(255,21,22,0.5)",
-                      strokeColor: "rgba(151,187,205,1)",
-                      pointColor: "rgba(151,187,205,1)",
+                      strokeColor: "rgba(255,21,22,1)",
+                      pointColor: "rgba(255,21,22,1)",
                       pointStrokeColor: "#fff",
                       pointHighlightFill: "#fff",
                       pointHighlightStroke: "rgba(151,187,205,1)",
-                      data: [28, 48, 40, 19, 96]
+                      data: <s:property value="catOutJson" escape="false"/>
                   }
               ]
           };
 
           var barData = {
-              labels: ["D12", "F34", "C3", "A10", "X23", "P2", "BB"],
+              labels: <s:property value="shelfNameJson" escape="false"/>,
               datasets: [
                   {
-                      label: "My First dataset",
-                      fillColor: "rgba(21,186,103,0.5)",
-                      strokeColor: "rgba(220,220,220,0.8)",
-                      highlightFill: "rgba(220,220,220,0.75)",
-                      highlightStroke: "rgba(220,220,220,1)",
-                      data: [65, 59, 80, 81, 56, 55, 40]
+                      label: "入库",
+                      fillColor: "rgba(21,255,22,0.5)",
+                      strokeColor: "rgba(21,255,22,0.8)",
+                      highlightFill: "rgba(21,255,22,0.75)",
+                      highlightStroke: "rgba(21,255,22,1)",
+                      data: <s:property value="shelfInJson" escape="false"/>
                   },
                   {
-                      label: "My Second dataset",
-                      fillColor: "rgba(21,113,186,0.5)",
-                      strokeColor: "rgba(151,187,205,0.8)",
-                      highlightFill: "rgba(151,187,205,0.75)",
-                      highlightStroke: "rgba(151,187,205,1)",
-                      data: [28, 48, 40, 19, 86, 27, 90]
+                      label: "出库",
+                      fillColor: "rgba(255,21,22,0.5)",
+                      strokeColor: "rgba(255,21,22,0.8)",
+                      highlightFill: "rgba(255,21,22,0.75)",
+                      highlightStroke: "rgba(255,21,22,1)",
+                      data: <s:property value="shelfOutJson" escape="false"/>
                   }
               ]
           };
 
-          $('.mask-money').mask('000,000,000,000,000.00', {reverse: true});
-          $(".select2-A").select2({
-              placeholder: "选择特殊贮存条件",
-              allowClear: true
-          });
           $(document).ready(function(){
 
               $(".nav-tabs a").click(function (e) {

@@ -90,6 +90,7 @@
 	<bean id="statisticsDaoBean"
 		class="pub.sanalar.wms.daos.StatisticsDao">
 		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="categoryQueryDao" ref="categoryQueryDaoBean"></property>
 	</bean>
 	<bean id="checkLoginActionBean" 
 	class="pub.sanalar.wms.actions.CheckLoginAction" 
