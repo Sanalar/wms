@@ -1,5 +1,7 @@
 package pub.sanalar.wms.daos;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,6 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pub.sanalar.wms.models.ProductStorageObject;
 import pub.sanalar.wms.models.StorageInfoObject;
+import pub.sanalar.wms.models.StreamInItem;
+import pub.sanalar.wms.models.StreamOutItem;
+import pub.sanalar.wms.models.WmsInApplicationProduct;
+import pub.sanalar.wms.models.WmsOutApplicationProduct;
 import pub.sanalar.wms.models.WmsProductShelf;
 import pub.sanalar.wms.models.WmsShelf;
 import pub.sanalar.wms.models.WmsStorage;
@@ -145,5 +151,61 @@ public class WarehouseQueryDao extends HibernateDaoSupport {
 		}
 		
 		return kindSet.size();
+	}
+	
+	public Integer getDefaultWarehouseId(){
+		return 1;
+	}
+	
+	public List<StreamInItem> getStreamInItems(Integer warehouseId){
+		String hql = "from WmsInApplicationProduct p where p.wmsShelf.wmsStorage.wmsWarehouse.warehouseId=?";
+		@SuppressWarnings("unchecked")
+		List<WmsInApplicationProduct> list = (List<WmsInApplicationProduct>)getHibernateTemplate().find(hql, warehouseId);
+		
+		List<StreamInItem> res = new ArrayList<StreamInItem>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss");
+		for(WmsInApplicationProduct p : list){
+			StreamInItem item = new StreamInItem();
+			item.setCharger(p.getWmsInApplication().getWmsUserByApplicationCreator().getUserRealName());
+			item.setId(p.getWmsInApplication().getApplicationId());
+			Timestamp time = p.getWmsInApplication().getApplicationAcceptTime();
+			item.setInTime(time == null ? "<未确认>" : sdf.format(time));
+			item.setNumber(p.getApNumber());
+			item.setProductCode(p.getWmsProduct().getProductCode());
+			item.setProductName(p.getWmsProduct().getProductName());
+			item.setShelfName(p.getWmsShelf().getShelfName());
+			item.setStorageName(p.getWmsShelf().getWmsStorage().getStorageName());
+			item.setState(p.getWmsInApplication().getWmsApplicationState().getStateName());
+			item.setProductId(p.getWmsProduct().getProductId());
+			res.add(item);
+		}
+		
+		return res;
+	}
+	
+	public List<StreamOutItem> getStreamOutItems(Integer warehouseId){
+		String hql = "from WmsOutApplicationProduct p where p.wmsShelf.wmsStorage.wmsWarehouse.warehouseId=?";
+		@SuppressWarnings("unchecked")
+		List<WmsOutApplicationProduct> list = (List<WmsOutApplicationProduct>)getHibernateTemplate().find(hql, warehouseId);
+		
+		List<StreamOutItem> res = new ArrayList<StreamOutItem>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss");
+		for(WmsOutApplicationProduct p : list){
+			StreamOutItem item = new StreamOutItem();
+			item.setCharger(p.getWmsOutApplication().getWmsUserByApplicationCreator().getUserRealName());
+			item.setId(p.getWmsOutApplication().getApplicationId());
+			Timestamp time = p.getWmsOutApplication().getApplicationAcceptTime();
+			item.setInTime(time == null ? "<未确认>" : sdf.format(time));
+			item.setNumber(p.getApNumber());
+			item.setProductCode(p.getWmsProduct().getProductCode());
+			item.setProductName(p.getWmsProduct().getProductName());
+			item.setShelfName(p.getWmsShelf().getShelfName());
+			item.setStorageName(p.getWmsShelf().getWmsStorage().getStorageName());
+			item.setState(p.getWmsOutApplication().getWmsApplicationState().getStateName());
+			item.setProductId(p.getWmsProduct().getProductId());
+			res.add(item);
+		}
+		
+		return res;
 	}
 }

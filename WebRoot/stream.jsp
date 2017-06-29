@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -193,14 +195,39 @@
             </div>
           <!-- end: Left Menu -->
 
-  		
+          <!-- modal -->
+          <div class="modal fade" id="select-warehouse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <form class="modal-content" action="stream.html" method="get">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">选择当前仓库</h4>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <select class="form-control" name="warehouseId" id="warehouseId-select">
+                                          <option value="1">北京海淀仓库</option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-default btn-round btn-gradient" data-dismiss="modal">关 闭</button>
+                          <button type="submit" class="btn btn-success btn-round btn-gradient">确 定</button>
+                      </div>
+                  </form>
+              </div>
+          </div>  		
           <!-- start: content -->
           <div id="content">
               <div class="tabs-wrapper text-center">
                   <div class="panel box-shadow-none text-left content-header">
                       <div class="panel-body" style="padding-bottom:0px;">
                           <div class="col-md-12">
-                              <h3 class="animated fadeInLeft"><b class="text-primary">北京海淀仓库</b> 流水信息</h3>
+                              <h3 class="animated fadeInLeft"><a class="text-primary" href="#" id="select-warehouse-bt"><s:property value="warehouseName"/></a> 流水信息</h3>
                               <p class="animated fadeInDown">
                                   仓库管理系统 <span class="fa-angle-right fa"></span> 流水查询
                               </p>
@@ -367,83 +394,19 @@
                                           </tr>
                                           </thead>
                                           <tbody>
+                                          <s:iterator value="inStreams" id="i">
                                           <tr>
-                                              <td>IN101231</td>
-                                              <td>D12</td>
-                                              <td>TP-12</td>
-                                              <td>2017-06-01</td>
-                                              <td>dfqkl-1011</td>
-                                              <td>德芙巧克力</td>
-                                              <td class="text-success">1000</td>
-                                              <td>郝爱国</td>
-                                              <td>FN-1092</td>
+                                          	<td><s:property value="#i.id"/></td>
+                                          	<td><s:property value="#i.storageName"/></td>
+                                          	<td><s:property value="#i.shelfName"/></td>
+                                          	<td><s:property value="#i.inTime"/></td>
+                                          	<td><s:property value="#i.productCode"/></td>
+                                          	<td><a href='product-details.html?id=<s:property value="#i.productId"/>'><s:property value="#i.productName"/></a></td>
+                                            <td class="text-success">+<s:property value="#i.number"/></td>
+                                            <td><s:property value="#i.charger"/></td>
+                                            <td><s:property value="#i.state"/></td>
                                           </tr>
-                                          <tr>
-                                              <td>IN101231</td>
-                                              <td>D12</td>
-                                              <td>TP-12</td>
-                                              <td>2017-06-01</td>
-                                              <td>dfqkl-1011</td>
-                                              <td>德芙巧克力</td>
-                                              <td class="text-success">1000</td>
-                                              <td>郝爱国</td>
-                                              <td>FN-1092</td>
-                                          </tr>
-                                          <tr>
-                                              <td>IN101231</td>
-                                              <td>D12</td>
-                                              <td>TP-12</td>
-                                              <td>2017-06-01</td>
-                                              <td>dfqkl-1011</td>
-                                              <td>德芙巧克力</td>
-                                              <td class="text-success">1000</td>
-                                              <td>郝爱国</td>
-                                              <td>FN-1092</td>
-                                          </tr>
-                                          <tr>
-                                              <td>IN101231</td>
-                                              <td>D12</td>
-                                              <td>TP-12</td>
-                                              <td>2017-06-01</td>
-                                              <td>dfqkl-1011</td>
-                                              <td>德芙巧克力</td>
-                                              <td class="text-success">1000</td>
-                                              <td>郝爱国</td>
-                                              <td>FN-1092</td>
-                                          </tr>
-                                          <tr>
-                                              <td>IN101231</td>
-                                              <td>D12</td>
-                                              <td>TP-12</td>
-                                              <td>2017-06-01</td>
-                                              <td>dfqkl-1011</td>
-                                              <td>德芙巧克力</td>
-                                              <td class="text-success">1000</td>
-                                              <td>郝爱国</td>
-                                              <td>FN-1092</td>
-                                          </tr>
-                                          <tr>
-                                              <td>IN101231</td>
-                                              <td>D12</td>
-                                              <td>TP-12</td>
-                                              <td>2017-06-01</td>
-                                              <td>dfqkl-1011</td>
-                                              <td>德芙巧克力</td>
-                                              <td class="text-success">1000</td>
-                                              <td>郝爱国</td>
-                                              <td>FN-1092</td>
-                                          </tr>
-                                          <tr>
-                                              <td>IN101231</td>
-                                              <td>D12</td>
-                                              <td>TP-12</td>
-                                              <td>2017-06-01</td>
-                                              <td>dfqkl-1011</td>
-                                              <td>德芙巧克力</td>
-                                              <td class="text-success">1000</td>
-                                              <td>郝爱国</td>
-                                              <td>FN-1092</td>
-                                          </tr>
+                                          </s:iterator>
                                           </tbody>
                                       </table>
                                   </div>
@@ -474,72 +437,19 @@
                                           </tr>
                                           </thead>
                                           <tbody>
+                                          <s:iterator value="outStreams" id="i">
                                           <tr>
-                                              <td>OUT10123</td>
-                                              <td>D12</td>
-                                              <td>TP-12</td>
-                                              <td>2017-06-02</td>
-                                              <td>dfqkl-1011</td>
-                                              <td>德芙巧克力</td>
-                                              <td class="text-danger">312</td>
-                                              <td>詹娜娜</td>
-                                              <td>SDK-085</td>
+                                          	<td><s:property value="#i.id"/></td>
+                                          	<td><s:property value="#i.storageName"/></td>
+                                          	<td><s:property value="#i.shelfName"/></td>
+                                          	<td><s:property value="#i.inTime"/></td>
+                                          	<td><s:property value="#i.productCode"/></td>
+                                          	<td><a href='product-details.html?id=<s:property value="#i.productId"/>'><s:property value="#i.productName"/></a></td>
+                                            <td class="text-danger">-<s:property value="#i.number"/></td>
+                                            <td><s:property value="#i.charger"/></td>
+                                            <td><s:property value="#i.state"/></td>
                                           </tr>
-                                          <tr>
-                                              <td>OUT10123</td>
-                                              <td>D12</td>
-                                              <td>TP-12</td>
-                                              <td>2017-06-02</td>
-                                              <td>dfqkl-1011</td>
-                                              <td>德芙巧克力</td>
-                                              <td class="text-danger">312</td>
-                                              <td>詹娜娜</td>
-                                              <td>SDK-085</td>
-                                          </tr>
-                                          <tr>
-                                              <td>OUT10123</td>
-                                              <td>D12</td>
-                                              <td>TP-12</td>
-                                              <td>2017-06-02</td>
-                                              <td>dfqkl-1011</td>
-                                              <td>德芙巧克力</td>
-                                              <td class="text-danger">312</td>
-                                              <td>詹娜娜</td>
-                                              <td>SDK-085</td>
-                                          </tr>
-                                          <tr>
-                                              <td>OUT10123</td>
-                                              <td>D12</td>
-                                              <td>TP-12</td>
-                                              <td>2017-06-02</td>
-                                              <td>dfqkl-1011</td>
-                                              <td>德芙巧克力</td>
-                                              <td class="text-danger">312</td>
-                                              <td>詹娜娜</td>
-                                              <td>SDK-085</td>
-                                          </tr>
-                                          <tr>
-                                              <td>OUT10123</td>
-                                              <td>D12</td>
-                                              <td>TP-12</td>
-                                              <td>2017-06-02</td>
-                                              <td>dfqkl-1011</td>
-                                              <td>德芙巧克力</td>
-                                              <td class="text-danger">312</td>
-                                              <td>詹娜娜</td>
-                                              <td>SDK-085</td>
-                                          </tr>
-                                          <tr>
-                                              <td>OUT10123</td>
-                                              <td>D12</td>
-                                              <td>TP-12</td>
-                                              <td>2017-06-02</td>
-                                              <td>dfqkl-1011</td>
-                                              <td>德芙巧克力</td>
-                                              <td class="text-danger">312</td>
-                                              <td>詹娜娜</td>
-                                              <td>SDK-085</td>
-                                          </tr>
+                                          </s:iterator>
                                           </tbody>
                                       </table>
                                   </div>
@@ -681,6 +591,29 @@
                   $(this).tab('show');
               });
               $('.datatable').DataTable();
+              
+              $("#select-warehouse-bt").click(function(event){
+                  event.preventDefault();
+                  $("#loading-box").modal({backdrop: 'static', keyboard: false});
+                  $.ajax( {  
+                	url:'fetchWarehouseList.action',  
+                	dataType:'json',
+                	type: "POST",
+                	success: function(data, textStatus){
+                		var widSel = $("#warehouseId-select");
+                		widSel.empty();
+                		$.each(data,function(i,n){ 
+							widSel.append('<option value="'+n["id"]+'">'+n["name"]+'</option>'); 
+						}); 
+						$("#loading-box").modal("hide");
+						$("#select-warehouse").modal();
+                	},
+                	error: function(){
+                		$("#loading-box").modal("hide");
+                		alert("请求仓库列表失败！请检查网络设置！"); 
+                	}  
+         		});
+              });
 
               var ctx = $("#canvas-holder1 .line-chart")[0].getContext("2d");
               window.myDoughnut = new Chart(ctx).Line(lineChartData1, {

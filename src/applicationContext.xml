@@ -131,4 +131,9 @@
 	scope="prototype">
 		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
 	</bean>
+	<bean id="htmlStreamActionBean" 
+	class="pub.sanalar.wms.actions.HtmlStreamAction" 
+	scope="prototype">
+		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
+	</bean>
 </beans>

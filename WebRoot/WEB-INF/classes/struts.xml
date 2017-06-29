@@ -34,6 +34,11 @@
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result>storage.jsp</result>
 		</action>
+		<action name="stream" class="htmlStreamActionBean">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<result>stream.jsp</result>
+		</action>
 		<action name="checkLogin" class="checkLoginActionBean">
 			<result name="error-login">error-login.html</result>
 			<result name="success" type="redirect">index.html</result>
