@@ -253,7 +253,7 @@
                                         <div class="panel">
                                             <div class="panel-heading bg-white border-none" style="padding:20px;">
                                                 <div class="col-md-12 col-sm-12 col-sm-12 text-left">
-                                                    <h4>6 月入库流水统计</h4>
+                                                    <h4><s:property value="statMonth"/> 月入库流水统计</h4>
                                                 </div>
                                             </div>
                                             <div class="panel-body" style="padding-bottom:50px;">
@@ -262,15 +262,15 @@
                                                 </div>
                                                 <div class="col-md-12" style="padding-top:20px;">
                                                     <div class="col-md-4 col-sm-4 col-xs-6 text-center">
-                                                        <h2 style="line-height:.4;">10,086</h2>
+                                                        <h2 style="line-height:.4;"><s:property value="inTotal"/></h2>
                                                         <small>总入库数</small>
                                                     </div>
                                                     <div class="col-md-4 col-sm-4 col-xs-6 text-center">
-                                                        <h2 style="line-height:.4;">9,793</h2>
+                                                        <h2 style="line-height:.4;"><s:property value="inTotal / dayCount"/></h2>
                                                         <small>日均入库数</small>
                                                     </div>
                                                     <div class="col-md-4 col-sm-4 col-xs-12 text-center">
-                                                        <h2 style="line-height:.4;">88,888</h2>
+                                                        <h2 style="line-height:.4;"><s:property value="inMax"/></h2>
                                                         <small>单日最大入库数</small>
                                                     </div>
                                                 </div>
@@ -281,7 +281,7 @@
                                         <div class="panel">
                                             <div class="panel-heading bg-white border-none" style="padding:20px;">
                                                 <div class="col-md-12 col-sm-12 col-sm-12 text-left">
-                                                    <h4>6 月出库流水统计</h4>
+                                                    <h4><s:property value="statMonth"/> 月出库流水统计</h4>
                                                 </div>
                                             </div>
                                             <div class="panel-body" style="padding-bottom:50px;">
@@ -290,15 +290,15 @@
                                                 </div>
                                                 <div class="col-md-12" style="padding-top:20px;">
                                                     <div class="col-md-4 col-sm-4 col-xs-6 text-center">
-                                                        <h2 style="line-height:.4;">10,086</h2>
+                                                        <h2 style="line-height:.4;"><s:property value="outTotal"/></h2>
                                                         <small>总出库数</small>
                                                     </div>
                                                     <div class="col-md-4 col-sm-4 col-xs-6 text-center">
-                                                        <h2 style="line-height:.4;">12</h2>
+                                                        <h2 style="line-height:.4;"><s:property value="outTotal / dayCount"/></h2>
                                                         <small>日均出库数</small>
                                                     </div>
                                                     <div class="col-md-4 col-sm-4 col-xs-12 text-center">
-                                                        <h2 style="line-height:.4;">65.6%</h2>
+                                                        <h2 style="line-height:.4;"><s:property value="outMax"/></h2>
                                                         <small>单日最大出库数</small>
                                                     </div>
                                                 </div>
@@ -516,7 +516,7 @@
           ];
 
           var lineChartData1 = {
-              labels: ["6月1日", "6月2日", "6月3日", "6月4日", "6月5日", "6月6日", "6月7日"],
+              labels: <s:property value="dayJson" escape="false"/>,
               datasets: [
                   {
                       label: "入库流水",
@@ -526,7 +526,23 @@
                       pointStrokeColor: "#fff",
                       pointHighlightFill: "#fff",
                       pointHighlightStroke: "rgba(220,220,220,1)",
-                      data: [65, 59, 80, 81, 56, 55, 98]
+                      data: <s:property value="inDataJson" escape="false"/>
+                  }
+              ]
+          };
+          
+          var lineChartData2 = {
+              labels: <s:property value="dayJson" escape="false"/>,
+              datasets: [
+                  {
+                      label: "入库流水",
+                      fillColor: "rgba(255,45,23,0.5)",
+                      strokeColor: "rgba(220,220,220,1)",
+                      pointColor: "rgba(220,220,220,1)",
+                      pointStrokeColor: "#fff",
+                      pointHighlightFill: "#fff",
+                      pointHighlightStroke: "rgba(220,220,220,1)",
+                      data: <s:property value="outDataJson" escape="false"/>
                   }
               ]
           };
@@ -622,7 +638,7 @@
               });
 
               var ctx2 = $("#canvas-holder2 .line-chart")[0].getContext("2d");
-              window.myDoughnut = new Chart(ctx2).Line(lineChartData1, {
+              window.myDoughnut = new Chart(ctx2).Line(lineChartData2, {
                   responsive : true,
                   showTooltips: true
               });

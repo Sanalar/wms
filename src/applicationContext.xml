@@ -87,6 +87,10 @@
 		class="pub.sanalar.wms.daos.WarehouseQueryDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="statisticsDaoBean"
+		class="pub.sanalar.wms.daos.StatisticsDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<bean id="checkLoginActionBean" 
 	class="pub.sanalar.wms.actions.CheckLoginAction" 
 	scope="prototype">
@@ -135,5 +139,6 @@
 	class="pub.sanalar.wms.actions.HtmlStreamAction" 
 	scope="prototype">
 		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
+		<property name="statisticsDao" ref="statisticsDaoBean"></property>
 	</bean>
 </beans>
