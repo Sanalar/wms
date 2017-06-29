@@ -333,14 +333,15 @@
 1. 2017-06-12 完成第一部分的界面设计初稿。
 2. 2017-06-16 完成项目的 SSH 构架搭建，并成功实现登录操作。
 3. 2017-06-21 完成了产品列表页面的显示，分页，按类别筛选和按名称查询。
-4. 2017-06-25 完成产品详情中的显示和图片修改功能。、
+4. 2017-06-25 完成产品详情中的显示和图片修改功能。
 5. 2017-06-26 完善数据库设计。
 6. 2017-06-27 完成项目从 `MySQL` 到 `SQL Server` 的迁移。
 7. 2017-06-27 完成 **产品管理** 页面的逻辑实现。
+8. 2017-06-28 完成 **库存查询** 页面的逻辑实现。
 
 ## 遇到的问题
 
-### URL 提交中文乱码的问题
+### Q1. URL 提交中文乱码的问题
 
 解决方法：
 
@@ -352,7 +353,7 @@
 
 		str = java.net.URLDecoder.decode(str, "UTF-8");
 
-### `struts` 中怎样直接指定返回状态码 `404` 或者 `403` ？
+### Q2. `struts` 中怎样直接指定返回状态码 `404` 或者 `403` ？
 
 在 `struts.xml` 文件中指定 `<result>` 标签对如下：
 
@@ -362,7 +363,7 @@
 </result>
 ```
    
-### 怎样实现小图片上传？
+### Q3. 怎样实现小图片上传？
 
 不通过文件上传的形式，可以先把要上传的图片转码成 `base64` 编码，然后再在
 `action` 中使用 `BASE64Decoder` 进行解码保存在本地文件就可以了。
@@ -372,7 +373,7 @@
 配置 `hibernate.hbm.xml` 中，添加 `Connection.autocommit` 为 `true`，
 然后在执行 `update()` 或者 `save()` 的地方后面加一句 `session.flush()`。
    
-### `action` 怎样返回 `json` 格式数据？
+### Q4. `action` 怎样返回 `json` 格式数据？
 
 在 `struts.xml` 文件中添加如下配置：
 
@@ -388,10 +389,72 @@
 </result>
 ```
 
-### 报错 `Spring Hibernate - Could not obtain transaction-synchronized Session for current thread`
+### Q5. 报错 `Spring Hibernate - Could not obtain transaction-synchronized Session for current thread`
 
 在每一个 `dao` 类的前面加上一行：
 
 ```java
 @Transactional
 ```
+
+### Q6. 怎样防止 `<s:property>` 标签输出文本被转义？
+
+给 `<s:property>` 标签加上 `escape` 属性，如：
+
+```xml
+<s:property value="str" escape="false" />
+```
+
+### Q7. 怎样使用 `ajax` 异步请求并解析 `json` 数据？
+
+使用 `jQuery` 的 `ajax` 的请求方法：
+
+```javascript
+$.ajax( {
+	url:'fetchWarehouseList.action',  
+	dataType:'json',
+	type: "POST",
+	data: {"data1":1,"data2":"str"}
+	success: function(data, textStatus){
+		alert("执行成功，data 是返回的 json 数据。");
+	},
+	error: function(){
+		alert("请求失败！");
+	});
+```
+
+然后可以通过以下方法解析获得的 `json` 数据：
+
+```javascript
+$.each(data,function(i,n){ 
+	$("select").append('<option value="'+n["id"]+'">'+n["name"]+'</option>'); 
+	}); 
+```
+
+### Q8. 怎样解决中文乱码的问题？
+
+网上有很多说法是加一个过滤器，在 `Java` 代码中进行编码转换，实际上这是很不可取的。
+
+其实这个问题本来不应该是个问题，只要在开发的时候保证以下内容的编码都一致，自然而然就不会
+出现乱码的问题。由于现在网络标准规范中要求 Web 应用统一使用 `UTF-8` 编码，所以本项目也统一
+使用 `UTF-8` 编码。以下内容的编码必须一致：
+
+* `Java` 代码的源文件必须用 `UTF-8` 编码，这个可以在 `MyEclipse` 中进行设置默认编码。
+* 数据库使用的编码必须是 `UTF-8` 编码，这个可以在对应的数据库管理系统中设置。
+* `jsp` 页面或者 `html` 页面的 `Page Encoding` 必须指定成 `UTF-8` 编码。
+* `URL` 或者 `js` 中使用到的中文都必须是 `UTF-8` 编码或者是对应的转义码。
+
+开发的时候只要注意所有出现中文的地方都必须 `UTF-8` 编码，中文乱码就不会出现。
+
+### Q9. `struts.xml` 中指定了自定义的拦截器之后，`action` 收不到来自页面的请求参数了？
+
+使用了自定义的拦截器之后，需要手动指定 `struts` 的默认拦截器栈，例如：
+
+```xml
+<interceptor-ref name="defaultStack"></interceptor-ref>
+<interceptor-ref name="loginInterceptor"></interceptor-ref>
+```
+
+### Q10. 几乎每个页面都要判断是否已经登录，如何简化这个过程？
+
+将登录检查做成 `struts` 的拦截器，然后再在需要检查登录的 `action` 中指定这个拦截器就可以了。
