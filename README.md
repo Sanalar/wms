@@ -445,3 +445,16 @@ $.each(data,function(i,n){
 * `URL` 或者 `js` 中使用到的中文都必须是 `UTF-8` 编码或者是对应的转义码。
 
 开发的时候只要注意所有出现中文的地方都必须 `UTF-8` 编码，中文乱码就不会出现。
+
+### Q9. `struts.xml` 中指定了自定义的拦截器之后，`action` 收不到来自页面的请求参数了？
+
+使用了自定义的拦截器之后，需要手动指定 `struts` 的默认拦截器栈，例如：
+
+```xml
+<interceptor-ref name="defaultStack"></interceptor-ref>
+<interceptor-ref name="loginInterceptor"></interceptor-ref>
+```
+
+### Q10. 几乎每个页面都要判断是否已经登录，如何简化这个过程？
+
+将登录检查做成 `struts` 的拦截器，然后再在需要检查登录的 `action` 中指定这个拦截器就可以了。
