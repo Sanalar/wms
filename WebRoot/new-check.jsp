@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +22,7 @@
       <link rel="stylesheet" type="text/css" href="asset/css/plugins/fullcalendar.min.css"/>
     <link rel="stylesheet" type="text/css" href="asset/css/plugins/datatables.bootstrap.min.css"/>
     <link href="asset/css/style.css" rel="stylesheet">
+    <link href="asset/css/plugins/font-awesome-animation.min.css" rel="stylesheet"/>
 
     <!-- end: Css -->
 
@@ -198,89 +201,33 @@
                       </div>
                       <div class="modal-body">
                           <div class="responsive-table" style="padding: 15px;">
+                              <input type="hidden" id="product-for-index" value="1">
                               <table class="datatable table table-striped table-bordered" width="100%" cellspacing="0">
                                   <thead>
                                   <tr>
-                                      <th>选择</th>
                                       <th>产品编号</th>
                                       <th>产品名称</th>
                                       <th>分类</th>
-                                      <th>库位号</th>
-                                      <th>货架号</th>
-                                      <th>剩余库存</th>
+                                      <th>规格</th>
+                                      <th>单位</th>
+                                      <th>选择</th>
                                   </tr>
                                   </thead>
                                   <tbody>
                                   <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1011</td>
-                                      <td>德芙巧克力</td>
-                                      <td>食品 > 糖果/糖果巧克力</td>
-                                      <td>D12</td>
-                                      <td>TP-312</td>
-                                      <td>334</td>
-                                  </tr>
-                                  <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1012</td>
-                                      <td>农夫山泉矿泉水</td>
-                                      <td>食品 > 饮料</td>
-                                      <td>C3</td>
-                                      <td>TP-112</td>
-                                      <td>1086</td>
-                                  </tr>
-                                  <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1013</td>
-                                      <td>玻尿酸试剂</td>
-                                      <td>食品 > 糖果/巧克力</td>
-                                      <td>W23</td>
-                                      <td>DS-12</td>
-                                      <td>29</td>
-                                  </tr>
-                                  <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1014</td>
-                                      <td>德芙巧克力</td>
-                                      <td>食品 > 糖果/巧克力</td>
-                                      <td>D12</td>
-                                      <td>TP-312</td>
-                                      <td>334</td>
-                                  </tr>
-                                  <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1015</td>
-                                      <td>德芙巧克力</td>
-                                      <td>食品 > 糖果/巧克力</td>
-                                      <td>D12</td>
-                                      <td>TP-312</td>
-                                      <td>334</td>
-                                  </tr>
-                                  <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1016</td>
-                                      <td>德芙巧克力</td>
-                                      <td>食品 > 糖果/巧克力</td>
-                                      <td>D12</td>
-                                      <td>TP-312</td>
-                                      <td>334</td>
-                                  </tr>
-                                  <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1017</td>
-                                      <td>德芙巧克力</td>
-                                      <td>食品 > 糖果/糖果巧克力</td>
-                                      <td>D12</td>
-                                      <td>TP-312</td>
-                                      <td>334</td>
+                                      <td id="sp-code1">dfqkl-1011</td>
+                                      <td id="sp-name1">德芙巧克力</td>
+                                      <td id="sp-category1">食品 > 糖果/糖果巧克力</td>
+                                      <td id="sp-standard1">D12</td>
+                                      <td id="sp-unit1">TP-312</td>
+                                      <td><a class="select-product" data-id="1" href="#"><span class="fa fa-check"></span> 选择</a> </td>
                                   </tr>
                                   </tbody>
                               </table>
                           </div>
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-default btn-round btn-gradient" data-dismiss="modal">取 消</button>
-                          <button type="button" id="choose-button" class="btn btn-primary btn-round btn-gradient" disabled="disabled">选 定</button>
+                          <button type="button" id="choose-button" class="btn btn-primary btn-round btn-gradient" data-dismiss="modal">关 闭</button>
                       </div>
                   </div>
               </div>
@@ -306,6 +253,39 @@
                   </div>
               </div>
           </div>
+
+          <!-- 选择货架 -->
+          <div class="modal fade" id="shelf-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel3">选择货架</h4>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="form-group col-sm-6">
+                                  <label for="storage-id">选择库位：</label>
+                                  <select class="form-control" id="storage-id">
+                                      <option value="1">A2区5</option>
+                                  </select>
+                              </div>
+                              <div class="form-group col-sm-6">
+                                  <label for="shelf-id">选择货架：</label>
+                                  <select class="form-control btn-block" id="shelf-id">
+                                      <option value="1">315</option>
+                                  </select>
+                              </div>
+                              <input type="hidden" id="shelf-for-index" value="1">
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-default btn-round btn-gradient" data-dismiss="modal">取 消</button>
+                          <button type="button" id="ok-for-shelf-id" class="btn btn-primary btn-round btn-gradient">确 定</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
           <!-- start: content -->
           <div id="content">
               <div class="tabs-wrapper text-center">
@@ -325,71 +305,58 @@
                               <h4><span class="fa fa-truck"></span> 仓库盘点结果表</h4>
                           </div>
                           <div class="panel-body">
-                              <form action="">
-                                  <div class="form-group">
-                                      <div class="col-md-6 form-inline">
-                                          <label>
-                                              <span class="fa fa-sign-out"></span> 盘点仓库：
-                                              <select class="form-control">
-                                                  <option>北京海淀仓库</option>
-                                                  <option>天津武清仓库</option>
-                                                  <option>江苏扬州仓库</option>
-                                              </select>
-                                          </label>
+                              <form class="form-group" action="new-check.html" method="get" id="swForm">
+                                  <div class="col-md-6 form-inline">
+                                      <label>
+                                          <span class="fa fa-sign-out"></span> 盘点仓库：
+                                          <select class="form-control" name="wid">
+                                          <s:iterator value="warehouseList" id="w">
+                                          	<s:if test="#w.warehouseId == wid">
+                                          	<option value='<s:property value="#w.warehouseId"/>' data-fixed selected><s:property value="#w.warehouseName"/></option>
+                                          	</s:if>
+                                          	<s:else>
+                                          	<option value='<s:property value="#w.warehouseId"/>'><s:property value="#w.warehouseName"/></option>
+                                          	</s:else>
+                                          </s:iterator>
+                                          </select>
+                                      </label>
+                                  </div>
+                              </form>
+                              <form action="newCheck.action" method="POST" id="checkItemsForm">
+                                  <div class="col-md-12">
+                                      <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
+                                          <input type="text" class="form-text" required>
+                                          <span class="bar"></span>
+                                          <label><span class="fa fa-align-justify"></span> 盘点备注</label>
                                       </div>
-                                      <div class="col-md-12">
-                                          <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                              <input type="text" class="form-text" required>
-                                              <span class="bar"></span>
-                                              <label><span class="fa fa-align-justify"></span> 盘点备注</label>
-                                          </div>
-                                      </div>
-                                      <div class="responsive-table" style="padding: 15px;">
-                                          <table class="table table-striped table-bordered" width="100%" cellspacing="0">
-                                              <thead>
-                                              <tr>
-                                                  <th>编号</th>
-                                                  <th>品名</th>
-                                                  <th>分类</th>
-                                                  <th>库位</th>
-                                                  <th>货架号</th>
-                                                  <th>单位</th>
-                                                  <th>盘点数</th>
-                                                  <th>操作</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody>
-                                              <tr>
-                                                  <td>dfqkl-1011</td>
-                                                  <td><a href="#">德芙巧克力</a></td>
-                                                  <td>食品 > 糖果/巧克力</td>
-                                                  <td>D12</td>
-                                                  <td>TP-315</td>
-                                                  <td>354</td>
-                                                  <td><input type="text" class="form-control input-sm android"></td>
-                                                  <td>
-                                                      <button class="btn btn-danger btn-mn btn-circle"><span class="fa fa-close"></span></button>
-                                                  </td>
-                                              </tr>
-                                              <tr>
-                                                  <td>dfqkl-1011</td>
-                                                  <td><a href="#">德芙巧克力</a></td>
-                                                  <td>食品 > 糖果/巧克力</td>
-                                                  <td>D12</td>
-                                                  <td>TP-315</td>
-                                                  <td>354</td>
-                                                  <td><input type="text" class="form-control input-sm android"></td>
-                                                  <td>
-                                                      <button class="btn btn-danger btn-mn btn-circle"><span class="fa fa-close"></span></button>
-                                                  </td>
-                                              </tr>
-                                              </tbody>
-                                          </table>
-                                      </div>
-                                      <div class="form-inline text-center">
-                                          <a class="btn btn-primary btn-round btn-gradient btn-lg"  data-toggle="modal" data-target="#choose-product">添加货品</a>
-                                          <button class="btn btn-success btn-round btn-gradient btn-lg" style="margin-left: 20px;">确认提交</button>
-                                      </div>
+                                  </div>
+                                  <div class="responsive-table" style="padding: 15px;">
+                                      <table id="check-item-table" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                                          <thead>
+                                          <tr>
+                                              <th>编号</th>
+                                              <th>品名</th>
+                                              <th>分类</th>
+                                              <th>库位</th>
+                                              <th>货架号</th>
+                                              <th>规格</th>
+                                              <th>单位</th>
+                                              <th>盘点数</th>
+                                              <th>操作</th>
+                                          </tr>
+                                          </thead>
+                                          <tbody data-count="0">
+                                          <tr>
+                                              <td colspan="9">
+                                                  <div class="text-center text-default">没有记录</div>
+                                              </td>
+                                          </tr>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                                  <div class="form-inline text-center">
+                                      <a class="btn btn-primary btn-round btn-gradient btn-lg" id="add-product">添加货品</a>
+                                      <button class="btn btn-success btn-round btn-gradient btn-lg" style="margin-left: 20px;">确认提交</button>
                                   </div>
                               </form>
                           </div>
@@ -398,6 +365,25 @@
               </div>
           </div>
           <!-- end: content -->
+
+          <!-- modal -->
+          <div class="modal fade" id="loading-box" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">正在加载</h4>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-md-12" style="font-size:22px">
+                                  <span class="fa fa-spinner faa-spin animated"></span> <span id="loading-msg">正在拼命加载数据，请稍后...</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
 
       </div>
 
@@ -414,6 +400,7 @@
       <script src="asset/js/plugins/select2.full.min.js"></script>
       <script src="asset/js/plugins/jquery.datatables.min.js"></script>
       <script src="asset/js/plugins/datatables.bootstrap.min.js"></script>
+      <script src="asset/js/check.js"></script>
 
       <!-- custom -->
       <script src="asset/js/main.js"></script>
@@ -431,6 +418,8 @@
               });
               $('.datatable').DataTable();
               $('#DataTables_Table_0_filter').append('<button class="btn btn-primary btn-circle btn-mn" style="margin-left: 5px" data-toggle="modal" data-target="#category-dialog"><span class="fa fa-list"></span></button>');
+
+              prepare();
           });
       </script>
 

@@ -142,4 +142,9 @@
 		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
 		<property name="statisticsDao" ref="statisticsDaoBean"></property>
 	</bean>
+	<bean id="htmlNewCheckActionBean" 
+	class="pub.sanalar.wms.actions.HtmlNewCheckAction" 
+	scope="prototype">
+		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
+	</bean>
 </beans>
