@@ -74,10 +74,28 @@
 				<param name="status">403</param>
 			</result>
 		</action>
+		<action name="newCheck" class="newCheckActionBean">
+			<result name="success">checks.html</result>
+		</action>
 		
 		<action name="fetchWarehouseList" class="jsonDataProviderActionBean" method="getAllWarehouseList">
 			<result name="success" type="json">
 				<param name="root">warehouseList</param>
+			</result>
+		</action>
+		<action name="fetchBasicProductList" class="jsonDataProviderActionBean" method="getAllProductBasicList">
+			<result name="success" type="json">
+				<param name="root">productList</param>
+			</result>
+		</action>
+		<action name="fetchStorageList" class="jsonDataProviderActionBean" method="getAllStorageList">
+			<result name="success" type="json">
+				<param name="root">storageList</param>
+			</result>
+		</action>
+		<action name="fetchShelfList" class="jsonDataProviderActionBean" method="getAllShelfList">
+			<result name="success" type="json">
+				<param name="root">shelfList</param>
 			</result>
 		</action>
 	</package>

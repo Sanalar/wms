@@ -1,11 +1,100 @@
+function getAllShelfList(shown){
+	var sid = $("#storage-id").val();
+	$.ajax( {  
+    	url:'fetchShelfList.action',  
+    	dataType:'json',
+    	type: "POST",
+    	data: {"storageId":sid},
+    	success: function(data, textStatus){
+    		var widSel = $("#shelf-id");
+    		widSel.empty();
+    		$.each(data,function(i,n){ 
+				widSel.append('<option value="'+n["id"]+'">'+n["name"]+'</option>'); 
+			}); 
+    		$("#loading-box").modal("hide");
+    		if(shown){
+    			$("#shelf-dialog").modal('show');
+    		}
+    	},
+    	error: function(){
+    		$("#loading-box").modal("hide");
+    		alert("请求货架列表失败！请检查网络设置！"); 
+    	}  
+		});
+}
+
+function getAllStorageList(){
+	$("#loading-box").modal("show");
+	var wid = $("select[name='wid']").val();
+	$.ajax( {  
+    	url:'fetchStorageList.action',  
+    	dataType:'json',
+    	type: "POST",
+    	data: {"warehouseId":wid},
+    	success: function(data, textStatus){
+    		var widSel = $("#storage-id");
+    		widSel.empty();
+    		$.each(data,function(i,n){ 
+				widSel.append('<option value="'+n["id"]+'">'+n["name"]+'</option>'); 
+			}); 
+    		$("#storage-id").unbind("change").change(function(){
+    			$("#loading-box").modal("show");
+    			getAllShelfList(false);
+    		});
+    		getAllShelfList(true);
+    	},
+    	error: function(){
+    		$("#loading-box").modal("hide");
+    		alert("请求库位列表失败！请检查网络设置！"); 
+    	}  
+		});
+}
+
 function showShelfDialog(idx){
     $("#shelf-for-index").val(idx);
-    $("#shelf-dialog").modal('show');
+    getAllStorageList();
+}
+
+function initProductList(data){
+	$('.datatable').dataTable().fnClearTable();
+	var ctx = $("#DataTables_Table_0_filter input");
+    ctx.val("");
+    ctx.keyup();
+	$.each(data,function(i,n){ 
+		var pid = n["id"];
+		$('.datatable').dataTable().fnAddData([
+			'<div id="sp-code' + pid + '">' + n["code"] + '</div>',
+			'<div id="sp-name'+pid+'">' + n["name"] + '</div>',
+			'<div id="sp-category' + pid + '">' + n["category"] + '</div>',
+			'<div id="sp-standard' + pid + '">' + n["standard"] + '</div>',
+			'<div id="sp-unit' + pid + '">' + n["unit"] + '</div>',
+			'<a class="select-product" data-id="' + pid + '" href="#"><span class="fa fa-check"></span> 选择</a>'
+			]);
+	});
 }
 
 function showAddProductDialog(idx){
-    $("#product-for-index").val(idx);
-    $("#choose-product").modal('show');
+	$("#loading-box").modal("show");
+	$.ajax( {  
+    	url:'fetchBasicProductList.action',  
+    	dataType:'json',
+    	type: "POST",
+    	success: function(data, textStatus){
+    		initProductList(data);
+			$("#loading-box").modal("hide");
+			$("#product-for-index").val(idx);
+		    $("#choose-product").modal('show');
+		    $(".select-product").unbind('click').click(function (e) {
+		        var pid = $(this).attr("data-id");
+		        appndCheckItem(pid);
+		        $("#choose-product").modal('hide');
+		    });
+    	},
+    	error: function(){
+    		$("#loading-box").modal("hide");
+    		alert("请求产品列表失败！请检查网络设置！"); 
+    	}  
+		});
 }
 
 function appndCheckItem(pid){
@@ -20,12 +109,12 @@ function appndCheckItem(pid){
         + '<td data-storage="' + count + '">(未指定)</td>'
         + '<td>'
             + '<input type="text" data-index="' + count +'" class="form-control input-sm android select-shelf"'
-            + ' value="" name="checkItem[' + count + '].shelfName"/>'
+            + ' value="" name="checkItem[' + count + '].shelfName" required/>'
             + '<input type="hidden" name="checkItem[' + count + '].shelfId" value="0"/>'
         + '</td>'
         + '<td>' + $("#sp-standard" + pid).text() + '</td>'
         + '<td>' + $("#sp-unit" + pid).text() + '</td>'
-        + '<td><input type="text" class="form-control input-sm android" name="checkItem[' + count + '].number" value="0"></td>'
+        + '<td><input type="text" class="form-control input-sm android" name="checkItem[' + count + '].number" value="0" required></td>'
         + '<td>'
             + '<button class="btn btn-danger btn-mn btn-circle delete-item" data-index="' + count + '">'
             + '<span class="fa fa-close"></span></button>'
@@ -35,11 +124,25 @@ function appndCheckItem(pid){
     if(count == 0){
         tbody.empty();
         $(window).bind('beforeunload',function(){
+        	$("select[name='wid']").val($("option[data-fixed]").val());
             return '您输入的内容尚未保存，直接离开该页面将丢失这些信息，确定离开此页面吗？';
         });
     }
     tbody.append(appendStr);
     tbody.attr("data-count", count + 1);
+    
+    $(".select-shelf").unbind("click").click(function(e){
+        showShelfDialog($(this).attr("data-index"));
+    });
+
+    $(".delete-item").unbind("click").click(function (e) {
+        e.preventDefault();
+        if(!confirm("您确定要删除这条记录吗？")){
+            return false;
+        }
+        var idx = parseInt($(this).attr("data-index"));
+        removeCheckItem(idx);
+    });
 }
 
 function removeCheckItem(idx){
@@ -77,8 +180,32 @@ function prepare(){
     });
 
     $("select[name='wid']").change(function () {
-        $("option[data-fixed]").attr("selected", true);
         $("#swForm").submit();
+    });
+    
+    $("#checkItemsFormSubmit").click(function(e){
+    	e.preventDefault();
+    	var canSubmit = true;
+    	var tbody = $("#check-item-table").find("tbody");
+        var count = parseInt(tbody.attr("data-count"));
+        
+        if(count == 0){
+        	alert("您没有可以添加可以提交的记录哦！");
+        	return false;
+        }
+        
+    	$("#checkItemsForm").find("input[required]").each(function(){
+    		if($(this).val().replace(/(^s*)|(s*$)/g, "").length == 0){
+    			alert("请填写所有字段之后再提交。");
+    			$(this).focus();
+    			canSubmit = false;
+    			return false;
+    		}
+    	});
+    	if(canSubmit){
+	    	$(window).unbind('beforeunload');
+	    	$("#checkItemsForm").submit();
+    	}
     });
 
     $("#ok-for-shelf-id").click(function (e) {
@@ -92,27 +219,4 @@ function prepare(){
         $("td[data-storage='" + index + "'").text($("#storage-id").find("option:selected").text());
         $("#shelf-dialog").modal('hide');
     });
-
-    $(".select-product").click(function (e) {
-        var pid = $(this).attr("data-id");
-        appndCheckItem(pid);
-        $("#choose-product").modal('hide');
-
-        $(".select-shelf").unbind("click").click(function(e){
-            showShelfDialog($(this).attr("data-index"));
-        });
-
-        $(".delete-item").unbind("click").click(function (e) {
-            e.preventDefault();
-            if(!confirm("您确定要删除这条记录吗？")){
-                return false;
-            }
-            var idx = parseInt($(this).attr("data-index"));
-            removeCheckItem(idx);
-        })
-    });
-}
-
-function checkSubmit(){
-    $("form#")
 }

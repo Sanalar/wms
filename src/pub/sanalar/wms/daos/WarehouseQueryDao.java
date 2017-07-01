@@ -11,6 +11,7 @@ import java.util.Map;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
+import pub.sanalar.wms.models.IdNameObject;
 import pub.sanalar.wms.models.ProductStorageObject;
 import pub.sanalar.wms.models.StorageInfoObject;
 import pub.sanalar.wms.models.StreamInItem;
@@ -38,6 +39,19 @@ public class WarehouseQueryDao extends HibernateDaoSupport {
 	@SuppressWarnings("unchecked")
 	public List<WmsWarehouse> getWarehouseList(){
 		return (List<WmsWarehouse>)getHibernateTemplate().find("from WmsWarehouse");
+	}
+	
+	public List<IdNameObject> getSimpleStorageList(Integer warehouseId){
+		String hql = "from WmsStorage s where s.wmsWarehouse.warehouseId=?";
+		@SuppressWarnings("unchecked")
+		List<WmsStorage> list = (List<WmsStorage>)getHibernateTemplate().find(hql, warehouseId);
+		
+		List<IdNameObject> res = new ArrayList<IdNameObject>();
+		for(WmsStorage s : list){
+			res.add(new IdNameObject(s.getStorageId(), s.getStorageName()));
+		}
+		
+		return res;
 	}
 	
 	public List<StorageInfoObject> getStorageInfos(Integer warehouseId){
@@ -204,6 +218,19 @@ public class WarehouseQueryDao extends HibernateDaoSupport {
 			item.setState(p.getWmsOutApplication().getWmsApplicationState().getStateName());
 			item.setProductId(p.getWmsProduct().getProductId());
 			res.add(item);
+		}
+		
+		return res;
+	}
+
+	public List<IdNameObject> getSimpleShelfList(Integer storageId) {
+		String hql = "from WmsShelf s where s.wmsStorage.storageId=?";
+		@SuppressWarnings("unchecked")
+		List<WmsShelf> list = (List<WmsShelf>)getHibernateTemplate().find(hql, storageId);
+		
+		List<IdNameObject> res = new ArrayList<IdNameObject>();
+		for(WmsShelf s : list){
+			res.add(new IdNameObject(s.getShelfId(), s.getShelfName()));
 		}
 		
 		return res;

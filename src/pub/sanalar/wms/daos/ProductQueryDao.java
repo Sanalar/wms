@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
+import pub.sanalar.wms.models.JsonProductBasicInfo;
 import pub.sanalar.wms.models.ProductInOutStreamOfWarehouse;
 import pub.sanalar.wms.models.WarehouseAndNumber;
 import pub.sanalar.wms.models.WmsInApplicationProduct;
@@ -157,6 +158,25 @@ public class ProductQueryDao extends HibernateDaoSupport {
 		
 		// 按照创建时间排序
 		Collections.sort(res);
+		return res;
+	}
+
+	public List<JsonProductBasicInfo> getAllProductBasic() {
+		@SuppressWarnings("unchecked")
+		List<WmsProduct> list = (List<WmsProduct>)getHibernateTemplate().find("from WmsProduct");
+		
+		List<JsonProductBasicInfo> res = new ArrayList<JsonProductBasicInfo>();
+		for(WmsProduct p : list){
+			JsonProductBasicInfo info = new JsonProductBasicInfo();
+			info.setCategory(p.getWmsCategory().getWmsCategory().getCategoryName() + " > " + p.getWmsCategory().getCategoryName());
+			info.setCode(p.getProductCode());
+			info.setId(p.getProductId());
+			info.setName(p.getProductName());
+			info.setStandard(p.getProductStandard());
+			info.setUnit(p.getProductUnit());
+			res.add(info);
+		}
+		
 		return res;
 	}
 }

@@ -213,7 +213,7 @@
                                       <th>选择</th>
                                   </tr>
                                   </thead>
-                                  <tbody>
+                                  <tbody id="product-list-tbody">
                                   <tr>
                                       <td id="sp-code1">dfqkl-1011</td>
                                       <td id="sp-name1">德芙巧克力</td>
@@ -325,10 +325,11 @@
                               <form action="newCheck.action" method="POST" id="checkItemsForm">
                                   <div class="col-md-12">
                                       <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                          <input type="text" class="form-text" required>
+                                          <input type="text" class="form-text" name="checkDescription">
                                           <span class="bar"></span>
                                           <label><span class="fa fa-align-justify"></span> 盘点备注</label>
                                       </div>
+                                      <input type="hidden" name="warehouseId" value='<s:property value="wid"/>'/>
                                   </div>
                                   <div class="responsive-table" style="padding: 15px;">
                                       <table id="check-item-table" class="table table-striped table-bordered" width="100%" cellspacing="0">
@@ -356,7 +357,7 @@
                                   </div>
                                   <div class="form-inline text-center">
                                       <a class="btn btn-primary btn-round btn-gradient btn-lg" id="add-product">添加货品</a>
-                                      <button class="btn btn-success btn-round btn-gradient btn-lg" style="margin-left: 20px;">确认提交</button>
+                                      <button id="checkItemsFormSubmit" type="button" class="btn btn-success btn-round btn-gradient btn-lg" style="margin-left: 20px;">确认提交</button>
                                   </div>
                               </form>
                           </div>
@@ -426,15 +427,9 @@
       <script>
           /*定义三级分类数据*/
           //一级分类
-          var province = ["危化品", "食品", "日用品", "电子设备", "医药品"];
+          var province = <s:property value="topCategoryListString" escape="false"/>;
           //二级分类
-          var city = [
-              ["爆炸品", "压缩气体和液化气体", "易燃液体", "易燃固体、自燃物品和遇湿易燃物品", "氧化剂和有机过氧化物", "毒害品和感染性物品", "放射性物品", "腐蚀品"],
-              ["糖果/巧克力", "饮料/水", "肉类/豆制品零食", "饼干糕点", "冲调保健", "酒类", "牛奶乳品", "坚果炒货", "蜜饯果干"],
-              ["厨卫用品", "收纳用品", "洗护用品", "文具", "体育用品"],
-              ["电脑", "手机", "电子芯片", "电脑周边", "线材", "家电", "装修工具"],
-              ["医保药品", "中成药", "西成药"]
-          ];
+          var city = <s:property value="allSubCategoryListString" escape="false"/>;
 
           var expressP, expressC, expressD, expressArea, areaCont;
           var arrow = " <font>&gt;</font> ";

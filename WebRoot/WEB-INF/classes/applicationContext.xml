@@ -92,6 +92,10 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 		<property name="categoryQueryDao" ref="categoryQueryDaoBean"></property>
 	</bean>
+	<bean id="checkQueryDaoBean"
+		class="pub.sanalar.wms.daos.CheckQueryDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<bean id="checkLoginActionBean" 
 	class="pub.sanalar.wms.actions.CheckLoginAction" 
 	scope="prototype">
@@ -135,6 +139,7 @@
 	class="pub.sanalar.wms.actions.JsonDataProvideAction" 
 	scope="prototype">
 		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
+		<property name="productQueryDao" ref="productQueryDaoBean"></property>
 	</bean>
 	<bean id="htmlStreamActionBean" 
 	class="pub.sanalar.wms.actions.HtmlStreamAction" 
@@ -146,5 +151,11 @@
 	class="pub.sanalar.wms.actions.HtmlNewCheckAction" 
 	scope="prototype">
 		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
+		<property name="categoryQueryDao" ref="categoryQueryDaoBean"></property>
+	</bean>
+	<bean id="newCheckActionBean" 
+	class="pub.sanalar.wms.actions.NewCheckAction" 
+	scope="prototype">
+		<property name="checkQueryDao" ref="checkQueryDaoBean"></property>
 	</bean>
 </beans>
