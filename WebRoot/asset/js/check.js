@@ -220,3 +220,46 @@ function prepare(){
         $("#shelf-dialog").modal('hide');
     });
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function showCheckDetails(cdid){
+    $("#loading-box").modal("show");
+    $.ajax( {
+        url:'fetchCheckDetails.action',
+        dataType:'json',
+        type: "POST",
+        data: {"checkId": cdid},
+        success: function(data, textStatus){
+            $("#cd-id").text(data['id']);
+            $("#cd-warehouse").text(data['warehouse']);
+            $("#cd-create-time").text(data['createTime']);
+            $("#cd-accept-time").text(data['acceptTime']);
+            $("#cd-creator").text(data['creator']);
+            $("#cd-acceptor").text(data['acceptor']);
+            $("#cd-desc").text(data['desc']);
+            var tbody = $("#cd-items");
+            tbody.empty();
+            $.each(data['items'], function(i, n){
+                tbody.append(
+                    '<tr>' +
+                        '<td>'+n['id']+'</td>' +
+                        '<td>'+n['code']+'</td>' +
+                        '<td>'+n['name']+'</td>' +
+                        '<td>'+n['category']+'</td>' +
+                        '<td>'+n['storage']+'</td>' +
+                        '<td>'+n['shelf']+'</td>' +
+                        '<td>'+n['oldNumber']+'</td>' +
+                        '<td>'+n['newNumber']+'</td>' +
+                    '</tr>'
+                );
+            });
+            $("#loading-box").modal("hide");
+            $("#show-checks").modal("show");
+        },
+        error: function(){
+            $("#loading-box").modal("hide");
+            alert("请求盘点详情列表失败！请检查网络设置！");
+        }
+    });
+}

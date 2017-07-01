@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 
+import pub.sanalar.wms.daos.CheckQueryDao;
 import pub.sanalar.wms.daos.ProductQueryDao;
 import pub.sanalar.wms.daos.WarehouseQueryDao;
+import pub.sanalar.wms.models.CheckDetailsObject;
 import pub.sanalar.wms.models.IdNameObject;
 import pub.sanalar.wms.models.JsonProductBasicInfo;
 import pub.sanalar.wms.models.SimpleWarehouseInfo;
@@ -19,6 +21,7 @@ public class JsonDataProvideAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private WarehouseQueryDao warehouseQueryDao;
 	private ProductQueryDao productQueryDao;
+	private CheckQueryDao checkQueryDao;
 
 	private List<SimpleWarehouseInfo> warehouseList;
 	private List<JsonProductBasicInfo> productList;
@@ -26,6 +29,8 @@ public class JsonDataProvideAction extends ActionSupport {
 	private List<IdNameObject> shelfList;
 	private Integer warehouseId;
 	private Integer storageId;
+	private String checkId;
+	private CheckDetailsObject checkDetails;
 	
 	public String getAllWarehouseList(){
 		List<WmsWarehouse> houses = warehouseQueryDao.getWarehouseList();
@@ -52,6 +57,11 @@ public class JsonDataProvideAction extends ActionSupport {
 	
 	public String getAllShelfList(){
 		shelfList = warehouseQueryDao.getSimpleShelfList(storageId);
+		return SUCCESS;
+	}
+	
+	public String getCheckDetailsObject(){
+		checkDetails = checkQueryDao.getCheckDetailsObject(checkId);
 		return SUCCESS;
 	}
 
@@ -117,5 +127,29 @@ public class JsonDataProvideAction extends ActionSupport {
 
 	public void setStorageId(Integer storageId) {
 		this.storageId = storageId;
+	}
+
+	public CheckQueryDao getCheckQueryDao() {
+		return checkQueryDao;
+	}
+
+	public void setCheckQueryDao(CheckQueryDao checkQueryDao) {
+		this.checkQueryDao = checkQueryDao;
+	}
+
+	public void setCheckDetails(CheckDetailsObject checkDetails) {
+		this.checkDetails = checkDetails;
+	}
+
+	public CheckDetailsObject getCheckDetails() {
+		return checkDetails;
+	}
+
+	public String getCheckId() {
+		return checkId;
+	}
+
+	public void setCheckId(String checkId) {
+		this.checkId = checkId;
 	}
 }

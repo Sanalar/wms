@@ -10,16 +10,16 @@
             <column name="check_id" length="50" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="wmsUserByCheckAcceptor" class="pub.sanalar.wms.models.WmsUser" fetch="select">
+        <many-to-one name="wmsUserByCheckAcceptor" class="pub.sanalar.wms.models.WmsUser" fetch="select" lazy="false">
             <column name="check_acceptor" />
         </many-to-one>
-        <many-to-one name="wmsUserByCheckCreator" class="pub.sanalar.wms.models.WmsUser" fetch="select">
+        <many-to-one name="wmsUserByCheckCreator" class="pub.sanalar.wms.models.WmsUser" fetch="select" lazy="false">
             <column name="check_creator" />
         </many-to-one>
-        <many-to-one name="wmsWarehouse" class="pub.sanalar.wms.models.WmsWarehouse" fetch="select">
+        <many-to-one name="wmsWarehouse" class="pub.sanalar.wms.models.WmsWarehouse" fetch="select" lazy="false">
             <column name="check_warehouse" />
         </many-to-one>
-        <many-to-one name="wmsCheckState" class="pub.sanalar.wms.models.WmsCheckState" fetch="select">
+        <many-to-one name="wmsCheckState" class="pub.sanalar.wms.models.WmsCheckState" fetch="select" lazy="false">
             <column name="check_state" />
         </many-to-one>
         <property name="checkCreateTime" type="java.sql.Timestamp">

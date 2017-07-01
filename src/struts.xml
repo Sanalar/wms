@@ -75,7 +75,10 @@
 			</result>
 		</action>
 		<action name="newCheck" class="newCheckActionBean">
-			<result name="success">checks.html</result>
+			<result name="success" type="redirect">checks.html</result>
+		</action>
+		<action name="checks" class="htmlChecksActionBean">
+			<result name="success">checks.jsp</result>
 		</action>
 		
 		<action name="fetchWarehouseList" class="jsonDataProviderActionBean" method="getAllWarehouseList">
@@ -96,6 +99,11 @@
 		<action name="fetchShelfList" class="jsonDataProviderActionBean" method="getAllShelfList">
 			<result name="success" type="json">
 				<param name="root">shelfList</param>
+			</result>
+		</action>
+		<action name="fetchCheckDetails" class="jsonDataProviderActionBean" method="getCheckDetailsObject">
+			<result name="success" type="json">
+				<param name="root">checkDetails</param>
 			</result>
 		</action>
 	</package>

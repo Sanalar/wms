@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -192,9 +194,32 @@
             </div>
           <!-- end: Left Menu -->
 
-
-<<<<<<< .mine
-||||||| .r33
+		<!-- modal -->
+          <div class="modal fade" id="select-warehouse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <form class="modal-content" action="checks.html" method="get">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">选择当前仓库</h4>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <select class="form-control" name="warehouseId" id="warehouseId-select">
+                                          <option value="1">北京海淀仓库</option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-default btn-round btn-gradient" data-dismiss="modal">关 闭</button>
+                          <button type="submit" class="btn btn-success btn-round btn-gradient">确 定</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
           <!-- modal -->
           <div class="modal fade" id="show-checks" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document" style="width:800px;">
@@ -206,151 +231,48 @@
                       <div class="modal-body">
                           <div class="col-md-6" style="font-size: 16px;">
                               <span class="text-primary">盘点单号:</span>
-                              北京海淀仓库
+                              	<span id="cd-id">北京海淀仓库</span>
                           </div>
                           <div class="col-md-6" style="font-size: 16px;">
                               <span class="text-primary">盘点仓库:</span>
-                              天津武清仓库
+                              	<span id="cd-warehouse">天津武清仓库</span>
                           </div>
                           <div class="col-md-6" style="font-size: 16px;">
-                              <span class="text-primary">盘点状态:</span>
-                              2017-06-07
+                              <span class="text-primary">盘点时间:</span>
+                              <span id="cd-create-time">2017-06-07</span>
                           </div>
                           <div class="col-md-6" style="font-size: 16px;">
-                              <span class="text-primary">执行操作:</span>
-                              2017-06-07
+                              <span class="text-primary">确认时间:</span>
+                              <span id="cd-accept-time">2017-06-07</span>
                           </div>
                           <div class="col-md-6" style="font-size: 16px;">
                               <span class="text-primary">盘点人:</span>
-                              郝爱国
+                              	<span id="cd-creator">郝爱国</span>
                           </div>
                           <div class="col-md-6" style="font-size: 16px;">
                               <span class="text-primary">审核人:</span>
-                              詹娜娜
+                              	<span id="cd-acceptor">詹娜娜</span>
                           </div>
                           <div class="col-md-12" style="font-size: 16px; margin-bottom: 15px">
                               <div class="text-primary">备注信息:</div>
-                              <div class="text-default">快点给老子盘点</div>
+                              <div class="text-default" id="cd-desc">快点给老子盘点</div>
                           </div>
                           <div class="responsive-table" style="padding: 15px;">
                               <table class="table table-striped table-bordered" width="100%" cellspacing="0">
                                   <thead>
                                   <tr>
-                                      <th>盘点编号</th>
-                                      <th>盘点时间</th>
-                                      <th>盘点仓库</th>
-                                      <th>盘点人</th>
-                                      <th>盘盈数量</th>
-                                      <th>销售盘盈</th>
-                                      <th>盘亏数量</th>
-                                      <th>销售盘亏</th>
+                                      <th>序号</th>
+                                      <th>货品编号</th>
+                                      <th>货品名称</th>
+                                      <th>货品分类</th>
+                                      <th>所在库位</th>
+                                      <th>所在货架</th>
+                                      <th>记录数量</th>
+                                      <th>盘点数量</th>
                                   </tr>
                                   </thead>
-                                  <tbody>
-                                  <tr>
-                                      <td>IN101231</td>
-                                      <td>2017-06-08</td>
-                                      <td>北京海淀仓库</td>
-                                      <td>詹娜娜</td>
-                                      <td>+100</td>
-                                      <td>+300</td>
-                                      <td>0</td>
-                                      <td>0</td>
-                                  </tr>
-                                  <tr>
-                                      <td>IN101231</td>
-                                      <td>2017-06-08</td>
-                                      <td>北京海淀仓库</td>
-                                      <td>詹娜娜</td>
-                                      <td>0</td>
-                                      <td>0</td>
-                                      <td>-1</td>
-                                      <td>-23</td>
-                                  </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                      <div class="modal-footer">
-                          <button type="button" class="btn btn-default btn-round btn-gradient" data-dismiss="modal">关 闭</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-=======
-          <!-- modal -->
-          <v class="modal fade" id="show-checks" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              di<div class="modal-dialog" role="document" style="width:800px;">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title">盘点信息</h4>
-                      </div>
-                      <div class="modal-body">
-                          <div class="col-md-6" style="font-size: 16px;">
-                              <span class="text-primary">盘点单号:</span>
-                              北京海淀仓库
-                          </div>
-                          <div class="col-md-6" style="font-size: 16px;">
-                              <span class="text-primary">盘点仓库:</span>
-                              天津武清仓库
-                          </div>
-                          <div class="col-md-6" style="font-size: 16px;">
-                              <span class="text-primary">盘点状态:</span>
-                              2017-06-07
-                          </div>
-                          <div class="col-md-6" style="font-size: 16px;">
-                              <span class="text-primary">执行操作:</span>
-                              2017-06-07
-                          </div>
-                          <div class="col-md-6" style="font-size: 16px;">
-                              <span class="text-primary">盘点人:</span>
-                              郝爱国
-                          </div>
-                          <div class="col-md-6" style="font-size: 16px;">
-                              <span class="text-primary">审核人:</span>
-                              詹娜娜
-                          </div>
-                          <div class="col-md-12" style="font-size: 16px; margin-bottom: 15px">
-                              <div class="text-primary">备注信息:</div>
-                              <div class="text-default">快点给老子盘点</div>
-                          </div>
-                          <div class="responsive-table" style="padding: 15px;">
-                              <table class="table table-striped table-bordered" width="100%" cellspacing="0">
-                                  <thead>
-                                  <tr>
-                                      <th>盘点编号</th>
-                                      <th>盘点时间</th>
-                                      <th>盘点仓库</th>
-                                      <th>盘点人</th>
-                                      <th>盘盈数量</th>
-                                      <th>销售盘盈</th>
-                                      <th>盘亏数量</th>
-                                      <th>销售盘亏</th>
-                                  </tr>
-                                  </thead>
-                                  <tbody>
-                                  <tr>
-                                      <td>IN101231</td>
-                                      <td>2017-06-08</td>
-                                      <td>北京海淀仓库</td>
-                                      <td>詹娜娜</td>
-                                      <td>+100</td>
-                                      <td>+300</td>
-                                      <td>0</td>
-                                      <td>0</td>
-                                  </tr>
-                                  <tr>
-                                      <td>IN101231</td>
-                                      <td>2017-06-08</td>
-                                      <td>北京海淀仓库</td>
-                                      <td>詹娜娜</td>
-                                      <td>0</td>
-                                      <td>0</td>
-                                      <td>-1</td>
-                                      <td>-23</td>
-                                  </tr>
+                                  <tbody id="cd-items">
+                                  
                                   </tbody>
                               </table>
                           </div>
@@ -368,7 +290,7 @@
                   <div class="panel box-shadow-none text-left content-header">
                       <div class="panel-body" style="padding-bottom:0px;">
                           <div class="col-md-12">
-                              <h3 class="animated fadeInLeft"><b class="text-primary">北京海淀仓库</b> 仓库盘点列表</h3>
+                              <h3 class="animated fadeInLeft"><a class="text-primary" href="#" id="select-warehouse-bt"><s:property value="warehouseName"/></a> 仓库盘点列表</h3>
                               <p class="animated fadeInDown">
                                   仓库管理系统 <span class="fa-angle-right fa"></span> 仓库盘点<span class="fa-angle-right fa"></span> 仓库盘点列表
                               </p>
@@ -401,35 +323,29 @@
                                               <th>盘点仓库</th>
                                               <th>盘点人</th>
                                               <th>盘盈数量</th>
-                                              <th>销售盘盈</th>
                                               <th>盘亏数量</th>
-                                              <th>销售盘亏</th>
+                                              <th>盘点货架数</th>
+                                              <th>盘点货物数</th>
                                               <th>操作</th>
                                           </tr>
                                           </thead>
                                           <tbody>
+                                          <s:iterator value="unSummarys" id="us">
                                           <tr>
-                                              <td>IN101231</td>
-                                              <td>2017-06-08</td>
-                                              <td>北京海淀仓库</td>
-                                              <td>詹娜娜</td>
-                                              <td>+100</td>
-                                              <td>+300</td>
-                                              <td>0</td>
-                                              <td>0</td>
-                                              <td> <a class="btn btn-primary btn-circle btn-mn btn-gradient" style="font-size: 22px"><span class="fa fa-edit"></span></a></td>
+                                              <td><a href="#" onclick='showCheckDetails("<s:property value="#us.id"/>")'><s:property value="#us.id"/></a></td>
+                                              <td><s:property value="#us.createTime"/></td>
+                                              <td><s:property value="#us.warehouse"/></td>
+                                              <td><s:property value="#us.creator"/></td>
+                                              <td class="text-success">+<s:property value="#us.addNumber"/></td>
+                                              <td class="text-danger">-<s:property value="#us.lostNumber"/></td>
+                                              <td><s:property value="#us.shelfNumber"/></td>
+                                              <td><s:property value="#us.productNumber"/></td>
+                                              <td>
+                                              <a data-id='<s:property value="#us.id"/>' class="btn btn-success btn-circle btn-mn btn-gradient check-ok" style="font-size: 22px"><span class="fa fa-check"></span></a>
+                                              <a data-id='<s:property value="#us.id"/>' class="btn btn-danger btn-circle btn-mn btn-gradient check-bad" style="font-size: 22px"><span class="fa fa-times"></span></a>
+                                              </td>
                                           </tr>
-                                          <tr>
-                                              <td>IN101231</td>
-                                              <td>2017-06-08</td>
-                                              <td>北京海淀仓库</td>
-                                              <td>詹娜娜</td>
-                                              <td>0</td>
-                                              <td>0</td>
-                                              <td>-1</td>
-                                              <td>-23</td>
-                                              <td> <a class="btn btn-primary btn-circle btn-mn btn-gradient" style="font-size: 22px"><span class="fa fa-edit"></span></a></td>
-                                          </tr>
+                                          </s:iterator>
                                           </tbody>
                                       </table>
                                   </div>
@@ -511,6 +427,7 @@
       <script src="asset/js/plugins/jquery.datatables.min.js"></script>
       <script src="asset/js/plugins/datatables.bootstrap.min.js"></script>
       <script src="asset/js/plugins/chart.min.js"></script>
+      <script src="asset/js/check.js"></script>
 
       <!-- custom -->
       <script src="asset/js/main.js"></script>
@@ -524,6 +441,28 @@
               });
               $('.datatable').DataTable();
 
+			$("#select-warehouse-bt").click(function(event){
+                  event.preventDefault();
+                  $("#loading-box").modal({backdrop: 'static', keyboard: false});
+                  $.ajax( {  
+                	url:'fetchWarehouseList.action',  
+                	dataType:'json',
+                	type: "POST",
+                	success: function(data, textStatus){
+                		var widSel = $("#warehouseId-select");
+                		widSel.empty();
+                		$.each(data,function(i,n){ 
+							widSel.append('<option value="'+n["id"]+'">'+n["name"]+'</option>'); 
+						}); 
+						$("#loading-box").modal("hide");
+						$("#select-warehouse").modal();
+                	},
+                	error: function(){
+                		$("#loading-box").modal("hide");
+                		alert("请求仓库列表失败！请检查网络设置！"); 
+                	}  
+         		});
+              });
           });
 
           function showDetail(id){

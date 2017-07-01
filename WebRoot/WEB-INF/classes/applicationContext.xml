@@ -140,6 +140,7 @@
 	scope="prototype">
 		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
 		<property name="productQueryDao" ref="productQueryDaoBean"></property>
+		<property name="checkQueryDao" ref="checkQueryDaoBean"></property>
 	</bean>
 	<bean id="htmlStreamActionBean" 
 	class="pub.sanalar.wms.actions.HtmlStreamAction" 
@@ -157,5 +158,11 @@
 	class="pub.sanalar.wms.actions.NewCheckAction" 
 	scope="prototype">
 		<property name="checkQueryDao" ref="checkQueryDaoBean"></property>
+	</bean>
+	<bean id="htmlChecksActionBean" 
+	class="pub.sanalar.wms.actions.HtmlChecksAction" 
+	scope="prototype">
+		<property name="checkQueryDao" ref="checkQueryDaoBean"></property>
+		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
 	</bean>
 </beans>
