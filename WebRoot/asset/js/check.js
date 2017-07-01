@@ -263,3 +263,21 @@ function showCheckDetails(cdid){
         }
     });
 }
+
+function prepareForChecks(){
+    $(".check-ok").click(function(e){
+        e.preventDefault();
+        if(!confirm("您确认要同意这一笔盘存信息吗？")){
+            return false;
+        }
+        window.location.href = "passCheck.action?id=" + $(this).attr("data-id");
+    });
+
+    $(".check-bad").click(function(e){
+        e.preventDefault();
+        if(!confirm("您确认要关闭这一笔盘存信息吗？")){
+            return false;
+        }
+        window.location.href = "abandonCheck.action?id=" + $(this).attr("data-id");
+    });
+}

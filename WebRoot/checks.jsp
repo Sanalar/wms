@@ -300,7 +300,7 @@
                                   <a href="#checks-info" id="tabs1" data-toggle="tab">待确认盘点表</a>
                               </li>
                               <li role="presentation" class="">
-                                  <a href="#checks-position" id="tabs2" data-toggle="tab">已完成盘点表</a>
+                                  <a href="#checks-position" id="tabs2" data-toggle="tab">所有盘点表</a>
                               </li>
                           </ul>
                       </div>
@@ -367,39 +367,27 @@
                                               <th>盘点时间</th>
                                               <th>盘点仓库</th>
                                               <th>盘点人</th>
-                                              <th>盘盈数量</th>
-                                              <th>销售盘盈</th>
-                                              <th>盘亏数量</th>
-                                              <th>销售盘亏</th>
+                                              <th>盘点货架数</th>
+                                              <th>盘点货物数</th>
+                                              <th>确认人</th>
+                                              <th>确认时间</th>
                                               <th>状态</th>
-                                              <th>执行人</th>
                                           </tr>
                                           </thead>
                                           <tbody>
+                                          <s:iterator value="allSummarys" id="us">
                                           <tr>
-                                              <td><a href="#" onclick="showDetail('IN101231')">IN101231</a></td>
-                                              <td>2017-06-08</td>
-                                              <td>1406仓库</td>
-                                              <td>詹娜娜</td>
-                                              <td>+100</td>
-                                              <td>+300</td>
-                                              <td>0</td>
-                                              <td>0</td>
-                                              <td>已调库</td>
-                                              <td>王老板</td>
+                                              <td><a href="#" onclick='showCheckDetails("<s:property value="#us.id"/>")'><s:property value="#us.id"/></a></td>
+                                              <td><s:property value="#us.createTime"/></td>
+                                              <td><s:property value="#us.warehouse"/></td>
+                                              <td><s:property value="#us.creator"/></td>
+                                              <td><s:property value="#us.shelfNumber"/></td>
+                                              <td><s:property value="#us.productNumber"/></td>
+                                              <td><s:property value="#us.acceptor"/></td>
+                                              <td><s:property value="#us.acceptTime"/></td>
+                                              <td><s:property value="#us.state"/></td>
                                           </tr>
-                                          <tr>
-                                              <td>IN101231</td>
-                                              <td>2017-06-08</td>
-                                              <td>北京海淀仓库</td>
-                                              <td>詹娜娜</td>
-                                              <td>0</td>
-                                              <td>0</td>
-                                              <td>-1</td>
-                                              <td>-23</td>
-                                              <td>已调库</td>
-                                              <td>小李子</td>
-                                          </tr>
+                                          </s:iterator>
                                           </tbody>
                                       </table>
                                   </div>
@@ -441,6 +429,7 @@
               });
               $('.datatable').DataTable();
 
+			prepareForChecks();
 			$("#select-warehouse-bt").click(function(event){
                   event.preventDefault();
                   $("#loading-box").modal({backdrop: 'static', keyboard: false});

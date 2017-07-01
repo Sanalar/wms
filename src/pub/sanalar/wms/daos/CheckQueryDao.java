@@ -178,4 +178,83 @@ public class CheckQueryDao extends HibernateDaoSupport {
 		
 		return res;
 	}
+
+	public String acceptCheck(String id, Integer userId) {
+		WmsCheck check = getHibernateTemplate().get(WmsCheck.class, id);
+		if(check == null || check.getWmsCheckState().getStateId() != 1){
+			return "您尝试确认的盘点单不存在或者盘点单无需确认！";
+		}
+		
+		String hql = "from WmsCheckProductShelf s where s.wmsCheck.checkId=?";
+		@SuppressWarnings("unchecked")
+		List<WmsCheckProductShelf> list = (List<WmsCheckProductShelf>)getHibernateTemplate().find(hql, id);
+		
+		Session session = getSessionFactory().getCurrentSession();
+		for(WmsCheckProductShelf p : list){
+			updateProductNum(p.getWmsProduct().getProductId(), p.getWmsShelf().getShelfId(),
+					session, p.getCpsNumber());
+		}
+		
+		WmsUser user = getHibernateTemplate().get(WmsUser.class, userId);
+		check.setWmsUserByCheckAcceptor(user);
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String time = df.format(cal.getTime());
+		check.setCheckAcceptTime(Timestamp.valueOf(time));
+		WmsCheckState state = getHibernateTemplate().get(WmsCheckState.class, 2);
+		check.setWmsCheckState(state);
+		
+		session.update(check);
+		
+		session.flush();
+		
+		return "盘点单确认成功！";
+	}
+
+	private void updateProductNum(Integer productId, Integer shelfId, Session session, Integer cpsNumber) {
+		String hql = "from WmsProductShelf s where s.wmsProduct.productId=? and s.wmsShelf.shelfId=?";
+		@SuppressWarnings("unchecked")
+		List<WmsProductShelf> list = (List<WmsProductShelf>)getHibernateTemplate().find(hql, productId, shelfId);
+		
+		if(list.size() == 0 && cpsNumber > 0){
+			// 插入新记录
+			WmsProductShelf pf = new WmsProductShelf();
+			pf.setPsNumber(cpsNumber);
+			pf.setWmsProduct(
+					getHibernateTemplate().get(WmsProduct.class, productId)
+					);
+			pf.setWmsShelf(
+					getHibernateTemplate().get(WmsShelf.class, shelfId)
+					);
+			session.save(pf);
+		}else{
+			// 更新现有记录
+			WmsProductShelf ps = list.get(0);
+			ps.setPsNumber(cpsNumber);
+			session.update(ps);
+		}
+	}
+
+	public String abandonCheck(String id, Integer userId) {
+		WmsCheck check = getHibernateTemplate().get(WmsCheck.class, id);
+		if(check == null || check.getWmsCheckState().getStateId() != 1){
+			return "您尝试关闭的订单不存在或者订单无法关闭！";
+		}
+	
+		Session session = getSessionFactory().getCurrentSession();
+		WmsUser user = getHibernateTemplate().get(WmsUser.class, userId);
+		check.setWmsUserByCheckAcceptor(user);
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String time = df.format(cal.getTime());
+		check.setCheckAcceptTime(Timestamp.valueOf(time));
+		WmsCheckState state = getHibernateTemplate().get(WmsCheckState.class, 3);
+		check.setWmsCheckState(state);
+		
+		session.update(check);
+		
+		session.flush();
+		
+		return "盘点单关闭成功！";
+	}
 }

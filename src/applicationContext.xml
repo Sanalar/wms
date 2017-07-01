@@ -165,4 +165,9 @@
 		<property name="checkQueryDao" ref="checkQueryDaoBean"></property>
 		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
 	</bean>
+	<bean id="checkReviewActionBean" 
+	class="pub.sanalar.wms.actions.CheckReviewAction" 
+	scope="prototype">
+		<property name="checkQueryDao" ref="checkQueryDaoBean"></property>
+	</bean>
 </beans>

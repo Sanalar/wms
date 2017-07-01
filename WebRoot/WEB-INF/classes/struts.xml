@@ -80,6 +80,12 @@
 		<action name="checks" class="htmlChecksActionBean">
 			<result name="success">checks.jsp</result>
 		</action>
+		<action name="passCheck" class="checkReviewActionBean" method="acceptCheck">
+			<result name="success">redirect-msg.jsp</result>
+		</action>
+		<action name="abandonCheck" class="checkReviewActionBean" method="abandonCheck">
+			<result name="success">redirect-msg.jsp</result>
+		</action>
 		
 		<action name="fetchWarehouseList" class="jsonDataProviderActionBean" method="getAllWarehouseList">
 			<result name="success" type="json">
