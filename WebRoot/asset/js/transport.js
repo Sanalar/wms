@@ -147,3 +147,67 @@ function prepare(){
         }
     });
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function showTransDetails(cdid){
+    $("#loading-box").modal("show");
+    $.ajax( {
+        url:'fetchTransportDetailList.action',
+        dataType:'json',
+        type: "POST",
+        data: {"tid": cdid},
+        success: function(data, textStatus){
+            $("#cp-id").text(data['id']);
+            $("#cp-from").text(data['fromHouse']);
+            $("#cp-to").text(data['toHouse']);
+            $("#cp-create-time").text(data['createTime']);
+            $("#cp-accept-time").text(data['acceptTime']);
+            $("#cp-finish-time").text(data['finishTime']);
+            $("#cp-creator").text(data['creator']);
+            $("#cp-acceptor").text(data['acceptor']);
+            $("#cp-finisher").text(data['finisher']);
+            $("#cp-desc").text(data['desc']);
+            var tbody = $("#cp-items");
+            tbody.empty();
+            $.each(data['items'], function(i, n){
+                tbody.append(
+                    '<tr>' +
+                    '<td>'+n['code']+'</td>' +
+                    '<td>'+n['name']+'</td>' +
+                    '<td>'+n['category']+'</td>' +
+                    '<td>'+n['storage']+'</td>' +
+                    '<td>'+n['shelf']+'</td>' +
+                    '<td>'+n['lastNum']+'</td>' +
+                    '<td>'+n['number']+'</td>' +
+                    '<td>'+n['cost']+'</td>' +
+                    '</tr>'
+                );
+            });
+            $("#loading-box").modal("hide");
+            $("#show-transport").modal("show");
+        },
+        error: function(){
+            $("#loading-box").modal("hide");
+            alert("请求盘点详情列表失败！请检查网络设置！");
+        }
+    });
+}
+
+function prepareForChecks(){
+    $(".check-ok").click(function(e){
+        e.preventDefault();
+        if(!confirm("您确认要同意这一笔盘存信息吗？")){
+            return false;
+        }
+        window.location.href = "passCheck.action?id=" + $(this).attr("data-id");
+    });
+
+    $(".check-bad").click(function(e){
+        e.preventDefault();
+        if(!confirm("您确认要关闭这一笔盘存信息吗？")){
+            return false;
+        }
+        window.location.href = "abandonCheck.action?id=" + $(this).attr("data-id");
+    });
+}

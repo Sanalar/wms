@@ -87,6 +87,9 @@
 		<action name="checks" class="htmlChecksActionBean">
 			<result name="success">checks.jsp</result>
 		</action>
+		<action name="transports" class="htmlTransportsActionBean">
+			<result name="success">transports.jsp</result>
+		</action>
 		<action name="passCheck" class="checkReviewActionBean" method="acceptCheck">
 			<result name="success">redirect-msg.jsp</result>
 		</action>
@@ -122,6 +125,11 @@
 		<action name="fetchTransportProductList" class="jsonDataProviderActionBean" method="getTransportProductList">
 			<result name="success" type="json">
 				<param name="root">trList</param>
+			</result>
+		</action>
+		<action name="fetchTransportDetailList" class="jsonDataProviderActionBean" method="getTransportDetailList">
+			<result name="success" type="json">
+				<param name="root">transList</param>
 			</result>
 		</action>
 	</package>

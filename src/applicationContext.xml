@@ -145,6 +145,7 @@
 		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
 		<property name="productQueryDao" ref="productQueryDaoBean"></property>
 		<property name="checkQueryDao" ref="checkQueryDaoBean"></property>
+		<property name="transportQueryDao" ref="transportQueryDaoBean"></property>
 	</bean>
 	<bean id="htmlStreamActionBean" 
 	class="pub.sanalar.wms.actions.HtmlStreamAction" 
@@ -184,5 +185,11 @@
 	class="pub.sanalar.wms.actions.NewTransportAction" 
 	scope="prototype">
 		<property name="transportQueryDao" ref="transportQueryDaoBean"></property>
+	</bean>
+	<bean id="htmlTransportsActionBean" 
+	class="pub.sanalar.wms.actions.HtmlTransportsAction" 
+	scope="prototype">
+		<property name="transportQueryDao" ref="transportQueryDaoBean"></property>
+		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
 	</bean>
 </beans>

@@ -6,12 +6,14 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import pub.sanalar.wms.daos.CheckQueryDao;
 import pub.sanalar.wms.daos.ProductQueryDao;
+import pub.sanalar.wms.daos.TransportQueryDao;
 import pub.sanalar.wms.daos.WarehouseQueryDao;
 import pub.sanalar.wms.models.CheckDetailsObject;
 import pub.sanalar.wms.models.IdNameObject;
 import pub.sanalar.wms.models.JsonProductBasicInfo;
 import pub.sanalar.wms.models.SimpleProductShelfInfo;
 import pub.sanalar.wms.models.SimpleWarehouseInfo;
+import pub.sanalar.wms.models.TransportDetailList;
 import pub.sanalar.wms.models.WmsWarehouse;
 
 public class JsonDataProvideAction extends ActionSupport {
@@ -23,6 +25,7 @@ public class JsonDataProvideAction extends ActionSupport {
 	private WarehouseQueryDao warehouseQueryDao;
 	private ProductQueryDao productQueryDao;
 	private CheckQueryDao checkQueryDao;
+	private TransportQueryDao transportQueryDao;
 
 	private List<SimpleWarehouseInfo> warehouseList;
 	private List<JsonProductBasicInfo> productList;
@@ -33,6 +36,8 @@ public class JsonDataProvideAction extends ActionSupport {
 	private Integer storageId;
 	private String checkId;
 	private CheckDetailsObject checkDetails;
+	private TransportDetailList transList;
+	private String tid;
 	
 	public String getAllWarehouseList(){
 		List<WmsWarehouse> houses = warehouseQueryDao.getWarehouseList();
@@ -69,6 +74,11 @@ public class JsonDataProvideAction extends ActionSupport {
 	
 	public String getTransportProductList(){
 		trList = productQueryDao.getTransportProductList(warehouseId);
+		return SUCCESS;
+	}
+	
+	public String getTransportDetailList(){
+		transList = transportQueryDao.getTransportDetailList(tid);
 		return SUCCESS;
 	}
 
@@ -166,5 +176,29 @@ public class JsonDataProvideAction extends ActionSupport {
 
 	public void setTrList(List<SimpleProductShelfInfo> trList) {
 		this.trList = trList;
+	}
+
+	public TransportQueryDao getTransportQueryDao() {
+		return transportQueryDao;
+	}
+
+	public void setTransportQueryDao(TransportQueryDao transportQueryDao) {
+		this.transportQueryDao = transportQueryDao;
+	}
+
+	public TransportDetailList getTransList() {
+		return transList;
+	}
+
+	public void setTransList(TransportDetailList transList) {
+		this.transList = transList;
+	}
+
+	public String getTid() {
+		return tid;
+	}
+
+	public void setTid(String tid) {
+		this.tid = tid;
 	}
 }

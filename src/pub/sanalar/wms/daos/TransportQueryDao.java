@@ -2,6 +2,7 @@ package pub.sanalar.wms.daos;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +11,10 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
+import pub.sanalar.wms.models.TransportDetailItem;
+import pub.sanalar.wms.models.TransportDetailList;
 import pub.sanalar.wms.models.TransportSubmitItem;
+import pub.sanalar.wms.models.TransportSummary;
 import pub.sanalar.wms.models.WmsDispatch;
 import pub.sanalar.wms.models.WmsDispatchProductShelf;
 import pub.sanalar.wms.models.WmsDispatchState;
@@ -96,5 +100,105 @@ public class TransportQueryDao extends HibernateDaoSupport {
 		
 		session.flush();
 		return "提交新的调度任务申请成功！";
+	}
+	
+	public TransportDetailList getTransportDetailList(String tid){
+		WmsDispatch d = getHibernateTemplate().get(WmsDispatch.class, tid);
+		TransportDetailList res = new TransportDetailList();
+		WmsUser user = d.getWmsUserByDispatchAccpetor();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+		res.setAcceptor(user==null?"(无)":user.getUserRealName());
+		res.setAcceptTime(user==null?"(无)":sdf.format(d.getDispatchAcceptTime()));
+		user = d.getWmsUserByDispatchFinisher();
+		res.setFinisher(user==null?"(无)":user.getUserRealName());
+		res.setFinishTime(user==null?"(无)":sdf.format(d.getDispatchFinishTime()));
+		res.setCreator(d.getWmsUserByDispatchCreator().getUserRealName());
+		res.setCreateTime(sdf.format(d.getDispatchCreateTime()));
+		res.setDesc(d.getDispatchDescription());
+		res.setFromHouse(d.getWmsWarehouseByDispatchFrom().getWarehouseName());
+		res.setToHouse(d.getWmsWarehouseByDispatchTo().getWarehouseName());
+		res.setId(tid);
+		
+		List<TransportDetailItem> items = new ArrayList<TransportDetailItem>();
+		String hql = "from WmsDispatchProductShelf s where s.wmsDispatch.dispatchId=?";
+		@SuppressWarnings("unchecked")
+		List<WmsDispatchProductShelf> list = (List<WmsDispatchProductShelf>)getHibernateTemplate().find(hql, tid);
+		for(WmsDispatchProductShelf ps : list){
+			TransportDetailItem it = new TransportDetailItem();
+			it.setCategory(ps.getWmsProduct().getWmsCategory().getWmsCategory().getCategoryName() + " > "
+					+ ps.getWmsProduct().getWmsCategory().getCategoryName());
+			it.setCode(ps.getWmsProduct().getProductCode());
+			it.setCost(ps.getDpsCost());
+			it.setLastNum(getProductNumberInShelf(ps.getWmsProduct().getProductId(), ps.getWmsShelf().getShelfId()));
+			it.setName(ps.getWmsProduct().getProductName());
+			it.setNumber(ps.getDpsNumber());
+			it.setPid(ps.getWmsProduct().getProductId());
+			it.setShelf(ps.getWmsShelf().getShelfName());
+			it.setStorage(ps.getWmsShelf().getWmsStorage().getStorageName());
+			items.add(it);
+		}
+		res.setItems(items);
+		return res;
+	}
+	
+	private Integer getProductNumberInShelf(Integer productId, Integer shelfId) {
+		String hql = "from WmsProductShelf ps where ps.wmsProduct.productId=? and ps.wmsShelf.shelfId=?";
+		@SuppressWarnings("unchecked")
+		List<WmsProductShelf> list = (List<WmsProductShelf>)getHibernateTemplate().find(hql, productId, shelfId);
+		Integer sum = 0;
+		if(list != null){
+			for(WmsProductShelf ps : list){
+				sum += ps.getPsNumber();
+			}
+		}
+		return sum;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<TransportSummary> getTransportSummary(Integer warehouseId, boolean needAll, boolean useFrom){
+		String hql;
+		List<WmsDispatch> list;
+		if(needAll){
+			hql = "from WmsDispatch p where p.wmsWarehouseByDispatchFrom.warehouseId=? or p.wmsWarehouseByDispatchTo.warehouseId=?";
+			list = (List<WmsDispatch>)getHibernateTemplate().find(hql, warehouseId, warehouseId);
+		}else if(useFrom){
+			hql = "from WmsDispatch p where p.wmsWarehouseByDispatchFrom.warehouseId=? and p.wmsDispatchState.stateId=1";
+			list = (List<WmsDispatch>)getHibernateTemplate().find(hql, warehouseId);
+		}else{
+			hql = "from WmsDispatch p where p.wmsWarehouseByDispatchTo.warehouseId=? and p.wmsDispatchState.stateId=3";
+			list = (List<WmsDispatch>)getHibernateTemplate().find(hql, warehouseId);
+		}
+		
+		List<TransportSummary> res = new ArrayList<TransportSummary>();
+		for(WmsDispatch dis : list){
+			TransportSummary ts = new TransportSummary();
+			WmsUser user = dis.getWmsUserByDispatchAccpetor();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+			ts.setAcceptor(user==null?"(无)":user.getUserRealName());
+			ts.setAcceptTime(user==null?"(无)":sdf.format(dis.getDispatchAcceptTime()));
+			user = dis.getWmsUserByDispatchFinisher();
+			ts.setFinisher(user==null?"(无)":user.getUserRealName());
+			ts.setFinishTime(user==null?"(无)":sdf.format(dis.getDispatchFinishTime()));
+			ts.setCreator(dis.getWmsUserByDispatchCreator().getUserRealName());
+			ts.setCreateTime(sdf.format(dis.getDispatchCreateTime()));
+			ts.setFromHouse(dis.getWmsWarehouseByDispatchFrom().getWarehouseName());
+			ts.setToHouse(dis.getWmsWarehouseByDispatchTo().getWarehouseName());
+			ts.setId(dis.getDispatchId());
+			ts.setState(dis.getWmsDispatchState().getStateName());
+			
+			hql = "from WmsDispatchProductShelf ps where ps.wmsDispatch.dispatchId=?";
+			List<WmsDispatchProductShelf> pss = (List<WmsDispatchProductShelf>)getHibernateTemplate().find(hql, dis.getDispatchId());
+			Integer totalNum = 0;
+			Double totalCost = 0.0;
+			for(WmsDispatchProductShelf ps : pss){
+				totalNum += ps.getDpsNumber();
+				totalCost += ps.getDpsCost();
+			}
+			ts.setCost(totalCost);
+			ts.setNumber(totalNum);
+			res.add(ts);
+		}
+		
+		return res;
 	}
 }
