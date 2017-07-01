@@ -1,4 +1,4 @@
-package pub.sanalar.wms.daos;
+ï»¿package pub.sanalar.wms.daos;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -75,10 +75,10 @@ public class CheckQueryDao extends HibernateDaoSupport {
 		CheckDetailsObject o = new CheckDetailsObject();
 		WmsCheck ch = getHibernateTemplate().get(WmsCheck.class, checkId);
 		WmsUser user = ch.getWmsUserByCheckAcceptor();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyå¹´MMæœˆddæ—¥ HH:mm:ss");
 		if(user == null){
-			o.setAcceptor("(Î´È·ÈÏ)");
-			o.setAcceptTime("(Î´È·ÈÏ)");
+			o.setAcceptor("(æœªç¡®è®¤)");
+			o.setAcceptTime("(æœªç¡®è®¤)");
 		}else{
 			o.setAcceptor(user.getUserRealName());
 			o.setAcceptTime(sdf.format(ch.getCheckAcceptTime()));
@@ -131,14 +131,14 @@ public class CheckQueryDao extends HibernateDaoSupport {
 		List<WmsCheck> list = (List<WmsCheck>)getHibernateTemplate().find(hql, warehouseId);
 		
 		List<CheckSummaryObject> res = new ArrayList<CheckSummaryObject>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyå¹´MMæœˆddæ—¥ HH:mm:ss");
 		String warehouseName = getHibernateTemplate().get(WmsWarehouse.class, warehouseId).getWarehouseName();
 		for(WmsCheck ch : list){
 			CheckSummaryObject o = new CheckSummaryObject();
 			WmsUser user = ch.getWmsUserByCheckAcceptor();
 			if(user == null){
-				o.setAcceptor("(Î´È·ÈÏ)");
-				o.setAcceptTime("(Î´È·ÈÏ)");
+				o.setAcceptor("(æœªç¡®è®¤)");
+				o.setAcceptTime("(æœªç¡®è®¤)");
 			}else{
 				o.setAcceptor(user.getUserRealName());
 				o.setAcceptTime(sdf.format(ch.getCheckAcceptTime()));
@@ -182,7 +182,7 @@ public class CheckQueryDao extends HibernateDaoSupport {
 	public String acceptCheck(String id, Integer userId) {
 		WmsCheck check = getHibernateTemplate().get(WmsCheck.class, id);
 		if(check == null || check.getWmsCheckState().getStateId() != 1){
-			return "Äú³¢ÊÔÈ·ÈÏµÄÅÌµãµ¥²»´æÔÚ»òÕßÅÌµãµ¥ÎŞĞèÈ·ÈÏ£¡";
+			return "æ‚¨å°è¯•ç¡®è®¤çš„ç›˜ç‚¹å•ä¸å­˜åœ¨æˆ–è€…ç›˜ç‚¹å•æ— éœ€ç¡®è®¤ï¼";
 		}
 		
 		String hql = "from WmsCheckProductShelf s where s.wmsCheck.checkId=?";
@@ -208,7 +208,7 @@ public class CheckQueryDao extends HibernateDaoSupport {
 		
 		session.flush();
 		
-		return "ÅÌµãµ¥È·ÈÏ³É¹¦£¡";
+		return "ç›˜ç‚¹å•ç¡®è®¤æˆåŠŸï¼";
 	}
 
 	private void updateProductNum(Integer productId, Integer shelfId, Session session, Integer cpsNumber) {
@@ -217,7 +217,7 @@ public class CheckQueryDao extends HibernateDaoSupport {
 		List<WmsProductShelf> list = (List<WmsProductShelf>)getHibernateTemplate().find(hql, productId, shelfId);
 		
 		if(list.size() == 0 && cpsNumber > 0){
-			// ²åÈëĞÂ¼ÇÂ¼
+			// æ’å…¥æ–°è®°å½•
 			WmsProductShelf pf = new WmsProductShelf();
 			pf.setPsNumber(cpsNumber);
 			pf.setWmsProduct(
@@ -228,7 +228,7 @@ public class CheckQueryDao extends HibernateDaoSupport {
 					);
 			session.save(pf);
 		}else{
-			// ¸üĞÂÏÖÓĞ¼ÇÂ¼
+			// æ›´æ–°ç°æœ‰è®°å½•
 			WmsProductShelf ps = list.get(0);
 			ps.setPsNumber(cpsNumber);
 			session.update(ps);
@@ -238,7 +238,7 @@ public class CheckQueryDao extends HibernateDaoSupport {
 	public String abandonCheck(String id, Integer userId) {
 		WmsCheck check = getHibernateTemplate().get(WmsCheck.class, id);
 		if(check == null || check.getWmsCheckState().getStateId() != 1){
-			return "Äú³¢ÊÔ¹Ø±ÕµÄ¶©µ¥²»´æÔÚ»òÕß¶©µ¥ÎŞ·¨¹Ø±Õ£¡";
+			return "æ‚¨å°è¯•å…³é—­çš„è®¢å•ä¸å­˜åœ¨æˆ–è€…è®¢å•æ— æ³•å…³é—­ï¼";
 		}
 	
 		Session session = getSessionFactory().getCurrentSession();
@@ -255,6 +255,6 @@ public class CheckQueryDao extends HibernateDaoSupport {
 		
 		session.flush();
 		
-		return "ÅÌµãµ¥¹Ø±Õ³É¹¦£¡";
+		return "ç›˜ç‚¹å•å…³é—­æˆåŠŸï¼";
 	}
 }

@@ -1,4 +1,4 @@
-package pub.sanalar.wms.daos;
+ï»¿package pub.sanalar.wms.daos;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -90,7 +90,7 @@ public class WarehouseQueryDao extends HibernateDaoSupport {
 			return sb.toString();
 		}
 		
-		return "<ÎÞ>";
+		return "<æ— >";
 	}
 
 	private void setStorageInfoCapacities(Integer storageId, StorageInfoObject o) {
@@ -177,13 +177,13 @@ public class WarehouseQueryDao extends HibernateDaoSupport {
 		List<WmsInApplicationProduct> list = (List<WmsInApplicationProduct>)getHibernateTemplate().find(hql, warehouseId);
 		
 		List<StreamInItem> res = new ArrayList<StreamInItem>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyå¹´MMæœˆddæ—¥ HH:mm:ss");
 		for(WmsInApplicationProduct p : list){
 			StreamInItem item = new StreamInItem();
 			item.setCharger(p.getWmsInApplication().getWmsUserByApplicationCreator().getUserRealName());
 			item.setId(p.getWmsInApplication().getApplicationId());
 			Timestamp time = p.getWmsInApplication().getApplicationAcceptTime();
-			item.setInTime(time == null ? "<Î´È·ÈÏ>" : sdf.format(time));
+			item.setInTime(time == null ? "<æœªç¡®è®¤>" : sdf.format(time));
 			item.setNumber(p.getApNumber());
 			item.setProductCode(p.getWmsProduct().getProductCode());
 			item.setProductName(p.getWmsProduct().getProductName());
@@ -203,13 +203,13 @@ public class WarehouseQueryDao extends HibernateDaoSupport {
 		List<WmsOutApplicationProduct> list = (List<WmsOutApplicationProduct>)getHibernateTemplate().find(hql, warehouseId);
 		
 		List<StreamOutItem> res = new ArrayList<StreamOutItem>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyå¹´MMæœˆddæ—¥ HH:mm:ss");
 		for(WmsOutApplicationProduct p : list){
 			StreamOutItem item = new StreamOutItem();
 			item.setCharger(p.getWmsOutApplication().getWmsUserByApplicationCreator().getUserRealName());
 			item.setId(p.getWmsOutApplication().getApplicationId());
 			Timestamp time = p.getWmsOutApplication().getApplicationAcceptTime();
-			item.setInTime(time == null ? "<Î´È·ÈÏ>" : sdf.format(time));
+			item.setInTime(time == null ? "<æœªç¡®è®¤>" : sdf.format(time));
 			item.setNumber(p.getApNumber());
 			item.setProductCode(p.getWmsProduct().getProductCode());
 			item.setProductName(p.getWmsProduct().getProductName());

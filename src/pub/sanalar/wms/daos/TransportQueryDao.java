@@ -1,4 +1,4 @@
-package pub.sanalar.wms.daos;
+ï»¿package pub.sanalar.wms.daos;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -39,16 +39,16 @@ public class TransportQueryDao extends HibernateDaoSupport {
 			List<TransportSubmitItem> items, String desc){
 		WmsUser user = getHibernateTemplate().get(WmsUser.class, userId);
 		if(user == null){
-			return "ÓÃ»§ĞÅÏ¢ÎŞĞ§£¬ÎŞ·¨Ìí¼Ó£¡";
+			return "ç”¨æˆ·ä¿¡æ¯æ— æ•ˆï¼Œæ— æ³•æ·»åŠ ï¼";
 		}
 		
 		WmsWarehouse fromHouse = getHibernateTemplate().get(WmsWarehouse.class, fromWId);
 		WmsWarehouse toHouse = getHibernateTemplate().get(WmsWarehouse.class, toWId);
 		if(fromHouse == null || toHouse == null){
-			return "ÎŞĞ§µÄ²Ö¿âĞÅÏ¢£¡";
+			return "æ— æ•ˆçš„ä»“åº“ä¿¡æ¯ï¼";
 		}
 		
-		// ¼ì²éĞèÒªÌí¼ÓµÄĞÅÏ¢ÊÇ·ñºÏ·¨
+		// æ£€æŸ¥éœ€è¦æ·»åŠ çš„ä¿¡æ¯æ˜¯å¦åˆæ³•
 		HashMap<Integer, Integer> trans = new HashMap<Integer, Integer>();
 		for(TransportSubmitItem i : items){
 			if(trans.containsKey(i.getId())){
@@ -60,18 +60,18 @@ public class TransportQueryDao extends HibernateDaoSupport {
 		for(Integer i : trans.keySet()){
 			WmsProductShelf sh = getHibernateTemplate().get(WmsProductShelf.class, i);
 			if(sh == null){
-				return "ÎŞĞ§µÄÁĞ±í²ÎÊı£¡";
+				return "æ— æ•ˆçš„åˆ—è¡¨å‚æ•°ï¼";
 			}
 			if(sh.getWmsShelf().getWmsStorage().getWmsWarehouse().getWarehouseId() != fromWId){
-				return "ÊÔÍ¼×ªÒÆÒ»¸ö²»ÊôÓÚ×Ô¼ºµÄ¿âÎ»ÀïµÄ»õÎï£¡";
+				return "è¯•å›¾è½¬ç§»ä¸€ä¸ªä¸å±äºè‡ªå·±çš„åº“ä½é‡Œçš„è´§ç‰©ï¼";
 			}
 			if(sh.getPsNumber() < trans.get(i)){
-				return "¡¾" + sh.getWmsShelf().getShelfName() + "¡¿»õ¼ÜÖĞ´æ·ÅµÄ¡¾" + sh.getWmsProduct().getProductName()
-						+ "¡¿µÄÊıÁ¿²»×ãÒÔÍê³ÉÕâ´Îµ÷¶È¡£´æ·ÅµÄÊıÁ¿Îª£º" + sh.getPsNumber() + "£¬ĞèÒªµ÷¶ÈµÄÊıÁ¿Îª£º" + trans.get(i);
+				return "ã€" + sh.getWmsShelf().getShelfName() + "ã€‘è´§æ¶ä¸­å­˜æ”¾çš„ã€" + sh.getWmsProduct().getProductName()
+						+ "ã€‘çš„æ•°é‡ä¸è¶³ä»¥å®Œæˆè¿™æ¬¡è°ƒåº¦ã€‚å­˜æ”¾çš„æ•°é‡ä¸ºï¼š" + sh.getPsNumber() + "ï¼Œéœ€è¦è°ƒåº¦çš„æ•°é‡ä¸ºï¼š" + trans.get(i);
 			}
 		}
 		
-		// ¼ì²éÍ¨¹ı£¬¿ªÊ¼Ìí¼Ó¼ÇÂ¼
+		// æ£€æŸ¥é€šè¿‡ï¼Œå¼€å§‹æ·»åŠ è®°å½•
 		Session session = getSessionFactory().getCurrentSession();
 		WmsDispatch dispatch = new WmsDispatch();
 		Calendar cl = Calendar.getInstance();
@@ -107,19 +107,19 @@ public class TransportQueryDao extends HibernateDaoSupport {
 		}
 		
 		session.flush();
-		return "Ìá½»ĞÂµÄµ÷¶ÈÈÎÎñÉêÇë³É¹¦£¡";
+		return "æäº¤æ–°çš„è°ƒåº¦ä»»åŠ¡ç”³è¯·æˆåŠŸï¼";
 	}
 	
 	public TransportDetailList getTransportDetailList(String tid){
 		WmsDispatch d = getHibernateTemplate().get(WmsDispatch.class, tid);
 		TransportDetailList res = new TransportDetailList();
 		WmsUser user = d.getWmsUserByDispatchAccpetor();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ HH:mm:ss");
-		res.setAcceptor(user==null?"(ÎŞ)":user.getUserRealName());
-		res.setAcceptTime(user==null?"(ÎŞ)":sdf.format(d.getDispatchAcceptTime()));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyå¹´MMæœˆddæ—¥ HH:mm:ss");
+		res.setAcceptor(user==null?"(æ— )":user.getUserRealName());
+		res.setAcceptTime(user==null?"(æ— )":sdf.format(d.getDispatchAcceptTime()));
 		user = d.getWmsUserByDispatchFinisher();
-		res.setFinisher(user==null?"(ÎŞ)":user.getUserRealName());
-		res.setFinishTime(user==null?"(ÎŞ)":sdf.format(d.getDispatchFinishTime()));
+		res.setFinisher(user==null?"(æ— )":user.getUserRealName());
+		res.setFinishTime(user==null?"(æ— )":sdf.format(d.getDispatchFinishTime()));
 		res.setCreator(d.getWmsUserByDispatchCreator().getUserRealName());
 		res.setCreateTime(sdf.format(d.getDispatchCreateTime()));
 		res.setDesc(d.getDispatchDescription());
@@ -181,12 +181,12 @@ public class TransportQueryDao extends HibernateDaoSupport {
 		for(WmsDispatch dis : list){
 			TransportSummary ts = new TransportSummary();
 			WmsUser user = dis.getWmsUserByDispatchAccpetor();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ HH:mm:ss");
-			ts.setAcceptor(user==null?"(ÎŞ)":user.getUserRealName());
-			ts.setAcceptTime(user==null?"(ÎŞ)":sdf.format(dis.getDispatchAcceptTime()));
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyå¹´MMæœˆddæ—¥ HH:mm:ss");
+			ts.setAcceptor(user==null?"(æ— )":user.getUserRealName());
+			ts.setAcceptTime(user==null?"(æ— )":sdf.format(dis.getDispatchAcceptTime()));
 			user = dis.getWmsUserByDispatchFinisher();
-			ts.setFinisher(user==null?"(ÎŞ)":user.getUserRealName());
-			ts.setFinishTime(user==null?"(ÎŞ)":sdf.format(dis.getDispatchFinishTime()));
+			ts.setFinisher(user==null?"(æ— )":user.getUserRealName());
+			ts.setFinishTime(user==null?"(æ— )":sdf.format(dis.getDispatchFinishTime()));
 			ts.setCreator(dis.getWmsUserByDispatchCreator().getUserRealName());
 			ts.setCreateTime(sdf.format(dis.getDispatchCreateTime()));
 			ts.setFromHouse(dis.getWmsWarehouseByDispatchFrom().getWarehouseName());
@@ -214,16 +214,16 @@ public class TransportQueryDao extends HibernateDaoSupport {
 	public String acceptTransport(String id, Integer userId) {
 		WmsUser user = getHibernateTemplate().get(WmsUser.class, userId);
 		if(user == null){
-			return "ÎŞĞ§µÄÓÃ»§£¡";
+			return "æ— æ•ˆçš„ç”¨æˆ·ï¼";
 		}
 		
 		WmsDispatch dispatch = getHibernateTemplate().get(WmsDispatch.class, id);
 		if(dispatch == null){
-			return "²»´æÔÚµÄµ÷¶Èµ¥£¡";
+			return "ä¸å­˜åœ¨çš„è°ƒåº¦å•ï¼";
 		}
 		
 		if(dispatch.getWmsDispatchState().getStateId() != 1){
-			return "²»ÄÜ¶Ô¸Ã¶©µ¥½øĞĞÉóºË²Ù×÷£¡";
+			return "ä¸èƒ½å¯¹è¯¥è®¢å•è¿›è¡Œå®¡æ ¸æ“ä½œï¼";
 		}
 		
 		String hql = "from WmsDispatchProductShelf p where p.wmsDispatch.dispatchId=?";
@@ -231,15 +231,15 @@ public class TransportQueryDao extends HibernateDaoSupport {
 		for(WmsDispatchProductShelf p : list){
 			Integer remain = getProductNumberInShelf(p.getWmsProduct().getProductId(), p.getWmsShelf().getShelfId());
 			if(p.getDpsNumber() >= remain){
-				return "¸Ãµ÷¶Èµ¥ÎŞ·¨Í¨¹ıÉóºË£¡ÒòÎª¡¾"+
-						p.getWmsShelf().getShelfName()+"¡¿Ëù´æµÄ¡¾"+
-						p.getWmsProduct().getProductName()+"¡¿µÄÊıÁ¿½öÎª£º"+
-						remain+"£¬ÉÙÓÚĞèÒªµ÷¶ÈµÄÖµ£º"+
-						p.getDpsNumber()+"£¡Äú¿ÉÒÔ¿¼ÂÇ¹Ø±Õ¸Ãµ÷¶Èµ¥»òÕß²¹³ä»õÔ´¡£";
+				return "è¯¥è°ƒåº¦å•æ— æ³•é€šè¿‡å®¡æ ¸ï¼å› ä¸ºã€"+
+						p.getWmsShelf().getShelfName()+"ã€‘æ‰€å­˜çš„ã€"+
+						p.getWmsProduct().getProductName()+"ã€‘çš„æ•°é‡ä»…ä¸ºï¼š"+
+						remain+"ï¼Œå°‘äºéœ€è¦è°ƒåº¦çš„å€¼ï¼š"+
+						p.getDpsNumber()+"ï¼æ‚¨å¯ä»¥è€ƒè™‘å…³é—­è¯¥è°ƒåº¦å•æˆ–è€…è¡¥å……è´§æºã€‚";
 			}
 		}
 		
-		// ´´½¨³ö¿âµ¥
+		// åˆ›å»ºå‡ºåº“å•
 		Session session = getSessionFactory().getCurrentSession();
 		WmsOutApplication out = new WmsOutApplication();
 		Calendar cl = Calendar.getInstance();
@@ -264,7 +264,7 @@ public class TransportQueryDao extends HibernateDaoSupport {
 			session.save(ap);
 		}
 		
-		// ĞŞ¸Äµ÷¶Èµ¥×´Ì¬
+		// ä¿®æ”¹è°ƒåº¦å•çŠ¶æ€
 		dispatch.setWmsUserByDispatchAccpetor(user);
 		dispatch.setDispatchAcceptTime(Timestamp.valueOf(time));
 		dispatch.setWmsDispatchState(getHibernateTemplate().get(WmsDispatchState.class, 3));
@@ -272,25 +272,25 @@ public class TransportQueryDao extends HibernateDaoSupport {
 		
 		session.flush();
 		
-		return "µ÷¶Èµ¥ÉóºË³É¹¦£¡Í¬Ê±Éú³ÉÁËÒ»ÕÅµ¥ºÅÎª¡¾" + out.getApplicationId() + "¡¿µÄ³ö¿âµ¥£¡";
+		return "è°ƒåº¦å•å®¡æ ¸æˆåŠŸï¼åŒæ—¶ç”Ÿæˆäº†ä¸€å¼ å•å·ä¸ºã€" + out.getApplicationId() + "ã€‘çš„å‡ºåº“å•ï¼";
 	}
 
 	public String abandonTransport(String id, Integer userId) {
 		WmsUser user = getHibernateTemplate().get(WmsUser.class, userId);
 		if(user == null){
-			return "ÎŞĞ§µÄÓÃ»§£¡";
+			return "æ— æ•ˆçš„ç”¨æˆ·ï¼";
 		}
 		
 		WmsDispatch dispatch = getHibernateTemplate().get(WmsDispatch.class, id);
 		if(dispatch == null){
-			return "²»´æÔÚµÄµ÷¶Èµ¥£¡";
+			return "ä¸å­˜åœ¨çš„è°ƒåº¦å•ï¼";
 		}
 		
 		if(dispatch.getWmsDispatchState().getStateId() != 1){
-			return "²»ÄÜ¶Ô¸Ã¶©µ¥½øĞĞÉóºË²Ù×÷£¡";
+			return "ä¸èƒ½å¯¹è¯¥è®¢å•è¿›è¡Œå®¡æ ¸æ“ä½œï¼";
 		}
 			
-		// ĞŞ¸Äµ÷¶Èµ¥×´Ì¬
+		// ä¿®æ”¹è°ƒåº¦å•çŠ¶æ€
 		Session session = getSessionFactory().getCurrentSession();
 		dispatch.setWmsUserByDispatchAccpetor(user);
 		Calendar cl = Calendar.getInstance();
@@ -302,23 +302,23 @@ public class TransportQueryDao extends HibernateDaoSupport {
 		
 		session.flush();
 		
-		return "µ÷¶Èµ¥ÉóºË²µ»Ø³É¹¦£¡";
+		return "è°ƒåº¦å•å®¡æ ¸é©³å›æˆåŠŸï¼";
 	}
 
 	@SuppressWarnings("unchecked")
 	public String finishTransport(String id, Integer userId) {
 		WmsUser user = getHibernateTemplate().get(WmsUser.class, userId);
 		if(user == null){
-			return "ÎŞĞ§µÄÓÃ»§£¡";
+			return "æ— æ•ˆçš„ç”¨æˆ·ï¼";
 		}
 		
 		WmsDispatch dispatch = getHibernateTemplate().get(WmsDispatch.class, id);
 		if(dispatch == null){
-			return "²»´æÔÚµÄµ÷¶Èµ¥£¡";
+			return "ä¸å­˜åœ¨çš„è°ƒåº¦å•ï¼";
 		}
 		
 		if(dispatch.getWmsDispatchState().getStateId() != 3){
-			return "²»ÄÜ¶Ô¸Ã¶©µ¥½øĞĞÈ·ÈÏ²Ù×÷£¡";
+			return "ä¸èƒ½å¯¹è¯¥è®¢å•è¿›è¡Œç¡®è®¤æ“ä½œï¼";
 		}
 		
 		String hql = "from WmsDispatchProductShelf p where p.wmsDispatch.dispatchId=?";
@@ -328,15 +328,15 @@ public class TransportQueryDao extends HibernateDaoSupport {
 			Integer shId = getAvailableShelf(p.getWmsProduct().getProductId(), p.getDpsNumber(),
 					dispatch.getWmsWarehouseByDispatchTo().getWarehouseId());
 			if(shId == null){
-				return "¸Ãµ÷¶Èµ¥ÎŞ·¨È·ÈÏ£¡ÒòÎªÎŞ·¨Îª¡¾"+
-						p.getWmsProduct().getProductName()+"¡¿µÄÕÒµ½¿ÉÒÔ´æ´¢"+
-						p.getDpsNumber()+"¼şµÄ»õ¼Ü£¡Äú¿ÉÒÔ¿¼ÂÇ¹Ø±Õ¸Ãµ÷¶Èµ¥»òÕßÕûÀí¿Õ¼ä¡£";
+				return "è¯¥è°ƒåº¦å•æ— æ³•ç¡®è®¤ï¼å› ä¸ºæ— æ³•ä¸ºã€"+
+						p.getWmsProduct().getProductName()+"ã€‘çš„æ‰¾åˆ°å¯ä»¥å­˜å‚¨"+
+						p.getDpsNumber()+"ä»¶çš„è´§æ¶ï¼æ‚¨å¯ä»¥è€ƒè™‘å…³é—­è¯¥è°ƒåº¦å•æˆ–è€…æ•´ç†ç©ºé—´ã€‚";
 			}
 			
 			storeMap.put(p.getDpsId(), shId);
 		}
 		
-		// ´´½¨Èë¿âµ¥
+		// åˆ›å»ºå…¥åº“å•
 		Session session = getSessionFactory().getCurrentSession();
 		WmsInApplication in = new WmsInApplication();
 		Calendar cl = Calendar.getInstance();
@@ -361,7 +361,7 @@ public class TransportQueryDao extends HibernateDaoSupport {
 			session.save(ap);
 		}
 		
-		// ĞŞ¸Äµ÷¶Èµ¥×´Ì¬
+		// ä¿®æ”¹è°ƒåº¦å•çŠ¶æ€
 		dispatch.setWmsUserByDispatchFinisher(user);
 		dispatch.setDispatchFinishTime(Timestamp.valueOf(time));
 		dispatch.setWmsDispatchState(getHibernateTemplate().get(WmsDispatchState.class, 4));
@@ -369,7 +369,7 @@ public class TransportQueryDao extends HibernateDaoSupport {
 		
 		session.flush();
 		
-		return "µ÷¶Èµ¥È·ÈÏ³É¹¦£¡Í¬Ê±Éú³ÉÁËÒ»ÕÅµ¥ºÅÎª¡¾" + in.getApplicationId() + "¡¿µÄÈë¿âµ¥£¡";
+		return "è°ƒåº¦å•ç¡®è®¤æˆåŠŸï¼åŒæ—¶ç”Ÿæˆäº†ä¸€å¼ å•å·ä¸ºã€" + in.getApplicationId() + "ã€‘çš„å…¥åº“å•ï¼";
 	}
 
 	@SuppressWarnings("unchecked")
@@ -377,7 +377,7 @@ public class TransportQueryDao extends HibernateDaoSupport {
 		String hql = "from WmsProductCondition c where c.wmsProduct.productId=?";
 		List<WmsProductCondition> wcs = (List<WmsProductCondition>)getHibernateTemplate().find(hql, productId);
 		
-		// Ñ°ÕÒ·ûºÏÌõ¼şµÄ»õ¼Ü
+		// å¯»æ‰¾ç¬¦åˆæ¡ä»¶çš„è´§æ¶
 		hql = "from WmsShelf s where s.wmsStorage.wmsWarehouse.warehouseId=?";
 		List<WmsShelf> list = (List<WmsShelf>)getHibernateTemplate().find(hql, warehouseId);
 		if(list.size() == 0){
@@ -388,7 +388,7 @@ public class TransportQueryDao extends HibernateDaoSupport {
 			hql = "from WmsStorageCondition c where c.wmsStorage.storageId=?";
 			List<WmsStorageCondition> scs = (List<WmsStorageCondition>)getHibernateTemplate().find(hql, s.getWmsStorage().getStorageId());
 
-			// ±È¶ÔÌõ¼ş
+			// æ¯”å¯¹æ¡ä»¶
 			HashSet<Integer> conSet = new HashSet<Integer>();
 			for(WmsStorageCondition con : scs){
 				conSet.add(con.getWmsCondition().getConditionId());
@@ -399,7 +399,7 @@ public class TransportQueryDao extends HibernateDaoSupport {
 				}
 			}
 			
-			// ±È¶ÔÈİÁ¿
+			// æ¯”å¯¹å®¹é‡
 			if(getShelfAvaliableCapacity(s) >= dpsNumber){
 				return s.getShelfId();
 			}
@@ -424,19 +424,19 @@ public class TransportQueryDao extends HibernateDaoSupport {
 	public String closeTransport(String id, Integer userId) {
 		WmsUser user = getHibernateTemplate().get(WmsUser.class, userId);
 		if(user == null){
-			return "ÎŞĞ§µÄÓÃ»§£¡";
+			return "æ— æ•ˆçš„ç”¨æˆ·ï¼";
 		}
 		
 		WmsDispatch dispatch = getHibernateTemplate().get(WmsDispatch.class, id);
 		if(dispatch == null){
-			return "²»´æÔÚµÄµ÷¶Èµ¥£¡";
+			return "ä¸å­˜åœ¨çš„è°ƒåº¦å•ï¼";
 		}
 		
 		if(dispatch.getWmsDispatchState().getStateId() != 1){
-			return "²»ÄÜ¶Ô¸Ã¶©µ¥½øĞĞÈ·ÈÏ²Ù×÷£¡";
+			return "ä¸èƒ½å¯¹è¯¥è®¢å•è¿›è¡Œç¡®è®¤æ“ä½œï¼";
 		}
 			
-		// ĞŞ¸Äµ÷¶Èµ¥×´Ì¬
+		// ä¿®æ”¹è°ƒåº¦å•çŠ¶æ€
 		Session session = getSessionFactory().getCurrentSession();
 		dispatch.setWmsUserByDispatchFinisher(user);
 		Calendar cl = Calendar.getInstance();
@@ -448,6 +448,6 @@ public class TransportQueryDao extends HibernateDaoSupport {
 		
 		session.flush();
 		
-		return "µ÷¶Èµ¥È·ÈÏ²µ»Ø³É¹¦£¡";
+		return "è°ƒåº¦å•ç¡®è®¤é©³å›æˆåŠŸï¼";
 	}
 }

@@ -1,4 +1,4 @@
-package pub.sanalar.wms.actions;
+ï»¿package pub.sanalar.wms.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -54,7 +54,7 @@ public class EditProductAction extends ActionSupport {
 		product.setWmsCategory(category);
 		productQueryDao.updateProduct(product);
 		
-		location = "product-details.html?id=" + id + "&msg=²úÆ·ĞÅÏ¢±£´æ³É¹¦£¡";
+		location = "product-details.html?id=" + id + "&msg=äº§å“ä¿¡æ¯ä¿å­˜æˆåŠŸï¼";
 		return SUCCESS;
 	}
 	

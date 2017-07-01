@@ -1,4 +1,4 @@
-package pub.sanalar.wms.actions;
+ï»¿package pub.sanalar.wms.actions;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class NewTransportAction extends ActionSupport {
 		WmsUser user = (WmsUser)ActionContext.getContext().getSession().get("user");
 		location = "transports.html";
 		msg = transportQueryDao.newTransport(user==null?1:user.getUserId(), wid, toid, trItem, desc);
-		if(!msg.equals("Ìá½»ĞÂµÄµ÷¶ÈÈÎÎñÉêÇë³É¹¦£¡")){
+		if(!msg.equals("æäº¤æ–°çš„è°ƒåº¦ä»»åŠ¡ç”³è¯·æˆåŠŸï¼")){
 			location = "new-transport.html";
 		}
 		return SUCCESS;

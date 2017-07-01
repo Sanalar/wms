@@ -1,4 +1,4 @@
-package pub.sanalar.wms.daos;
+Ôªøpackage pub.sanalar.wms.daos;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -133,7 +133,7 @@ public class ProductQueryDao extends HibernateDaoSupport {
 		for(WmsInApplicationProduct p : inList){
 			ProductInOutStreamOfWarehouse item = new ProductInOutStreamOfWarehouse();
 			WmsUser user = p.getWmsInApplication().getWmsUserByApplicationAcceptor();
-			item.setAcceptUser(user == null ? "<Œﬁ>" : user.getUserRealName());
+			item.setAcceptUser(user == null ? "<Êó†>" : user.getUserRealName());
 			item.setCreateUser(p.getWmsInApplication().getWmsUserByApplicationCreator().getUserRealName());
 			item.setInStream(true);
 			item.setState(p.getWmsInApplication().getWmsApplicationState().getStateName());
@@ -146,7 +146,7 @@ public class ProductQueryDao extends HibernateDaoSupport {
 		for(WmsOutApplicationProduct p : outList){
 			ProductInOutStreamOfWarehouse item = new ProductInOutStreamOfWarehouse();
 			WmsUser user = p.getWmsOutApplication().getWmsUserByApplicationAcceptor();
-			item.setAcceptUser(user == null ? "<Œﬁ>" : user.getUserRealName());
+			item.setAcceptUser(user == null ? "<Êó†>" : user.getUserRealName());
 			item.setCreateUser(p.getWmsOutApplication().getWmsUserByApplicationCreator().getUserRealName());
 			item.setInStream(false);
 			item.setState(p.getWmsOutApplication().getWmsApplicationState().getStateName());
@@ -157,7 +157,7 @@ public class ProductQueryDao extends HibernateDaoSupport {
 			res.add(item);
 		}
 		
-		// ∞¥’’¥¥Ω® ±º‰≈≈–Ú
+		// ÊåâÁÖßÂàõÂª∫Êó∂Èó¥ÊéíÂ∫è
 		Collections.sort(res);
 		return res;
 	}

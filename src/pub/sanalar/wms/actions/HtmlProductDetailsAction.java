@@ -1,4 +1,4 @@
-package pub.sanalar.wms.actions;
+ï»¿package pub.sanalar.wms.actions;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -38,7 +38,7 @@ public class HtmlProductDetailsAction extends ActionSupport {
 	private HashSet<Integer> productConditions;
 	private List<WarehouseAndNumber> warehouseAndNumbers;
 	private List<ProductInOutStreamOfWarehouse> streams;
-	private DateFormat sdf = new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ HH:mm:ss"); 
+	private DateFormat sdf = new SimpleDateFormat("yyyyå¹´MMæœˆddæ—¥ HH:mm:ss"); 
 	private String warehouseName;
 	private Integer id;
 	private Integer warehouse;
