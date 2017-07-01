@@ -177,7 +177,7 @@ public class WarehouseQueryDao extends HibernateDaoSupport {
 		List<WmsInApplicationProduct> list = (List<WmsInApplicationProduct>)getHibernateTemplate().find(hql, warehouseId);
 		
 		List<StreamInItem> res = new ArrayList<StreamInItem>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
 		for(WmsInApplicationProduct p : list){
 			StreamInItem item = new StreamInItem();
 			item.setCharger(p.getWmsInApplication().getWmsUserByApplicationCreator().getUserRealName());
@@ -203,7 +203,7 @@ public class WarehouseQueryDao extends HibernateDaoSupport {
 		List<WmsOutApplicationProduct> list = (List<WmsOutApplicationProduct>)getHibernateTemplate().find(hql, warehouseId);
 		
 		List<StreamOutItem> res = new ArrayList<StreamOutItem>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
 		for(WmsOutApplicationProduct p : list){
 			StreamOutItem item = new StreamOutItem();
 			item.setCharger(p.getWmsOutApplication().getWmsUserByApplicationCreator().getUserRealName());

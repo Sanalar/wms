@@ -30,7 +30,7 @@ public class CheckQueryDao extends HibernateDaoSupport {
 	public void newCheck(Integer userId, Integer warehouseId, List<CheckItemSubmitObject> items, String description){
 		WmsCheck check = new WmsCheck();
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-hhmmss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss");
 		
 		check.setCheckId("WMS-CHECK-" + sdf.format(cal.getTime()));
 		check.setCheckAcceptTime(null);
@@ -75,7 +75,7 @@ public class CheckQueryDao extends HibernateDaoSupport {
 		CheckDetailsObject o = new CheckDetailsObject();
 		WmsCheck ch = getHibernateTemplate().get(WmsCheck.class, checkId);
 		WmsUser user = ch.getWmsUserByCheckAcceptor();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
 		if(user == null){
 			o.setAcceptor("(未确认)");
 			o.setAcceptTime("(未确认)");
@@ -131,7 +131,7 @@ public class CheckQueryDao extends HibernateDaoSupport {
 		List<WmsCheck> list = (List<WmsCheck>)getHibernateTemplate().find(hql, warehouseId);
 		
 		List<CheckSummaryObject> res = new ArrayList<CheckSummaryObject>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
 		String warehouseName = getHibernateTemplate().get(WmsWarehouse.class, warehouseId).getWarehouseName();
 		for(WmsCheck ch : list){
 			CheckSummaryObject o = new CheckSummaryObject();
