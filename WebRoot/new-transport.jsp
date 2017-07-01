@@ -294,7 +294,7 @@
                                       <div class="col-md-6 form-inline">
                                           <label>
                                               <span class="fa fa-sign-in"></span> 调入仓库：
-                                              <select class="form-control">
+                                              <select class="form-control" name="toid">
                                               <s:iterator value="warehouseList" id="w">
                                           		<option value='<s:property value="#w.warehouseId"/>'><s:property value="#w.warehouseName"/></option>
                                               </s:iterator>
@@ -302,7 +302,7 @@
                                           </label>
                                       </div>
                                       <div class="col-md-12">
-                                          <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
+                                          <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px" name="desc">
                                               <input type="text" class="form-text">
                                               <span class="bar"></span>
                                               <label><span class="fa fa-align-justify"></span> 调度备注</label>

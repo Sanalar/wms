@@ -8,7 +8,7 @@
     <class name="pub.sanalar.wms.models.WmsDispatchProductShelf" table="wms_dispatch_product_shelf" schema="dbo" catalog="wms">
         <id name="dpsId" type="java.lang.Integer">
             <column name="dps_id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="wmsShelf" class="pub.sanalar.wms.models.WmsShelf" fetch="select">
             <column name="shelf_id" />

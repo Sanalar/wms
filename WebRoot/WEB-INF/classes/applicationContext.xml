@@ -96,6 +96,10 @@
 		class="pub.sanalar.wms.daos.CheckQueryDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="transportQueryDaoBean"
+		class="pub.sanalar.wms.daos.TransportQueryDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<bean id="checkLoginActionBean" 
 	class="pub.sanalar.wms.actions.CheckLoginAction" 
 	scope="prototype">
@@ -175,5 +179,10 @@
 	scope="prototype">
 		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
 		<property name="categoryQueryDao" ref="categoryQueryDaoBean"></property>
+	</bean>
+	<bean id="newTransportActionBean" 
+	class="pub.sanalar.wms.actions.NewTransportAction" 
+	scope="prototype">
+		<property name="transportQueryDao" ref="transportQueryDaoBean"></property>
 	</bean>
 </beans>
