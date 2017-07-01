@@ -170,4 +170,10 @@
 	scope="prototype">
 		<property name="checkQueryDao" ref="checkQueryDaoBean"></property>
 	</bean>
+	<bean id="htmlNewTransportActionBean" 
+	class="pub.sanalar.wms.actions.HtmlNewTransportAction" 
+	scope="prototype">
+		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
+		<property name="categoryQueryDao" ref="categoryQueryDaoBean"></property>
+	</bean>
 </beans>

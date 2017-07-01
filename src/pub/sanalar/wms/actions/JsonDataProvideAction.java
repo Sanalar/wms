@@ -10,6 +10,7 @@ import pub.sanalar.wms.daos.WarehouseQueryDao;
 import pub.sanalar.wms.models.CheckDetailsObject;
 import pub.sanalar.wms.models.IdNameObject;
 import pub.sanalar.wms.models.JsonProductBasicInfo;
+import pub.sanalar.wms.models.SimpleProductShelfInfo;
 import pub.sanalar.wms.models.SimpleWarehouseInfo;
 import pub.sanalar.wms.models.WmsWarehouse;
 
@@ -27,6 +28,7 @@ public class JsonDataProvideAction extends ActionSupport {
 	private List<JsonProductBasicInfo> productList;
 	private List<IdNameObject> storageList;
 	private List<IdNameObject> shelfList;
+	private List<SimpleProductShelfInfo> trList;
 	private Integer warehouseId;
 	private Integer storageId;
 	private String checkId;
@@ -62,6 +64,11 @@ public class JsonDataProvideAction extends ActionSupport {
 	
 	public String getCheckDetailsObject(){
 		checkDetails = checkQueryDao.getCheckDetailsObject(checkId);
+		return SUCCESS;
+	}
+	
+	public String getTransportProductList(){
+		trList = productQueryDao.getTransportProductList(warehouseId);
 		return SUCCESS;
 	}
 
@@ -151,5 +158,13 @@ public class JsonDataProvideAction extends ActionSupport {
 
 	public void setCheckId(String checkId) {
 		this.checkId = checkId;
+	}
+
+	public List<SimpleProductShelfInfo> getTrList() {
+		return trList;
+	}
+
+	public void setTrList(List<SimpleProductShelfInfo> trList) {
+		this.trList = trList;
 	}
 }

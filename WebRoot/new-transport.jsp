@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +22,7 @@
       <link rel="stylesheet" type="text/css" href="asset/css/plugins/fullcalendar.min.css"/>
     <link rel="stylesheet" type="text/css" href="asset/css/plugins/datatables.bootstrap.min.css"/>
     <link href="asset/css/style.css" rel="stylesheet">
+    <link href="asset/css/plugins/font-awesome-animation.min.css" rel="stylesheet"/>
 
     <!-- end: Css -->
 
@@ -201,86 +204,31 @@
                               <table class="datatable table table-striped table-bordered" width="100%" cellspacing="0">
                                   <thead>
                                   <tr>
-                                      <th>选择</th>
                                       <th>产品编号</th>
                                       <th>产品名称</th>
                                       <th>分类</th>
                                       <th>库位号</th>
                                       <th>货架号</th>
                                       <th>剩余库存</th>
+                                      <th>添加</th>
                                   </tr>
                                   </thead>
                                   <tbody>
                                   <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1011</td>
-                                      <td>德芙巧克力</td>
-                                      <td>食品 > 糖果/糖果巧克力</td>
-                                      <td>D12</td>
-                                      <td>TP-312</td>
-                                      <td>334</td>
-                                  </tr>
-                                  <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1012</td>
-                                      <td>农夫山泉矿泉水</td>
-                                      <td>食品 > 饮料</td>
-                                      <td>C3</td>
-                                      <td>TP-112</td>
-                                      <td>1086</td>
-                                  </tr>
-                                  <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1013</td>
-                                      <td>玻尿酸试剂</td>
-                                      <td>食品 > 糖果/巧克力</td>
-                                      <td>W23</td>
-                                      <td>DS-12</td>
-                                      <td>29</td>
-                                  </tr>
-                                  <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1014</td>
-                                      <td>德芙巧克力</td>
-                                      <td>食品 > 糖果/巧克力</td>
-                                      <td>D12</td>
-                                      <td>TP-312</td>
-                                      <td>334</td>
-                                  </tr>
-                                  <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1015</td>
-                                      <td>德芙巧克力</td>
-                                      <td>食品 > 糖果/巧克力</td>
-                                      <td>D12</td>
-                                      <td>TP-312</td>
-                                      <td>334</td>
-                                  </tr>
-                                  <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1016</td>
-                                      <td>德芙巧克力</td>
-                                      <td>食品 > 糖果/巧克力</td>
-                                      <td>D12</td>
-                                      <td>TP-312</td>
-                                      <td>334</td>
-                                  </tr>
-                                  <tr>
-                                      <td><div class="form-group form-animate-checkbox"><input type="checkbox" class="checkbox"></div></td>
-                                      <td>dfqkl-1017</td>
-                                      <td>德芙巧克力</td>
-                                      <td>食品 > 糖果/糖果巧克力</td>
-                                      <td>D12</td>
-                                      <td>TP-312</td>
-                                      <td>334</td>
+                                      <td><div id="sp-code1">dfqkl-1011</div></td>
+                                      <td><div id="sp-name1" data-id="1">德芙巧克力</div></td>
+                                      <td><div id="sp-category1">食品 > 糖果/糖果巧克力</div></td>
+                                      <td><div id="sp-storage1">D12</div></td>
+                                      <td><div id="sp-shelf1" data-id="2">TP-312</div></td>
+                                      <td><div id="sp-last1">334</div></td>
+                                      <td><a class="select-product" data-id="1" href="#"><span class="fa fa-check"></span> 选择</a></td>
                                   </tr>
                                   </tbody>
                               </table>
                           </div>
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-default btn-round btn-gradient" data-dismiss="modal">取 消</button>
-                          <button type="button" id="choose-button" class="btn btn-primary btn-round btn-gradient" disabled="disabled">选 定</button>
+                          <button type="button" class="btn btn-primary btn-round btn-gradient" data-dismiss="modal">关 闭</button>
                       </div>
                   </div>
               </div>
@@ -315,7 +263,7 @@
                               <h3 class="animated fadeInLeft">新建调度任务</h3>
                               <p class="animated fadeInDown">
                                   仓库管理系统 <span class="fa-angle-right fa"></span> 仓库调度 <span class="fa-angle-right fa"></span> 新建调度任务
-                                  <span class="fa-angle-right fa"></span> 产品详情
+                                  
                               </p>
                           </div>
                       </div>
@@ -326,15 +274,20 @@
                               <h4><span class="fa fa-truck"></span> 仓库调度申请表</h4>
                           </div>
                           <div class="panel-body">
-                              <form action="">
+                              <form action="newTransport.action" method="post" id="newTransForm">
                                   <div class="form-group">
                                       <div class="col-md-6 form-inline">
                                           <label>
                                               <span class="fa fa-sign-out"></span> 调出仓库：
-                                              <select class="form-control">
-                                                  <option>北京海淀仓库</option>
-                                                  <option>天津武清仓库</option>
-                                                  <option>江苏扬州仓库</option>
+                                              <select class="form-control" name="wid">
+                                              <s:iterator value="warehouseList" id="w">
+	                                          	<s:if test="#w.warehouseId == wid">
+	                                          	<option value='<s:property value="#w.warehouseId"/>' data-fixed selected><s:property value="#w.warehouseName"/></option>
+	                                          	</s:if>
+	                                          	<s:else>
+	                                          	<option value='<s:property value="#w.warehouseId"/>'><s:property value="#w.warehouseName"/></option>
+	                                          	</s:else>
+	                                          </s:iterator>
                                               </select>
                                           </label>
                                       </div>
@@ -342,67 +295,42 @@
                                           <label>
                                               <span class="fa fa-sign-in"></span> 调入仓库：
                                               <select class="form-control">
-                                                  <option>北京海淀仓库</option>
-                                                  <option>天津武清仓库</option>
-                                                  <option>江苏扬州仓库</option>
+                                              <s:iterator value="warehouseList" id="w">
+                                          		<option value='<s:property value="#w.warehouseId"/>'><s:property value="#w.warehouseName"/></option>
+                                              </s:iterator>
                                               </select>
                                           </label>
                                       </div>
                                       <div class="col-md-12">
                                           <div class="form-group form-animate-text" style="margin-top:10px; margin-bottom: 10px">
-                                              <input type="text" class="form-text" required>
+                                              <input type="text" class="form-text">
                                               <span class="bar"></span>
                                               <label><span class="fa fa-align-justify"></span> 调度备注</label>
                                           </div>
                                       </div>
                                       <div class="responsive-table" style="padding: 15px;">
-                                          <table class="table table-striped table-bordered" width="100%" cellspacing="0">
+                                          <table id="check-item-table" class="table table-striped table-bordered" width="100%" cellspacing="0">
                                               <thead>
                                               <tr>
-                                                  <th>编号</th>
-                                                  <th>品名</th>
+                                                  <th>产品编号</th>
+                                                  <th>产品名称</th>
                                                   <th>分类</th>
                                                   <th>库位</th>
                                                   <th>货架号</th>
-                                                  <th>库存</th>
+                                                  <th>现有库存</th>
                                                   <th>调出数量</th>
                                                   <th>调度成本</th>
                                                   <th>操作</th>
                                               </tr>
                                               </thead>
-                                              <tbody>
-                                              <tr>
-                                                  <td>dfqkl-1011</td>
-                                                  <td><a href="#">德芙巧克力</a></td>
-                                                  <td>食品 > 糖果/巧克力</td>
-                                                  <td>D12</td>
-                                                  <td>TP-315</td>
-                                                  <td>354</td>
-                                                  <td><input type="text" class="form-control input-sm android"></td>
-                                                  <td><input type="text" class="form-control input-sm android"></td>
-                                                  <td>
-                                                      <button class="btn btn-danger btn-mn btn-circle"><span class="fa fa-close"></span></button>
-                                                  </td>
-                                              </tr>
-                                              <tr>
-                                                  <td>dfqkl-1011</td>
-                                                  <td><a href="#">德芙巧克力</a></td>
-                                                  <td>食品 > 糖果/巧克力</td>
-                                                  <td>D12</td>
-                                                  <td>TP-315</td>
-                                                  <td>354</td>
-                                                  <td><input type="text" class="form-control input-sm android"></td>
-                                                  <td><input type="text" class="form-control input-sm android"></td>
-                                                  <td>
-                                                      <button class="btn btn-danger btn-mn btn-circle"><span class="fa fa-close"></span></button>
-                                                  </td>
-                                              </tr>
+                                              <tbody data-count="0">
+                                              <tr><td colspan="9"><div class="text-center text-default">没有记录</div></td></tr>
                                               </tbody>
                                           </table>
                                       </div>
                                       <div class="form-inline text-center">
-                                          <a class="btn btn-primary btn-round btn-gradient btn-lg"  data-toggle="modal" data-target="#choose-product">添加货品</a>
-                                          <button class="btn btn-success btn-round btn-gradient btn-lg" style="margin-left: 20px;">确认提交</button>
+                                          <a class="btn btn-primary btn-round btn-gradient btn-lg" id="add-product">添加货品</a>
+                                          <button class="btn btn-success btn-round btn-gradient btn-lg" style="margin-left: 20px;" id="newTransFormSubmit">确认提交</button>
                                       </div>
                                   </div>
                               </form>
@@ -412,6 +340,25 @@
               </div>
           </div>
           <!-- end: content -->
+
+          <!-- modal -->
+          <div class="modal fade" id="loading-box" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">正在加载</h4>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-md-12" style="font-size:22px">
+                                  <span class="fa fa-spinner faa-spin animated"></span> <span id="loading-msg">正在拼命加载数据，请稍后...</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
 
       </div>
 
@@ -428,15 +375,12 @@
       <script src="asset/js/plugins/select2.full.min.js"></script>
       <script src="asset/js/plugins/jquery.datatables.min.js"></script>
       <script src="asset/js/plugins/datatables.bootstrap.min.js"></script>
+      <script src="asset/js/transport.js"></script>
 
       <!-- custom -->
       <script src="asset/js/main.js"></script>
       <script type="text/javascript">
           $('.mask-money').mask('000,000,000,000,000.00', {reverse: true});
-          $(".select2-A").select2({
-              placeholder: "选择特殊贮存条件",
-              allowClear: true
-          });
           $(document).ready(function(){
 
               $(".nav-tabs a").click(function (e) {
@@ -445,21 +389,17 @@
               });
               $('.datatable').DataTable();
               $('#DataTables_Table_0_filter').append('<button class="btn btn-primary btn-circle btn-mn" style="margin-left: 5px" data-toggle="modal" data-target="#category-dialog"><span class="fa fa-list"></span></button>');
+
+              prepare();
           });
       </script>
 
       <script>
           /*定义三级分类数据*/
           //一级分类
-          var province = ["危化品", "食品", "日用品", "电子设备", "医药品"];
+          var province = <s:property value="topCategoryListString" escape="false"/>;
           //二级分类
-          var city = [
-              ["爆炸品", "压缩气体和液化气体", "易燃液体", "易燃固体、自燃物品和遇湿易燃物品", "氧化剂和有机过氧化物", "毒害品和感染性物品", "放射性物品", "腐蚀品"],
-              ["糖果/巧克力", "饮料/水", "肉类/豆制品零食", "饼干糕点", "冲调保健", "酒类", "牛奶乳品", "坚果炒货", "蜜饯果干"],
-              ["厨卫用品", "收纳用品", "洗护用品", "文具", "体育用品"],
-              ["电脑", "手机", "电子芯片", "电脑周边", "线材", "家电", "装修工具"],
-              ["医保药品", "中成药", "西成药"]
-          ];
+          var city = <s:property value="allSubCategoryListString" escape="false"/>;
 
           var expressP, expressC, expressD, expressArea, areaCont;
           var arrow = " <font>&gt;</font> ";

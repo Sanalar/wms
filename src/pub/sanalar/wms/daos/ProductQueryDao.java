@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pub.sanalar.wms.models.JsonProductBasicInfo;
 import pub.sanalar.wms.models.ProductInOutStreamOfWarehouse;
+import pub.sanalar.wms.models.SimpleProductShelfInfo;
 import pub.sanalar.wms.models.WarehouseAndNumber;
 import pub.sanalar.wms.models.WmsInApplicationProduct;
 import pub.sanalar.wms.models.WmsOutApplicationProduct;
@@ -174,6 +175,30 @@ public class ProductQueryDao extends HibernateDaoSupport {
 			info.setName(p.getProductName());
 			info.setStandard(p.getProductStandard());
 			info.setUnit(p.getProductUnit());
+			res.add(info);
+		}
+		
+		return res;
+	}
+
+	public List<SimpleProductShelfInfo> getTransportProductList(Integer warehouseId) {
+		String hql = "from WmsProductShelf s where s.wmsShelf.wmsStorage.wmsWarehouse.warehouseId=?";
+		@SuppressWarnings("unchecked")
+		List<WmsProductShelf> list = (List<WmsProductShelf>)getHibernateTemplate().find(hql, warehouseId);
+		
+		List<SimpleProductShelfInfo> res = new ArrayList<SimpleProductShelfInfo>();
+		for(WmsProductShelf p : list){
+			SimpleProductShelfInfo info = new SimpleProductShelfInfo();
+			info.setCategory(p.getWmsProduct().getWmsCategory().getWmsCategory().getCategoryName() + " > "
+					+ p.getWmsProduct().getWmsCategory().getCategoryName());
+			info.setCode(p.getWmsProduct().getProductCode());
+			info.setId(p.getPsId());
+			info.setLastNum(p.getPsNumber());
+			info.setName(p.getWmsProduct().getProductName());
+			info.setProductId(p.getWmsProduct().getProductId());
+			info.setShelf(p.getWmsShelf().getShelfName());
+			info.setShelfId(p.getWmsShelf().getShelfId());
+			info.setStorage(p.getWmsShelf().getWmsStorage().getStorageName());
 			res.add(info);
 		}
 		

@@ -43,6 +43,10 @@
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result>new-check.jsp</result>
 		</action>
+		<action name="new-transport" class="htmlNewTransportActionBean">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result>new-transport.jsp</result>
+		</action>
 		<action name="checkLogin" class="checkLoginActionBean">
 			<result name="error-login">error-login.html</result>
 			<result name="success" type="redirect">index.html</result>
@@ -110,6 +114,11 @@
 		<action name="fetchCheckDetails" class="jsonDataProviderActionBean" method="getCheckDetailsObject">
 			<result name="success" type="json">
 				<param name="root">checkDetails</param>
+			</result>
+		</action>
+		<action name="fetchTransportProductList" class="jsonDataProviderActionBean" method="getTransportProductList">
+			<result name="success" type="json">
+				<param name="root">trList</param>
 			</result>
 		</action>
 	</package>
