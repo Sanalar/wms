@@ -199,7 +199,7 @@
 			<!-- modal -->
           <div class="modal fade" id="select-warehouse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
-                  <form class="modal-content" action="checks.html" method="get">
+                  <form class="modal-content" action="transports.html" method="get">
                       <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                           <h4 class="modal-title">选择当前仓库</h4>
@@ -545,7 +545,7 @@
               	if(!confirm("审核通过意味着将要创建对应的出库单，并按照此单的设置进行出库，您确定要继续吗？")){
               		return false;
               	}
-              	window.location.href="aceeptTransport.action?id=" + id;
+              	window.location.href="acceptTransport.action?id=" + id;
               });
               $(".bad-accept-t").click(function(e){
               	e.preventDefault();
@@ -561,7 +561,7 @@
               	if(!confirm("确认调度意味着将要创建对应的入库单，并按照此单的设置进行入库，您确定要继续吗？")){
               		return false;
               	}
-              	window.location.href="aceeptTransport2.action?id=" + id;
+              	window.location.href="finishTransport.action?id=" + id;
               });
               $(".bad-check-t").click(function(e){
               	e.preventDefault();
@@ -569,7 +569,7 @@
               	if(!confirm("此操作将驳回该调度请求，您确定要继续吗？")){
               		return false;
               	}
-              	window.location.href="abandonTransport2.action?id=" + id;
+              	window.location.href="closeTransport.action?id=" + id;
               });
           });
 

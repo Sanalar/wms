@@ -96,6 +96,18 @@
 		<action name="abandonCheck" class="checkReviewActionBean" method="abandonCheck">
 			<result name="success">redirect-msg.jsp</result>
 		</action>
+		<action name="acceptTransport" class="transportReviewActionBean" method="acceptTransport">
+			<result name="success">redirect-msg.jsp</result>
+		</action>
+		<action name="abandonTransport" class="transportReviewActionBean" method="abandonTransport">
+			<result name="success">redirect-msg.jsp</result>
+		</action>
+		<action name="finishTransport" class="transportReviewActionBean" method="finishTransport">
+			<result name="success">redirect-msg.jsp</result>
+		</action>
+		<action name="closeTransport" class="transportReviewActionBean" method="closeTransport">
+			<result name="success">redirect-msg.jsp</result>
+		</action>
 		
 		<action name="fetchWarehouseList" class="jsonDataProviderActionBean" method="getAllWarehouseList">
 			<result name="success" type="json">

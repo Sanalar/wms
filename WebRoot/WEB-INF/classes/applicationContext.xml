@@ -192,4 +192,9 @@
 		<property name="transportQueryDao" ref="transportQueryDaoBean"></property>
 		<property name="warehouseQueryDao" ref="warehouseQueryDaoBean"></property>
 	</bean>
+	<bean id="transportReviewActionBean" 
+	class="pub.sanalar.wms.actions.TransportReviewAction" 
+	scope="prototype">
+		<property name="transportQueryDao" ref="transportQueryDaoBean"></property>
+	</bean>
 </beans>
