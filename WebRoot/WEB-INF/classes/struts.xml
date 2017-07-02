@@ -79,69 +79,123 @@
 			</result>
 		</action>
 		<action name="newCheck" class="newCheckActionBean">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success" type="redirect">checks.html</result>
 		</action>
 		<action name="newTransport" class="newTransportActionBean">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success">redirect-msg.jsp</result>
 		</action>
 		<action name="checks" class="htmlChecksActionBean">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success">checks.jsp</result>
 		</action>
 		<action name="transports" class="htmlTransportsActionBean">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success">transports.jsp</result>
 		</action>
 		<action name="passCheck" class="checkReviewActionBean" method="acceptCheck">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success">redirect-msg.jsp</result>
 		</action>
 		<action name="abandonCheck" class="checkReviewActionBean" method="abandonCheck">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success">redirect-msg.jsp</result>
 		</action>
 		<action name="acceptTransport" class="transportReviewActionBean" method="acceptTransport">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success">redirect-msg.jsp</result>
 		</action>
 		<action name="abandonTransport" class="transportReviewActionBean" method="abandonTransport">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success">redirect-msg.jsp</result>
 		</action>
 		<action name="finishTransport" class="transportReviewActionBean" method="finishTransport">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success">redirect-msg.jsp</result>
 		</action>
 		<action name="closeTransport" class="transportReviewActionBean" method="closeTransport">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success">redirect-msg.jsp</result>
 		</action>
 		
 		<action name="fetchWarehouseList" class="jsonDataProviderActionBean" method="getAllWarehouseList">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success" type="json">
 				<param name="root">warehouseList</param>
 			</result>
+			<result name="login" type="httpheader">
+				<param name="status">403</param>
+			</result>
 		</action>
 		<action name="fetchBasicProductList" class="jsonDataProviderActionBean" method="getAllProductBasicList">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success" type="json">
 				<param name="root">productList</param>
 			</result>
+			<result name="login" type="httpheader">
+				<param name="status">403</param>
+			</result>
 		</action>
 		<action name="fetchStorageList" class="jsonDataProviderActionBean" method="getAllStorageList">
-			<result name="success" type="json">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>	<result name="success" type="json">
 				<param name="root">storageList</param>
+			</result>
+			<result name="login" type="httpheader">
+				<param name="status">403</param>
 			</result>
 		</action>
 		<action name="fetchShelfList" class="jsonDataProviderActionBean" method="getAllShelfList">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success" type="json">
 				<param name="root">shelfList</param>
 			</result>
+			<result name="login" type="httpheader">
+				<param name="status">403</param>
+			</result>
 		</action>
 		<action name="fetchCheckDetails" class="jsonDataProviderActionBean" method="getCheckDetailsObject">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success" type="json">
 				<param name="root">checkDetails</param>
 			</result>
+			<result name="login" type="httpheader">
+				<param name="status">403</param>
+			</result>
 		</action>
 		<action name="fetchTransportProductList" class="jsonDataProviderActionBean" method="getTransportProductList">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success" type="json">
 				<param name="root">trList</param>
 			</result>
+			<result name="login" type="httpheader">
+				<param name="status">403</param>
+			</result>
 		</action>
 		<action name="fetchTransportDetailList" class="jsonDataProviderActionBean" method="getTransportDetailList">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="success" type="json">
 				<param name="root">transList</param>
+			</result>
+			<result name="login" type="httpheader">
+				<param name="status">403</param>
 			</result>
 		</action>
 	</package>

@@ -114,7 +114,7 @@ function appndCheckItem(pid){
         + '</td>'
         + '<td>' + $("#sp-standard" + pid).text() + '</td>'
         + '<td>' + $("#sp-unit" + pid).text() + '</td>'
-        + '<td><input type="text" class="form-control input-sm android" name="checkItem[' + count + '].number" value="0" required></td>'
+        + '<td><input type="text" onkeyup="value=value.replace(/[^\\d]/g,\'\')" class="form-control input-sm android" name="checkItem[' + count + '].number" value="0" required></td>'
         + '<td>'
             + '<button class="btn btn-danger btn-mn btn-circle delete-item" data-index="' + count + '">'
             + '<span class="fa fa-close"></span></button>'

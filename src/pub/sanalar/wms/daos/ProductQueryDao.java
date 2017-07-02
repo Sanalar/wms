@@ -89,7 +89,7 @@ public class ProductQueryDao extends HibernateDaoSupport {
 	
 	public void updateProduct(WmsProduct product){
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-		session.save(product);
+		session.update(product);
 		session.flush();
 	}
 	
@@ -133,7 +133,7 @@ public class ProductQueryDao extends HibernateDaoSupport {
 		for(WmsInApplicationProduct p : inList){
 			ProductInOutStreamOfWarehouse item = new ProductInOutStreamOfWarehouse();
 			WmsUser user = p.getWmsInApplication().getWmsUserByApplicationAcceptor();
-			item.setAcceptUser(user == null ? "<无>" : user.getUserRealName());
+			item.setAcceptUser(user == null ? "(无)" : user.getUserRealName());
 			item.setCreateUser(p.getWmsInApplication().getWmsUserByApplicationCreator().getUserRealName());
 			item.setInStream(true);
 			item.setState(p.getWmsInApplication().getWmsApplicationState().getStateName());
@@ -146,7 +146,7 @@ public class ProductQueryDao extends HibernateDaoSupport {
 		for(WmsOutApplicationProduct p : outList){
 			ProductInOutStreamOfWarehouse item = new ProductInOutStreamOfWarehouse();
 			WmsUser user = p.getWmsOutApplication().getWmsUserByApplicationAcceptor();
-			item.setAcceptUser(user == null ? "<无>" : user.getUserRealName());
+			item.setAcceptUser(user == null ? "(无)" : user.getUserRealName());
 			item.setCreateUser(p.getWmsOutApplication().getWmsUserByApplicationCreator().getUserRealName());
 			item.setInStream(false);
 			item.setState(p.getWmsOutApplication().getWmsApplicationState().getStateName());
