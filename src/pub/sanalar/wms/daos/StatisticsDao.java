@@ -12,7 +12,7 @@ import java.util.Map;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
-import javafx.util.Pair;
+import pub.sanalar.wms.models.Pair;
 import pub.sanalar.wms.models.WmsInApplicationProduct;
 import pub.sanalar.wms.models.WmsOutApplicationProduct;
 import pub.sanalar.wms.models.WmsShelf;

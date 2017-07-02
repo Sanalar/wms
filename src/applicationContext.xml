@@ -8,7 +8,7 @@
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"></property>
-		<property name="url" value="jdbc:sqlserver://localhost:1433;database=wms"></property>
+		<property name="url" value="jdbc:sqlserver://211.82.83.233:1433;database=wms"></property>
 		<property name="username" value="rg"></property>
 		<property name="password" value="123"></property>
 		<property name="defaultAutoCommit"><value>true</value></property>

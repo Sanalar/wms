@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import javafx.util.Pair;
 import pub.sanalar.wms.daos.StatisticsDao;
 import pub.sanalar.wms.daos.WarehouseQueryDao;
+import pub.sanalar.wms.models.Pair;
 import pub.sanalar.wms.models.StreamInItem;
 import pub.sanalar.wms.models.StreamOutItem;
 

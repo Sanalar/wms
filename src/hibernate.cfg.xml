@@ -16,7 +16,7 @@
 		<property name="connection.password">123</property>
 		<property name="connection.username">rg</property>
 		<property name="connection.url">
-			jdbc:sqlserver://localhost:1433;database=wms
+			jdbc:sqlserver://211.82.83.233:1433;database=wms
 		</property>
 		<property name="connection.driver_class">
 			com.microsoft.sqlserver.jdbc.SQLServerDriver
